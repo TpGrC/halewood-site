@@ -13,6 +13,7 @@ img{max-width:100%;height:auto;display:block}
 .brand small{font-size:9px;letter-spacing:5.5px;color:var(--mut);margin-top:4px}
 .menu{display:flex;gap:26px;list-style:none;margin-left:auto;font-size:15px;color:var(--mut)}
 .menu a:hover,.menu a.on{color:var(--txt)}
+.langpick{margin-left:14px;background:#0f141b;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:7px 8px;font:inherit;font-size:14px;cursor:pointer}
 .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--txt);width:44px;height:44px;border-radius:10px;font-size:20px;cursor:pointer}
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:.2s;border:1px solid transparent;cursor:pointer;min-height:44px}

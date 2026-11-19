@@ -3,6 +3,12 @@ import pathlib; R=str(pathlib.Path(__file__).resolve().parent.parent)
 YT='https://www.youtube.com/@HalewoodSystems'
 DON='https://buy.stripe.com/14AcMY4rr24U6Pqec0dUY02'
 MAIL='support@halewoodsystems.com'
+# Gumroad checkout links (fill in when the products exist); empty = "On sale soon"
+BUY={'driver':'','cleaner':'','backup':''}
+def buybtn(k,label='Buy Pro'):
+    return f'<a class="btn p" href="{BUY[k]}" target="_blank" rel="noopener">{label}</a>' if BUY[k] else '<span class="btn p off">On sale soon</span>'
+SALEBADGE=lambda k:'<span class="badge live">Pro</span>' if BUY[k] else '<span class="badge soon">Pro</span>'
+PRONOTE='<p class="updated" style="text-align:center">One-time payment, no subscription. After buying you get your key at <a href="/activate/">halewoodsystems.com/activate</a>.</p>'
 KF_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>'
 SG_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/></svg>'
 def page(path,title,desc,body):
@@ -153,7 +159,7 @@ page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updat
 <section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version is the full driver updater. Pro adds automation and extras.</p>
   <div class="plans">
     <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Kyrofix Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Scan and update drivers</li><li>Official sources only</li><li>Restore point before installs</li><li>Blue screen explanations</li><li>Sound &amp; network fixes</li><li>AI assistant (daily limit)</li><li class="x">Automatic updates</li><li class="x">Game Boost</li></ul><a class="btn g" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download free</a></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Kyrofix Pro</h3><div class="price">€19.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €39.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic updates and weekly checks</li><li>Game Boost</li><li>Missing DLL fixer</li><li>Driver backup &amp; restore</li><li>Unlimited AI</li><li>Priority support</li></ul><span class="btn p off">Coming soon</span></div>
+    <div class="plan hl">{SALEBADGE("driver")}<h3 style="margin-top:12px">Kyrofix Pro</h3><div class="price">€19.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €49.99 one-time, forever</div><ul><li>Everything in Free</li><li>Automatic updates and weekly checks</li><li>Game Boost</li><li>Missing DLL fixer</li><li>Driver backup &amp; restore</li><li>Unlimited AI</li><li>Priority support</li></ul>{buybtn("driver")}</div>
   </div>
   <p class="updated">Pro is not on sale yet. Prices include VAT and may change at launch.</p>
 </div></section>
@@ -178,6 +184,7 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
   <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
   <div class="meta" style="margin-top:22px"><span>Version 1.1.0</span><span>Windows 10 / 11, 64-bit</span><span>No ads, no bundled extras</span></div>
   <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-cleaner/results.jpg" alt="Kyrofix Cleaner scan results" width="1440" height="960"></div>
+  {PRONOTE}
 </div></section>
 <section class="alt"><div class="wrap"><h2>What it cleans</h2>
   <div class="grid">
@@ -199,8 +206,9 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
 <section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version is a full cleaner. Pro adds automation and deep tools.</p>
   <div class="plans">
     <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Cleaner Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Junk &amp; temp file cleaning</li><li>Windows Update leftovers</li><li>Browser cache (logins kept)</li><li>Startup manager</li><li>Big file finder</li><li class="x">Automatic cleaning</li><li class="x">Privacy cleaning</li></ul><a class="btn g" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Cleaner Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €29.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic weekly cleaning</li><li>Privacy cleaning (history, cookies)</li><li>Uninstaller with leftover removal</li><li>Duplicate file finder</li><li>Priority support</li></ul><span class="btn p off">On sale soon</span></div>
+    <div class="plan hl">{SALEBADGE("cleaner")}<h3 style="margin-top:12px">Cleaner Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €39.99 one-time, forever</div><ul><li>Everything in Free</li><li>Automatic weekly cleaning</li><li>Privacy cleaning (history, cookies)</li><li>Uninstaller with leftover removal</li><li>Duplicate file finder</li><li>Priority support</li></ul>{buybtn("cleaner")}</div>
   </div>
+  {PRONOTE}
 </div></section>
 <section><div class="wrap"><h2>System requirements</h2>
   <div class="grid">
@@ -243,8 +251,9 @@ page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup f
 <section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version backs up and restores. Pro makes it automatic and keeps older versions.</p>
   <div class="plans">
     <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Backup Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Back up any folders</li><li>USB, external disk or OneDrive folder</li><li>Only changed files are copied</li><li>Restore missing files</li><li class="x">Automatic backups</li><li class="x">Version history</li></ul><a class="btn g" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download free</a></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Backup Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €29.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic daily or weekly backups</li><li>Version history (older copies)</li><li>Reminder when the drive is missing</li><li>Priority support</li></ul><span class="btn p off">On sale soon</span></div>
+    <div class="plan hl">{SALEBADGE("backup")}<h3 style="margin-top:12px">Backup Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €39.99 one-time, forever</div><ul><li>Everything in Free</li><li>Automatic daily or weekly backups</li><li>Version history (older copies)</li><li>Reminder when the drive is missing</li><li>Priority support</li></ul>{buybtn("backup")}</div>
   </div>
+  {PRONOTE}
 </div></section>
 <section><div class="wrap"><h2>System requirements</h2>
   <div class="grid">
@@ -255,6 +264,38 @@ page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup f
   <p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
 </div></section>
 <div class="band"><h2>Don't lose your files.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download Kyrofix Backup</a></div></div>''')
+
+# Activate: exchange a Gumroad licence key for a Kyrofix key
+page('activate/index.html','Get your Kyrofix key — Halewood Systems','Bought Kyrofix Pro? Paste the licence key from your Gumroad receipt to get your Kyrofix key.',f'''
+<section class="hero"><div class="wrap" style="max-width:720px">
+  <h1>Get your Kyrofix key</h1>
+  <p class="lead">Thanks for buying Kyrofix Pro! Paste the <b>licence key from your Gumroad receipt</b> below.</p>
+  <div class="card" style="margin-top:24px;padding:22px">
+    <label for="lic"><b>Gumroad licence key</b></label>
+    <input id="lic" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" spellcheck="false" autocomplete="off" style="width:100%;margin:10px 0 14px;padding:12px 14px;border-radius:10px;border:1px solid var(--line,#2a3140);background:transparent;color:inherit;font:inherit">
+    <button class="btn p" id="go" type="button">Get my key</button>
+    <p id="msg" class="updated" style="margin-top:12px"></p>
+    <div id="out" style="display:none;margin-top:8px">
+      <p><b id="pn"></b> <span id="pe"></span></p>
+      <code id="key" style="display:block;padding:14px;border-radius:10px;background:rgba(127,127,127,.12);word-break:break-all;font-size:15px"></code>
+      <button class="btn g" id="cp" type="button" style="margin-top:12px">Copy key</button>
+      <ol style="margin-top:18px;line-height:1.8"><li>Open the Kyrofix app and go to <b>Pro</b>.</li><li>Paste the key and click <b>Activate</b>.</li><li>Use the same key on up to 3 of your PCs.</li></ol>
+      <p class="updated">Keep this key. You can come back to this page anytime and paste the same Gumroad key to see it again.</p>
+    </div>
+  </div>
+  <p class="updated" style="margin-top:18px">Problems? Email <b>{MAIL}</b> with your Gumroad receipt.</p>
+</div></section>
+<script>
+const $=s=>document.querySelector(s);
+$('#go').onclick=async()=>{{const l=$('#lic').value.trim();if(!l)return;$('#go').disabled=true;$('#msg').textContent='Checking your purchase…';$('#out').style.display='none';
+ try{{const r=await(await fetch('https://windrova-api.thomaslipknot1.workers.dev/kyro/redeem',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{license:l}})}})).json();
+  if(r.ok){{$('#msg').textContent='';$('#pn').textContent=r.name;$('#pe').textContent=r.lifetime?'· forever':'· valid until '+r.expires;$('#key').textContent=r.key;$('#out').style.display='block';}}
+  else $('#msg').textContent={{bad:'We could not find this licence key. Copy it exactly from your Gumroad receipt.',refunded:'This purchase was refunded, so the key no longer works.',empty:'Your purchase is fine, but we need a moment to prepare your key. Please email us and we will send it today.',net:'Could not check right now. Please try again in a minute.'}}[r.reason]||'Something went wrong. Please email us.';}}
+ catch(e){{$('#msg').textContent='Could not connect. Check your internet and try again.';}}
+ $('#go').disabled=false;}};
+$('#lic').onkeydown=e=>{{if(e.key==='Enter')$('#go').click();}};
+$('#cp').onclick=()=>{{navigator.clipboard.writeText($('#key').textContent);$('#cp').textContent='Copied';}};
+</script>''')
 
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''
@@ -276,8 +317,9 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
     <thead><tr><th>Product</th><th>Free</th><th>Paid</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
-      <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99/year or €39.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
-      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99/year or €29.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
+      <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99 / year or €49.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['driver'] else '<span class="badge free">Free available</span>'}</td></tr>
+      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['cleaner'] else '<span class="badge free">Free available</span>'}</td></tr>
+      <tr><td><b>Kyrofix Backup</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['backup'] else '<span class="badge free">Free available</span>'}</td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>
@@ -319,7 +361,7 @@ def legal(slug,title,desc,content):
 legal('notice','Legal notice','Legal notice and provider information for Halewood Systems.',f'''
 <h2>Provider</h2><p>Halewood Systems is an independent software project operated in Greece, European Union.</p>
 <p>Email: <b>{MAIL}</b><br>Website: halewoodsystems.com</p>
-<div class="box">Paid sales are not open yet. Before any paid product goes on sale, the full registered business details (legal name, address and VAT number) will be published on this page, as EU law requires.</div>
+<div class="box">Kyrofix Pro licences are sold through our online reseller Gumroad, Inc., which is the merchant of record: it processes the payment, issues the receipt and handles VAT. Questions about a purchase: <b>{MAIL}</b>.</div>
 <h2>Responsibility for content</h2><p>We take care to keep the information on this site accurate, but it may change without notice. Links to other websites are provided for convenience; we are not responsible for their content.</p>
 <h2>Weather information</h2><p>Windrova shows forecasts from public weather services. Forecasts can be wrong. Do not rely on them alone for safety decisions at sea, in the mountains or in the air; always check official warnings.</p>
 <h2>Copyright</h2><p>All content on this site, including text, design and logos, belongs to Halewood Systems unless stated otherwise. Third-party data and trademarks belong to their owners.</p>''')
@@ -328,7 +370,7 @@ legal('terms','Terms of use','Terms of use for Halewood Systems websites and sof
 <p>These terms apply when you use halewoodsystems.com and our products (Windrova, Kyrofix, Slipgate and others). By using them you agree to these terms. If you are a consumer, nothing here limits your rights under the law of your country of residence in the EU.</p>
 <h2>1. Our products</h2><p>We offer free versions of our products, and in the future paid plans (for example Windrova Premium and Kyrofix Pro). The features of each plan are described on its product page at the time you get it.</p>
 <h2>2. Licence</h2><p>We give you a personal, non-exclusive, non-transferable licence to use our software for your own purposes. You may not resell it, copy it for distribution, remove notices, or try to break its protections, except where the law allows.</p>
-<h2>3. Paid plans (when available)</h2><ul><li>Prices are shown in euros and include VAT where it applies.</li><li>Payments are processed by Stripe. We never see your full card details.</li><li>Subscriptions renew automatically until you cancel. You can cancel at any time and keep access until the end of the paid period.</li><li>Your right of withdrawal is explained in <a href="/legal/refunds/">Refunds &amp; withdrawal</a>.</li></ul>
+<h2>3. Paid plans</h2><ul><li>Kyrofix Pro is sold as a one-time payment: a licence for 1 year, or a licence forever. Nothing renews automatically.</li><li>Payments are processed by our reseller Gumroad, which is the seller of record and handles VAT. We never see your card details.</li><li>Each licence key works on up to 3 of your own PCs. A licence for 1 year stops unlocking Pro 365 days after purchase; the free version keeps working.</li><li>Keys that were refunded or charged back stop working.</li><li>Your right of withdrawal is explained in <a href="/legal/refunds/">Refunds &amp; withdrawal</a>.</li></ul>
 <h2>4. Acceptable use</h2><p>Do not use our services to break the law, to attack or overload our systems, or to copy our data in bulk with automated tools.</p>
 <h2>5. Weather and system information</h2><p>Windrova forecasts come from public weather services and can be wrong. Kyrofix changes system drivers; it creates a restore point first, but you use it at your own judgement. Keep backups of important files.</p>
 <h2>6. Legal guarantee</h2><p>If a product does not work as described, you have the rights given by EU law for digital content and services (Directive (EU) 2019/770), including repair, a price reduction or a refund.</p>
@@ -343,18 +385,18 @@ legal('privacy','Privacy policy','How Halewood Systems handles personal data, un
 <h3>Visiting our websites</h3><p>Our sites are hosted on GitHub Pages and use Cloudflare for some services. These providers process technical data such as your IP address and browser type to deliver the pages and keep them secure. We do not use advertising or tracking cookies. We count visits with Cloudflare Web Analytics, which uses no cookies and does not identify you.</p>
 <h3>Windrova</h3><p>When you look up a forecast, the map position is sent to our weather relay and to public weather services (such as MET Norway) to get the data. Your settings (language, units, favourite places) are stored only in your own browser. Place search uses the Photon service.</p>
 <h3>Emails</h3><p>If you email us, we use your email address and message only to answer you, and delete them when they are no longer needed.</p>
-<h3>Payments and donations</h3><p>Payments and donations are handled by Stripe. Stripe processes your payment details under its own <a href="https://stripe.com/privacy" target="_blank" rel="noopener">privacy policy</a>. We receive only what we need for our records, such as the amount and date.</p>
+<h3>Purchases</h3><p>Kyrofix Pro purchases are handled by Gumroad, Inc. as merchant of record, under its own <a href="https://gumroad.com/privacy" target="_blank" rel="noopener">privacy policy</a>. Gumroad shares with us your email address and the licence key, which we use to deliver and check your Kyrofix key, and to answer support questions. Keys are checked online when you activate Pro; we store the key number and an anonymous ID of each PC.</p><h3>Donations</h3><p>Donations are handled by Stripe. Stripe processes your payment details under its own <a href="https://stripe.com/privacy" target="_blank" rel="noopener">privacy policy</a>. We receive only what we need for our records, such as the amount and date.</p>
 <h2>Legal bases</h2><ul><li>Providing a service you asked for (Art. 6(1)(b) GDPR)</li><li>Our legitimate interest in running secure, working websites (Art. 6(1)(f))</li><li>Legal obligations, such as keeping invoices (Art. 6(1)(c))</li></ul>
-<h2>Transfers outside the EU</h2><p>Some providers (for example GitHub, Cloudflare and Stripe) may process data outside the EU. They use safeguards approved by the European Commission, such as Standard Contractual Clauses or the EU–US Data Privacy Framework.</p>
+<h2>Transfers outside the EU</h2><p>Some providers (for example GitHub, Cloudflare, Gumroad and Stripe) may process data outside the EU. They use safeguards approved by the European Commission, such as Standard Contractual Clauses or the EU–US Data Privacy Framework.</p>
 <h2>How long we keep data</h2><p>Only as long as needed for the purpose, or as long as the law requires (for example, tax records).</p>
 <h2>Your rights</h2><p>You can ask to access, correct or delete your data, to restrict or object to processing, and to receive your data in a portable format. Email {MAIL}. You can also complain to a data protection authority; in Greece this is the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noopener">dpa.gr</a>).</p>
 <h2>Children</h2><p>Our services are not aimed at children under 16, and we do not knowingly collect their data.</p>''')
 
 legal('refunds','Refunds & withdrawal','Your 14-day right of withdrawal and refunds for Halewood Systems products, under EU law.',f'''
-<p>All our products currently have free versions. This page explains your rights when paid plans become available.</p>
+<p>Every product has a free version, so you can try it fully before you pay. Kyrofix Pro licences are sold through Gumroad, which processes payments and refunds.</p>
 <h2>14-day right of withdrawal</h2><p>If you are a consumer in the EU, you can withdraw from a purchase within 14 days without giving a reason (Directive 2011/83/EU). The 14 days start on the day you buy.</p>
 <h2>Digital content you start using right away</h2><p>For software and digital content delivered immediately, the law allows the right of withdrawal to end once delivery starts, but only if you agreed to this at checkout and confirmed you understand you lose the right. We will always ask you clearly before that happens.</p>
-<h2>Subscriptions</h2><p>You can cancel a subscription at any time. It stops at the end of the current paid period. If you withdraw within 14 days of your first payment, before you start using paid features, we refund you in full.</p>
+<h2>Kyrofix Pro</h2><p>Pro is a one-time payment, not a subscription. If you ask within 14 days of buying, we refund you in full, even if you already activated the key; the key then stops working.</p>
 <h2>If something doesn't work</h2><p>If a product does not work as described, you are entitled to have it fixed, or to a price reduction or refund, under EU law on digital content (Directive (EU) 2019/770). This applies regardless of the 14-day period.</p>
 <h2>How to ask</h2><p>Email <b>{MAIL}</b> with the email address you used and the date of purchase. You can also use this sentence: "I hereby give notice that I withdraw from my contract for the following product: …". We refund within 14 days, to the same payment method, at no cost to you.</p>
 <h2>Donations</h2><p>Donations are voluntary gifts and are not purchases. If you donated by mistake, contact us within 14 days and we will refund it.</p>''')
@@ -362,7 +404,7 @@ legal('refunds','Refunds & withdrawal','Your 14-day right of withdrawal and refu
 legal('cookies','Cookies','Cookie information for Halewood Systems websites.',f'''
 <h2>Short version</h2><p>We do not use advertising or tracking cookies, so we don't show a cookie banner.</p>
 <h2>What we store</h2><ul><li><b>halewoodsystems.com:</b> no cookies.</li><li><b>Windrova:</b> your settings (language, units, favourite places, last map view) are saved in your browser's local storage so the map remembers them. They never leave your device and you can clear them in your browser settings.</li></ul>
-<h2>Third parties</h2><p>When you pay or donate, Stripe may set cookies needed for secure payment and fraud prevention, on its own pages. See Stripe's policy.</p>
+<h2>Third parties</h2><p>When you buy, Gumroad may set cookies needed for checkout, on its own pages. When you donate, Stripe may set cookies needed for secure payment and fraud prevention, on its own pages. See Stripe's policy.</p>
 <h2>Changes</h2><p>If we ever add cookies that need your consent, we will ask you first.</p>''')
 
 # 404

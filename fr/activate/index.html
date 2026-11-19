@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Get your Kyrofix key — Halewood Systems</title>
+<meta content="Bought Kyrofix Pro? Paste the licence key from your Gumroad receipt to get your Kyrofix key." name="description"/>
+<meta content="Get your Kyrofix key — Halewood Systems" property="og:title"/>
+<meta content="Bought Kyrofix Pro? Paste the licence key from your Gumroad receipt to get your Kyrofix key." property="og:description"/>
+<meta content="https://halewoodsystems.com/img/og.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="#07090d" name="theme-color"/>
+<link href="/favicon-48.png" rel="icon" type="image/png"/><link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="/assets/site.css?v=5" rel="stylesheet"/>
+<link href="https://halewoodsystems.com/activate/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/activate/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/activate/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/activate/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/activate/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/activate/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/activate/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/activate/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/activate/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/activate/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<header id="nav"></header>
+<main>
+<section class="hero"><div class="wrap" style="max-width:720px">
+<h1>Get your Kyrofix key</h1>
+<p class="lead">Thanks for buying Kyrofix Pro! Paste the <b>licence key from your Gumroad receipt</b> below.</p>
+<div class="card" style="margin-top:24px;padding:22px">
+<label for="lic"><b>Gumroad licence key</b></label>
+<input autocomplete="off" id="lic" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" spellcheck="false" style="width:100%;margin:10px 0 14px;padding:12px 14px;border-radius:10px;border:1px solid var(--line,#2a3140);background:transparent;color:inherit;font:inherit"/>
+<button class="btn p" id="go" type="button">Get my key</button>
+<p class="updated" id="msg" style="margin-top:12px"></p>
+<div id="out" style="display:none;margin-top:8px">
+<p><b id="pn"></b> <span id="pe"></span></p>
+<code id="key" style="display:block;padding:14px;border-radius:10px;background:rgba(127,127,127,.12);word-break:break-all;font-size:15px"></code>
+<button class="btn g" id="cp" style="margin-top:12px" type="button">Copy key</button>
+<ol style="margin-top:18px;line-height:1.8"><li>Open the Kyrofix app and go to <b>Pro</b>.</li><li>Paste the key and click <b>Activate</b>.</li><li>Use the same key on up to 3 of your PCs.</li></ol>
+<p class="updated">Keep this key. You can come back to this page anytime and paste the same Gumroad key to see it again.</p>
+</div>
+</div>
+<p class="updated" style="margin-top:18px">Problems? Email <b>support@halewoodsystems.com</b> with your Gumroad receipt.</p>
+</div></section>
+<script>
+const $=s=>document.querySelector(s);
+$('#go').onclick=async()=>{const l=$('#lic').value.trim();if(!l)return;$('#go').disabled=true;$('#msg').textContent='Checking your purchase…';$('#out').style.display='none';
+ try{const r=await(await fetch('https://windrova-api.thomaslipknot1.workers.dev/kyro/redeem',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({license:l})})).json();
+  if(r.ok){$('#msg').textContent='';$('#pn').textContent=r.name;$('#pe').textContent=r.lifetime?'· forever':'· valid until '+r.expires;$('#key').textContent=r.key;$('#out').style.display='block';}
+  else $('#msg').textContent={bad:'We could not find this licence key. Copy it exactly from your Gumroad receipt.',refunded:'This purchase was refunded, so the key no longer works.',empty:'Your purchase is fine, but we need a moment to prepare your key. Please email us and we will send it today.',net:'Could not check right now. Please try again in a minute.'}[r.reason]||'Something went wrong. Please email us.';}
+ catch(e){$('#msg').textContent='Could not connect. Check your internet and try again.';}
+ $('#go').disabled=false;};
+$('#lic').onkeydown=e=>{if(e.key==='Enter')$('#go').click();};
+$('#cp').onclick=()=>{navigator.clipboard.writeText($('#key').textContent);$('#cp').textContent='Copied';};
+</script>
+</main>
+<footer id="foot"></footer>
+<script src="/assets/site.js?v=5"></script>
+<script data-cf-beacon='{"token": "a11dfd5ee7a843d0b247e834f27c971c"}' defer="" src="https://static.cloudflareinsights.com/beacon.min.js"></script>
+</body>
+</html>

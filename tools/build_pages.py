@@ -38,6 +38,7 @@ CARDS=f'''<div class="grid">
   <a class="card" href="/products/windrova/"><div class="ico"><img src="/img/windrova-icon.png" alt=""></div><span class="badge live">● Live</span><h3>Windrova</h3><p>Live weather map for the whole world, with three forecast models and an activity planner.</p><div class="meta"><span>Web · Free</span><span>Mobile app soon</span></div></a>
   <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-cleaner/"><div class="ico kc"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Cleaner</h3><p>Cleans junk files, browser cache and update leftovers, and speeds up Windows startup.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix-backup/"><div class="ico kc"><img src="/img/kyrofix-backup/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Backup</h3><p>Backs up your documents and photos to a USB drive or external disk, and gets them back when you need them.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/slipgate/"><div class="ico sg">{SG_ICO}</div><span class="badge free">Free to play</span><h3>Slipgate</h3><p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p><div class="meta"><span>Browser · Free</span></div></a>
 </div>'''
 
@@ -79,6 +80,7 @@ page('products/index.html','Products — Halewood Systems','All Halewood Systems
       <tr><td><a href="/products/windrova/"><b>Windrova</b></a></td><td>Web · Android soon</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td>Premium, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix-cleaner/"><b>Kyrofix Cleaner</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
+      <tr><td><a href="/products/kyrofix-backup/"><b>Kyrofix Backup</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/slipgate/"><b>Slipgate</b></a></td><td>Browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
     </tbody></table></div>
 </div></section>''')
@@ -209,6 +211,50 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
   <p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
 </div></section>
 <div class="band"><h2>Free up space in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download Kyrofix Cleaner</a></div></div>''')
+
+
+# Kyrofix Backup
+page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup for Windows','Kyrofix Backup for Windows 10 and 11: back up your documents, desktop and photos to a USB drive, external disk or OneDrive folder. Restore in one click. Free download.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Backup</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-backup/icon.png" alt="" width="56" height="56"></div>
+  <span class="badge free">Free download · Windows 10 / 11</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Backup</h1>
+  <p class="lead">Drives fail. Laptops get lost. Kyrofix Backup keeps a copy of your documents and photos on a USB drive or external disk, and gets them back in one click.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No admin rights needed</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-backup/home.jpg" alt="Kyrofix Backup main screen" width="1440" height="960"></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>Simple, safe backups</h2>
+  <div class="grid">
+    <div class="card"><h3>Your important folders</h3><p>Documents, Desktop and Pictures are picked for you. Add any other folder.</p></div>
+    <div class="card"><h3>Any drive</h3><p>USB stick, external disk, second drive or a OneDrive folder.</p></div>
+    <div class="card"><h3>Fast</h3><p>Only new and changed files are copied, so later backups take seconds.</p></div>
+    <div class="card"><h3>Plain files</h3><p>Backups are normal folders. Open them in Explorer, even without Kyrofix.</p></div>
+    <div class="card"><h3>Never deletes</h3><p>Deleting a file on your PC never removes it from the backup.</p></div>
+    <div class="card"><h3>One-click restore</h3><p>Put back every missing file, without overwriting anything on your PC.</p></div>
+  </div></div></section>
+<section><div class="wrap"><h2>See it in action</h2>
+  <div class="gallery">
+    <figure><img src="/img/kyrofix-backup/restore.jpg" alt="Restore screen" loading="lazy"><figcaption>Restore missing files</figcaption></figure>
+    <figure><img src="/img/kyrofix-backup/versions.jpg" alt="Version history" loading="lazy"><figcaption>Get back older versions (Pro)</figcaption></figure>
+    <figure><img src="/img/kyrofix-backup/sched.jpg" alt="Automatic backups" loading="lazy"><figcaption>Automatic backups (Pro)</figcaption></figure>
+  </div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version backs up and restores. Pro makes it automatic and keeps older versions.</p>
+  <div class="plans">
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Backup Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Back up any folders</li><li>USB, external disk or OneDrive folder</li><li>Only changed files are copied</li><li>Restore missing files</li><li class="x">Automatic backups</li><li class="x">Version history</li></ul><a class="btn g" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download free</a></div>
+    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Backup Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €29.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic daily or weekly backups</li><li>Version history (older copies)</li><li>Reminder when the drive is missing</li><li>Priority support</li></ul><span class="btn p off">On sale soon</span></div>
+  </div>
+</div></section>
+<section><div class="wrap"><h2>System requirements</h2>
+  <div class="grid">
+    <div class="card"><h3>System</h3><p>Windows 10 or 11, 64-bit. No administrator rights needed.</p></div>
+    <div class="card"><h3>Storage</h3><p>A USB drive, external disk or any folder with enough free space.</p></div>
+    <div class="card"><h3>Internet</h3><p>Not needed. Your files never leave your PC.</p></div>
+  </div>
+  <p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
+</div></section>
+<div class="band"><h2>Don't lose your files.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download Kyrofix Backup</a></div></div>''')
 
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''

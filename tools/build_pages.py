@@ -161,7 +161,7 @@ page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updat
     <div class="card"><h3>Memory</h3><p>4 GB RAM. 8 GB recommended for the AI assistant.</p></div>
     <div class="card"><h3>Internet</h3><p>Needed to download drivers. Everything else works offline.</p></div>
   </div>
-  <p class="updated">Installer SHA-256: <code style="word-break:break-all">2aebcef80682d8c584741ce505daa14cb5472bceaa1bc087ed7d3a06e9338f04</code>. Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
+  <p class="updated">Installer SHA-256: <code style="word-break:break-all">88b6a2f6010c21476dd9adbda0cb236febe92c79fc685879237375ba74c442b9</code>. Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
 </div></section>
 <div class="band"><h2>Fix your drivers in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download Kyrofix free</a></div></div>''')
 
@@ -174,7 +174,7 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Cleaner</h1>
   <p class="lead">Free up gigabytes in one click. Kyrofix Cleaner removes junk and leftovers, never your personal files, and shows you everything before it deletes.</p>
   <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
-  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No ads, no bundled extras</span></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.1.0</span><span>Windows 10 / 11, 64-bit</span><span>No ads, no bundled extras</span></div>
   <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-cleaner/results.jpg" alt="Kyrofix Cleaner scan results" width="1440" height="960"></div>
 </div></section>
 <section class="alt"><div class="wrap"><h2>What it cleans</h2>
@@ -191,11 +191,13 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
     <figure><img src="/img/kyrofix-cleaner/scan.jpg" alt="Scan screen" loading="lazy"><figcaption>One click to scan</figcaption></figure>
     <figure><img src="/img/kyrofix-cleaner/startup.jpg" alt="Startup apps" loading="lazy"><figcaption>Startup apps on or off</figcaption></figure>
     <figure><img src="/img/kyrofix-cleaner/big.jpg" alt="Big files" loading="lazy"><figcaption>Find big files</figcaption></figure>
+    <figure><img src="/img/kyrofix-cleaner/uninstall.jpg" alt="Uninstaller" loading="lazy"><figcaption>Uninstaller with leftover removal (Pro)</figcaption></figure>
+    <figure><img src="/img/kyrofix-cleaner/dupes.jpg" alt="Duplicate files" loading="lazy"><figcaption>Duplicate file finder (Pro)</figcaption></figure>
   </div></div></section>
 <section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version is a full cleaner. Pro adds automation and deep tools.</p>
   <div class="plans">
     <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Cleaner Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Junk &amp; temp file cleaning</li><li>Windows Update leftovers</li><li>Browser cache (logins kept)</li><li>Startup manager</li><li>Big file finder</li><li class="x">Automatic cleaning</li><li class="x">Privacy cleaning</li></ul><a class="btn g" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Cleaner Pro</h3><div class="price">Soon</div><div class="note">Price announced at launch</div><ul><li>Everything in Free</li><li>Automatic weekly cleaning</li><li>Privacy cleaning (history, cookies)</li><li>Uninstaller with leftover removal</li><li>Duplicate file finder</li><li>Priority support</li></ul><span class="btn p off">Coming soon</span></div>
+    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Cleaner Pro</h3><div class="price">€14.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €29.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic weekly cleaning</li><li>Privacy cleaning (history, cookies)</li><li>Uninstaller with leftover removal</li><li>Duplicate file finder</li><li>Priority support</li></ul><span class="btn p off">On sale soon</span></div>
   </div>
 </div></section>
 <section><div class="wrap"><h2>System requirements</h2>
@@ -229,7 +231,7 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
     <tbody>
       <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
       <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99/year or €39.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
-      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: price at launch</td><td><span class="badge free">Free available</span></td></tr>
+      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99/year or €29.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>

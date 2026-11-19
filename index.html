@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halewood Systems — Software that just works</title>
+<meta name="description" content="Halewood Systems makes fast, simple software: Windrova live weather map, Kyrofix PC tools and games. Free to start.">
+<meta property="og:title" content="Halewood Systems">
+<meta property="og:description" content="Fast, simple software. Windrova, Kyrofix and games.">
+<meta property="og:image" content="https://halewoodsystems.com/img/og.jpg">
+<meta name="theme-color" content="#07090d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#07090d;--bg2:#0d1117;--card:#11161e;--line:#1e2632;--txt:#e9eef5;--mut:#8a97a8;--acc:#2f7bff;--acc2:#00d4ff;--ok:#2fd27a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:10;background:rgba(7,9,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;height:68px;gap:32px}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand b{font-size:20px;letter-spacing:4px;font-weight:800}
+.brand small{font-size:9px;letter-spacing:5.5px;color:var(--mut);margin-top:4px}
+nav ul{display:flex;gap:28px;list-style:none;margin-left:auto;font-size:15px;color:var(--mut)}
+nav ul a:hover{color:var(--txt)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;font-weight:600;font-size:15px;transition:.2s;border:1px solid transparent;cursor:pointer}
+.btn.p{background:var(--acc);color:#fff}.btn.p:hover{background:#4a8dff;transform:translateY(-1px)}
+.btn.g{border-color:var(--line);color:var(--txt)}.btn.g:hover{border-color:#3a4658}
+.btn.s{padding:9px 16px;font-size:14px}
+.hero{padding:110px 0 80px;text-align:center;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-40% -20% auto;height:700px;background:radial-gradient(closest-side,rgba(47,123,255,.22),transparent);pointer-events:none}
+.eyebrow{display:inline-block;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--acc2);border:1px solid rgba(0,212,255,.3);padding:6px 14px;border-radius:99px;margin-bottom:26px}
+h1{font-size:clamp(40px,6.4vw,76px);line-height:1.05;letter-spacing:-2px;font-weight:800;max-width:900px;margin:0 auto}
+h1 span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:19px;color:var(--mut);max-width:620px;margin:24px auto 36px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+section{padding:90px 0}
+h2{font-size:clamp(30px,4vw,44px);letter-spacing:-1px;line-height:1.15;font-weight:800}
+.lead{color:var(--mut);font-size:18px;margin-top:14px;max-width:640px}
+.feat{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02)}
+.shot img{display:block;width:100%;height:auto}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:6px}
+.badge.live{background:rgba(47,210,122,.12);color:var(--ok)}
+.badge.soon{background:rgba(255,190,60,.12);color:#ffbe3c}
+.badge.free{background:rgba(47,123,255,.14);color:#7fb0ff}
+.ticks{list-style:none;margin:26px 0 32px;display:grid;gap:12px}
+.ticks li{padding-left:30px;position:relative;color:#c9d3df}
+.ticks li:before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:rgba(47,123,255,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237fb0ff' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column;transition:.25s}
+.card:hover{border-color:#2c3a50;transform:translateY(-3px)}
+.ico{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;margin-bottom:22px}
+.ico img{width:60px;height:60px;border-radius:14px}
+.card h3{font-size:22px;margin:12px 0 8px}
+.card p{color:var(--mut);font-size:15px;flex:1}
+.card .btn{margin-top:24px;align-self:flex-start}
+.card .badge{align-self:flex-start}
+.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px;background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+th,td{padding:16px 22px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:600}
+th:not(:first-child),td:not(:first-child){text-align:center;width:22%}
+tr:last-child td{border-bottom:0}
+.y{color:var(--ok);font-weight:700}.n{color:#4a5566}
+thead th.pro{color:#7fb0ff}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.why div{padding:28px;border-radius:16px;border:1px solid var(--line)}
+.why h4{font-size:18px;margin-bottom:8px}.why p{color:var(--mut);font-size:15px}
+.band{text-align:center;padding:90px 24px;background:radial-gradient(closest-side,rgba(47,123,255,.18),transparent)}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+footer .links{display:flex;gap:22px;margin-left:auto}
+footer a:hover{color:var(--txt)}
+@media(max-width:900px){nav ul{display:none}.feat{grid-template-columns:1fr;gap:36px}.grid,.why{grid-template-columns:1fr}.hero{padding:80px 0 60px}th,td{padding:13px 12px}section{padding:70px 0}nav .wrap{gap:12px}.navcta{margin-left:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><b>HALEWOOD</b><small>SYSTEMS</small></a>
+  <ul><li><a href="#products">Products</a></li><li><a href="#windrova">Windrova</a></li><li><a href="#kyrofix">Kyrofix</a></li><li><a href="#games">Games</a></li></ul>
+  <a class="btn p s navcta" href="https://windrova.com" target="_blank" rel="noopener">Try Windrova</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Independent software studio</span>
+  <h1>Software that <span>just works.</span></h1>
+  <p>Halewood Systems builds fast, simple tools for everyday life, from live weather to PC care and games. Free to start, no clutter.</p>
+  <div class="cta">
+    <a class="btn p" href="#products">Explore products</a>
+    <a class="btn g" href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">Watch on YouTube</a>
+  </div>
+</div></header>
+
+<section id="windrova"><div class="wrap feat">
+  <div>
+    <span class="badge live">● Live now</span>
+    <h2 style="margin-top:16px">Windrova.<br>The whole world's weather, live.</h2>
+    <p class="lead">A live weather map for every place on Earth. Open it in any browser, no account needed.</p>
+    <ul class="ticks">
+      <li>Live wind, rain, temperature, clouds and sea waves</li>
+      <li>Three global models in one click: ECMWF, GFS and GEM</li>
+      <li>Hurricanes, lightning, earthquakes, fires and live satellite</li>
+      <li>Best hours for the beach, sailing, kitesurf and hiking</li>
+      <li>10-day forecast for any place, in 23 languages</li>
+    </ul>
+    <a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova, it's free →</a>
+  </div>
+  <div class="shot"><img src="img/windrova-hero.jpg" alt="Windrova live wind map over Europe" loading="lazy"></div>
+</div></section>
+
+<section id="products" class="alt"><div class="wrap">
+  <h2>Products</h2>
+  <p class="lead">Everything we make, in one place.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="ico"><img src="img/windrova-icon.png" alt=""></div>
+      <span class="badge live">● Live</span>
+      <h3>Windrova</h3>
+      <p>Live weather map for the whole world, with three forecast models and an activity planner. Mobile app coming soon.</p>
+      <a class="btn p s" href="https://windrova.com" target="_blank" rel="noopener">Open free</a>
+    </div>
+    <div class="card" id="kyrofix-card">
+      <div class="ico" style="background:linear-gradient(135deg,#2f7bff,#00d4ff)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div>
+      <span class="badge soon">Coming soon</span>
+      <h3>Kyrofix Driver Updater</h3>
+      <p>Finds outdated drivers and updates them in one click, with a built-in AI assistant that explains every fix. For Windows.</p>
+      <a class="btn g s" href="#kyrofix">See Free vs Pro</a>
+    </div>
+    <div class="card" id="games">
+      <div class="ico" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/></svg></div>
+      <span class="badge free">Free to play</span>
+      <h3>Slipgate</h3>
+      <p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p>
+      <a class="btn g s" href="https://halewood-systems.itch.io/slipgate" target="_blank" rel="noopener">Play now</a>
+    </div>
+  </div>
+</div></section>
+
+<section id="kyrofix"><div class="wrap">
+  <span class="badge soon">Coming soon</span>
+  <h2 style="margin-top:16px">Kyrofix Driver Updater</h2>
+  <p class="lead">Keep your PC's drivers up to date without hunting through websites. Start free, upgrade when you need more.</p>
+  <table>
+    <thead><tr><th>Feature</th><th>Free</th><th class="pro">Pro</th></tr></thead>
+    <tbody>
+      <tr><td>Scan for outdated drivers</td><td class="y">✓</td><td class="y">✓</td></tr>
+      <tr><td>Update drivers</td><td>One at a time</td><td class="y">All in one click</td></tr>
+      <tr><td>Backup before every update</td><td class="y">✓</td><td class="y">✓</td></tr>
+      <tr><td>AI assistant that explains fixes</td><td>Basic</td><td class="y">Full</td></tr>
+      <tr><td>Automatic scheduled scans</td><td class="n">—</td><td class="y">✓</td></tr>
+      <tr><td>Priority support</td><td class="n">—</td><td class="y">✓</td></tr>
+    </tbody>
+  </table>
+  <div class="cta" style="justify-content:flex-start;margin-top:30px">
+    <span class="btn p" style="opacity:.55;cursor:default">Download, coming soon</span>
+    <a class="btn g" href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">Get notified on YouTube</a>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <h2>Why Halewood</h2>
+  <div class="why">
+    <div><h4>Free to start</h4><p>Every product has a free version that's actually useful, not a demo.</p></div>
+    <div><h4>No clutter</h4><p>No bundled extras, no pop-ups, no tricks. Just the tool you came for.</p></div>
+    <div><h4>Built with care</h4><p>Small team, fast updates. Tell us what's missing and we'll build it.</p></div>
+  </div>
+</div></section>
+
+<div class="band">
+  <h2>Try Windrova today.</h2>
+  <p class="lead" style="margin:14px auto 30px">Free, live, and ready in your browser.</p>
+  <div class="cta">
+    <a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova</a>
+    <a class="btn g" href="https://buy.stripe.com/14AcMY4rr24U6Pqec0dUY02" target="_blank" rel="noopener">❤ Support us</a>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <a class="brand" href="#"><b style="font-size:16px">HALEWOOD</b><small>SYSTEMS</small></a>
+  <span>© 2026 Halewood Systems</span>
+  <div class="links">
+    <a href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://halewood-systems.itch.io" target="_blank" rel="noopener">itch.io</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

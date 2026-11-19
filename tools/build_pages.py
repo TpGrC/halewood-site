@@ -18,7 +18,7 @@ def page(path,title,desc,body):
 <meta property="og:image" content="https://halewoodsystems.com/img/og.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>

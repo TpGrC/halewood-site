@@ -8,7 +8,7 @@ img{max-width:100%;height:auto;display:block}
 /* nav */
 .nav{position:sticky;top:0;z-index:20;background:rgba(7,9,13,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;height:68px;gap:28px}
-.brand{display:flex;flex-direction:column;line-height:1}
+.brand{display:flex;align-items:center;gap:10px;line-height:1}.brand img{display:block;height:auto}.brand span{display:flex;flex-direction:column}
 .brand b{font-size:20px;letter-spacing:4px;font-weight:800}
 .brand small{font-size:9px;letter-spacing:5.5px;color:var(--mut);margin-top:4px}
 .menu{display:flex;gap:26px;list-style:none;margin-left:auto;font-size:15px;color:var(--mut)}

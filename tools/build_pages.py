@@ -36,7 +36,7 @@ def page(path,title,desc,body):
 
 CARDS=f'''<div class="grid">
   <a class="card" href="/products/windrova/"><div class="ico"><img src="/img/windrova-icon.png" alt=""></div><span class="badge live">● Live</span><h3>Windrova</h3><p>Live weather map for the whole world, with three forecast models and an activity planner.</p><div class="meta"><span>Web · Free</span><span>Mobile app soon</span></div></a>
-  <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge soon">Coming soon</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/slipgate/"><div class="ico sg">{SG_ICO}</div><span class="badge free">Free to play</span><h3>Slipgate</h3><p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p><div class="meta"><span>Browser · Free</span></div></a>
 </div>'''
 
@@ -76,7 +76,7 @@ page('products/index.html','Products — Halewood Systems','All Halewood Systems
     <thead><tr><th>Product</th><th>Platform</th><th>Status</th><th>Free version</th><th>Paid version</th></tr></thead>
     <tbody>
       <tr><td><a href="/products/windrova/"><b>Windrova</b></a></td><td>Web · Android soon</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td>Premium, coming soon</td></tr>
-      <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge soon">Coming soon</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
+      <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/slipgate/"><b>Slipgate</b></a></td><td>Browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
     </tbody></table></div>
 </div></section>''')
@@ -118,28 +118,50 @@ page('products/windrova/index.html','Windrova — Live weather map for the whole
 <div class="band"><h2>Open Windrova now.</h2><p class="lead">It's free and runs in any browser.</p><div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova</a></div></div>''')
 
 # Kyrofix
-page('products/kyrofix/index.html','Kyrofix Driver Updater — Keep your PC drivers up to date','Kyrofix Driver Updater for Windows: find outdated drivers and update them safely, with an AI assistant. Free and Pro. Coming soon.',f'''
+page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updater for Windows','Kyrofix Driver Updater for Windows 10 and 11: official drivers from Windows Update, NVIDIA, AMD and Intel, a restore point before every install, and a private AI that explains fixes. Free download.',f'''
 <section class="hero"><div class="wrap">
   <p class="crumb"><a href="/products/">Products</a> / Kyrofix Driver Updater</p>
   <div class="ico kf" style="width:72px;height:72px">{KF_ICO}</div>
-  <span class="badge soon">Coming soon · Windows 10 / 11</span>
+  <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Driver Updater</h1>
-  <p class="lead">Keep your PC's drivers up to date without hunting through websites. Fewer crashes, better sound, faster Wi-Fi.</p>
-  <div class="cta"><span class="btn p off">Free download, coming soon</span><a class="btn g" href="{YT}" target="_blank" rel="noopener">Get notified on YouTube</a></div>
+  <p class="lead">Keep your PC's drivers up to date without hunting through websites. Official drivers only, a restore point before every change, and an AI that explains what's wrong in plain words.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download free (11 MB)</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.2.0</span><span>Windows 10 / 11, 64-bit</span><span>10 languages</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix/scan.jpg" alt="Kyrofix scan screen" width="1440" height="936"></div>
 </div></section>
-<section class="alt"><div class="wrap"><h2>How it works</h2>
+<section class="alt"><div class="wrap"><h2>What it does</h2>
   <div class="grid">
-    <div class="card"><h3>1. Scan</h3><p>Kyrofix checks your hardware and finds drivers that are outdated or missing.</p></div>
-    <div class="card"><h3>2. Update safely</h3><p>It updates them for you, with a restore point so you can always go back.</p></div>
-    <div class="card"><h3>3. Ask the AI</h3><p>Not sure what a fix does? The built-in assistant explains it in plain words.</p></div>
+    <div class="card"><h3>Official drivers</h3><p>Drivers come from Windows Update and straight from NVIDIA, AMD and Intel. Never from random download sites.</p></div>
+    <div class="card"><h3>Safe by default</h3><p>Kyrofix makes a Windows restore point before it installs anything, so you can always go back.</p></div>
+    <div class="card"><h3>Crash explanations</h3><p>Had a blue screen? Kyrofix reads it and tells you what caused it and how to fix it.</p></div>
+    <div class="card"><h3>Sound &amp; network fixes</h3><p>One-click repairs for no sound, no Wi-Fi and other common Windows problems.</p></div>
+    <div class="card"><h3>Private AI assistant</h3><p>Ask anything about your PC. The AI runs on your computer, so nothing leaves it.</p></div>
+    <div class="card"><h3>10 languages</h3><p>English, Ελληνικά, Deutsch, Español, Français, Italiano, Polski, Português, Русский and Türkçe.</p></div>
   </div></div></section>
-<section><div class="wrap"><h2>Free vs Pro</h2><p class="lead">Start free. Upgrade when you want everything automatic.</p>
+<section><div class="wrap"><h2>See it in action</h2>
+  <div class="gallery">
+    <figure><img src="/img/kyrofix/results.jpg" alt="Scan results" loading="lazy"><figcaption>Clear scan results</figcaption></figure>
+    <figure><img src="/img/kyrofix/drivers.jpg" alt="Driver list" loading="lazy"><figcaption>Every driver, with its source</figcaption></figure>
+    <figure><img src="/img/kyrofix/ai.jpg" alt="AI assistant" loading="lazy"><figcaption>A private AI that explains fixes</figcaption></figure>
+    <figure><img src="/img/kyrofix/tools.jpg" alt="Repair tools" loading="lazy"><figcaption>Sound, network and crash tools</figcaption></figure>
+    <figure><img src="/img/kyrofix/boost.jpg" alt="Game Boost" loading="lazy"><figcaption>Game Boost (Pro)</figcaption></figure>
+  </div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version is the full driver updater. Pro adds automation and extras.</p>
   <div class="plans">
-    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Kyrofix Free</h3><div class="price">€0</div><div class="note">Free download</div><ul><li>Scan for outdated drivers</li><li>Update drivers one by one</li><li>Restore point before updates</li><li>AI assistant (basic)</li><li class="x">One-click update all</li><li class="x">Automatic scans</li></ul><span class="btn g off">Coming soon</span></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Kyrofix Pro</h3><div class="price">Soon</div><div class="note">Price announced at launch</div><ul><li>Everything in Free</li><li>One-click update all</li><li>Automatic scheduled scans</li><li>AI assistant (full)</li><li>Priority support</li></ul><span class="btn p off">Coming soon</span></div>
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Kyrofix Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Scan and update drivers</li><li>Official sources only</li><li>Restore point before installs</li><li>Blue screen explanations</li><li>Sound &amp; network fixes</li><li>AI assistant (daily limit)</li><li class="x">Automatic updates</li><li class="x">Game Boost</li></ul><a class="btn g" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download free</a></div>
+    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Kyrofix Pro</h3><div class="price">€19.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €39.99 lifetime</div><ul><li>Everything in Free</li><li>Automatic updates and weekly checks</li><li>Game Boost</li><li>Missing DLL fixer</li><li>Driver backup &amp; restore</li><li>Unlimited AI</li><li>Priority support</li></ul><span class="btn p off">Coming soon</span></div>
   </div>
-  <p class="updated">Planned features. The final list may change before launch.</p>
-</div></section>''')
+  <p class="updated">Pro is not on sale yet. Prices include VAT and may change at launch.</p>
+</div></section>
+<section><div class="wrap"><h2>System requirements</h2>
+  <div class="grid">
+    <div class="card"><h3>System</h3><p>Windows 10 or 11, 64-bit. Administrator rights to install drivers.</p></div>
+    <div class="card"><h3>Memory</h3><p>4 GB RAM. 8 GB recommended for the AI assistant.</p></div>
+    <div class="card"><h3>Internet</h3><p>Needed to download drivers. Everything else works offline.</p></div>
+  </div>
+  <p class="updated">Installer SHA-256: <code style="word-break:break-all">2aebcef80682d8c584741ce505daa14cb5472bceaa1bc087ed7d3a06e9338f04</code>. Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
+</div></section>
+<div class="band"><h2>Fix your drivers in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download Kyrofix free</a></div></div>''')
 
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''
@@ -161,7 +183,7 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
     <thead><tr><th>Product</th><th>Free</th><th>Paid</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
-      <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: price at launch</td><td><span class="badge soon">Coming soon</span></td></tr>
+      <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99/year or €39.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>
@@ -181,7 +203,7 @@ page('support/index.html','Support & contact — Halewood Systems','Get help wit
   <h2 style="font-size:28px">Frequently asked</h2>
   <details><summary>Is Windrova really free?</summary><p>Yes. All weather maps, models and the 10-day forecast are free, with no account and no ads.</p></details>
   <details><summary>When is the Windrova mobile app coming?</summary><p>Soon. Until then, open windrova.com on your phone and use "Add to home screen". It works like an app.</p></details>
-  <details><summary>When does Kyrofix come out?</summary><p>We're finishing it now. Follow us on YouTube to know the day it launches.</p></details>
+  <details><summary>Is Kyrofix free?</summary><p>Yes. The free version updates your drivers with no time limit. Pro, with automatic updates and extras, is coming soon.</p></details>
   <details><summary>Something isn't working. What do I send?</summary><p>Tell us which product, what you did, and what happened. A screenshot helps a lot.</p></details>
   <details><summary>How do I delete my data?</summary><p>We keep almost no data. If you emailed us, ask and we'll delete your messages. See our <a href="/legal/privacy/" style="color:#7fb0ff">Privacy policy</a>.</p></details>
 </div></section>''')
@@ -191,7 +213,7 @@ page('about/index.html','About — Halewood Systems','Halewood Systems is an ind
 <section class="hero"><div class="wrap doc"><h1>About</h1>
   <p class="lead">Halewood Systems is an independent software studio based in the European Union.</p>
   <p style="margin-top:28px">We make tools we want to use ourselves: fast, simple and honest. No bundled extras, no dark patterns, no selling your data.</p>
-  <p>Our first product, <a href="/products/windrova/">Windrova</a>, brings professional weather models to everyone, free. Next comes <a href="/products/kyrofix/">Kyrofix</a>, PC care software that explains what it does. We also make games, like <a href="/products/slipgate/">Slipgate</a>.</p>
+  <p>Our first product, <a href="/products/windrova/">Windrova</a>, brings professional weather models to everyone, free. Then came <a href="/products/kyrofix/">Kyrofix</a>, PC care software that explains what it does. We also make games, like <a href="/products/slipgate/">Slipgate</a>.</p>
   <p>Want to follow along? Watch us build on <a href="{YT}" target="_blank" rel="noopener">YouTube</a>.</p>
 </div></section>''')
 

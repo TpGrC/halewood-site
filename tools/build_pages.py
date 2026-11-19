@@ -38,7 +38,6 @@ CARDS=f'''<div class="grid">
   <a class="card" href="/products/windrova/"><div class="ico"><img src="/img/windrova-icon.png" alt=""></div><span class="badge live">● Live</span><h3>Windrova</h3><p>Live weather map for the whole world, with three forecast models and an activity planner.</p><div class="meta"><span>Web · Free</span><span>Mobile app soon</span></div></a>
   <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-cleaner/"><div class="ico kc"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Cleaner</h3><p>Cleans junk files, browser cache and update leftovers, and speeds up Windows startup.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
-  <a class="card" href="/products/kyrofix-monitor/"><div class="ico kc"><img src="/img/kyrofix-monitor/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Monitor</h3><p>Live CPU and GPU temperatures, fans and disk health, with overheat alerts.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/slipgate/"><div class="ico sg">{SG_ICO}</div><span class="badge free">Free to play</span><h3>Slipgate</h3><p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p><div class="meta"><span>Browser · Free</span></div></a>
 </div>'''
 
@@ -80,7 +79,6 @@ page('products/index.html','Products — Halewood Systems','All Halewood Systems
       <tr><td><a href="/products/windrova/"><b>Windrova</b></a></td><td>Web · Android soon</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td>Premium, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix-cleaner/"><b>Kyrofix Cleaner</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
-      <tr><td><a href="/products/kyrofix-monitor/"><b>Kyrofix Monitor</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/slipgate/"><b>Slipgate</b></a></td><td>Browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
     </tbody></table></div>
 </div></section>''')
@@ -212,49 +210,6 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
 </div></section>
 <div class="band"><h2>Free up space in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download Kyrofix Cleaner</a></div></div>''')
 
-# Kyrofix Monitor
-page('products/kyrofix-monitor/index.html','Kyrofix Monitor — Free PC temperature monitor for Windows','Kyrofix Monitor for Windows 10 and 11: live CPU and GPU temperatures, fan speeds, RAM and disk health, with overheat alerts. Free download.',f'''
-<section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Monitor</p>
-  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-monitor/icon.png" alt="" width="56" height="56"></div>
-  <span class="badge free">Free download · Windows 10 / 11</span>
-  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Monitor</h1>
-  <p class="lead">Know how hot your PC really runs. Live CPU and GPU temperatures, fans, memory and disk health, with a warning before anything overheats.</p>
-  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Monitor-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
-  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No ads, no bundled extras</span></div>
-  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-monitor/live.jpg" alt="Kyrofix Monitor live view" width="1440" height="960"></div>
-</div></section>
-<section class="alt"><div class="wrap"><h2>What it shows</h2>
-  <div class="grid">
-    <div class="card"><h3>CPU &amp; GPU temperature</h3><p>Live temperature, load, clock speed and power for your processor and graphics card.</p></div>
-    <div class="card"><h3>Fans &amp; memory</h3><p>Fan speeds, RAM and video memory use at a glance.</p></div>
-    <div class="card"><h3>Disk health</h3><p>Temperature and wear for every SSD and hard drive, so you know before a drive wears out.</p></div>
-    <div class="card"><h3>Overheat alerts</h3><p>A Windows notification when a part gets too hot. You choose the limits.</p></div>
-    <div class="card"><h3>Safe sensor driver</h3><p>Uses the signed PawnIO driver for CPU sensors, not the old WinRing0 driver that antivirus programs block.</p></div>
-    <div class="card"><h3>Light and private</h3><p>Uses almost no CPU. Nothing is sent anywhere.</p></div>
-  </div></div></section>
-<section><div class="wrap"><h2>See it in action</h2>
-  <div class="gallery">
-    <figure><img src="/img/kyrofix-monitor/disks.jpg" alt="Disk health" loading="lazy"><figcaption>Disk health and temperature</figcaption></figure>
-    <figure><img src="/img/kyrofix-monitor/history.jpg" alt="History graphs" loading="lazy"><figcaption>History graphs (Pro)</figcaption></figure>
-    <figure><img src="/img/kyrofix-monitor/stress.jpg" alt="Stress test" loading="lazy"><figcaption>Stress test with cooling score (Pro)</figcaption></figure>
-  </div></div></section>
-<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version shows everything live. Pro adds history, an in-game overlay and a stress test.</p>
-  <div class="plans">
-    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Monitor Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Live CPU &amp; GPU temperature and load</li><li>Fans, RAM and video memory</li><li>Disk health and temperature</li><li>Overheat alerts</li><li class="x">History graphs</li><li class="x">In-game overlay</li></ul><a class="btn g" href="/downloads/Kyrofix-Monitor-Setup.exe" download>Download free</a></div>
-    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Monitor Pro</h3><div class="price">€9.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €19.99 lifetime</div><ul><li>Everything in Free</li><li>History graphs (up to 7 days)</li><li>In-game overlay (CPU, GPU, RAM)</li><li>Stress test with cooling score</li><li>Priority support</li></ul><span class="btn p off">On sale soon</span></div>
-  </div>
-</div></section>
-<section><div class="wrap"><h2>System requirements</h2>
-  <div class="grid">
-    <div class="card"><h3>System</h3><p>Windows 10 or 11, 64-bit. Administrator rights to read the sensors.</p></div>
-    <div class="card"><h3>CPU temperature</h3><p>Needs the free PawnIO driver; Kyrofix offers to install it with one click.</p></div>
-    <div class="card"><h3>Internet</h3><p>Not needed, except to activate Pro.</p></div>
-  </div>
-  <p class="updated">Sensor library: LibreHardwareMonitor (MPL-2.0). Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
-</div></section>
-<div class="band"><h2>Keep your PC cool.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Monitor-Setup.exe" download>Download Kyrofix Monitor</a></div></div>''')
-
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''
 <section class="hero"><div class="wrap">
@@ -277,7 +232,6 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
       <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
       <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99/year or €39.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
       <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99/year or €29.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
-      <tr><td><b>Kyrofix Monitor</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99/year or €19.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>

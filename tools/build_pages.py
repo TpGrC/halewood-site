@@ -19,7 +19,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=3">
+<link rel="stylesheet" href="/assets/site.css?v=4">
 </head>
 <body>
 <header id="nav"></header>
@@ -27,7 +27,7 @@ def page(path,title,desc,body):
 {body}
 </main>
 <footer id="foot"></footer>
-<script src="/assets/site.js?v=3"></script>
+<script src="/assets/site.js?v=4"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "a11dfd5ee7a843d0b247e834f27c971c"}}'></script>
 </body>
 </html>
@@ -37,6 +37,7 @@ def page(path,title,desc,body):
 CARDS=f'''<div class="grid">
   <a class="card" href="/products/windrova/"><div class="ico"><img src="/img/windrova-icon.png" alt=""></div><span class="badge live">● Live</span><h3>Windrova</h3><p>Live weather map for the whole world, with three forecast models and an activity planner.</p><div class="meta"><span>Web · Free</span><span>Mobile app soon</span></div></a>
   <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix-cleaner/"><div class="ico kc"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Cleaner</h3><p>Cleans junk files, browser cache and update leftovers, and speeds up Windows startup.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/slipgate/"><div class="ico sg">{SG_ICO}</div><span class="badge free">Free to play</span><h3>Slipgate</h3><p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p><div class="meta"><span>Browser · Free</span></div></a>
 </div>'''
 
@@ -77,6 +78,7 @@ page('products/index.html','Products — Halewood Systems','All Halewood Systems
     <tbody>
       <tr><td><a href="/products/windrova/"><b>Windrova</b></a></td><td>Web · Android soon</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td>Premium, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
+      <tr><td><a href="/products/kyrofix-cleaner/"><b>Kyrofix Cleaner</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/slipgate/"><b>Slipgate</b></a></td><td>Browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
     </tbody></table></div>
 </div></section>''')
@@ -163,6 +165,49 @@ page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updat
 </div></section>
 <div class="band"><h2>Fix your drivers in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Driver-Updater-Setup.exe" download>Download Kyrofix free</a></div></div>''')
 
+# Kyrofix Cleaner
+page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner for Windows','Kyrofix Cleaner for Windows 10 and 11: remove junk files, browser cache and Windows Update leftovers, turn off slow startup apps and find big files. Free download.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Cleaner</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="56" height="56"></div>
+  <span class="badge free">Free download · Windows 10 / 11</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Cleaner</h1>
+  <p class="lead">Free up gigabytes in one click. Kyrofix Cleaner removes junk and leftovers, never your personal files, and shows you everything before it deletes.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No ads, no bundled extras</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-cleaner/results.jpg" alt="Kyrofix Cleaner scan results" width="1440" height="960"></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>What it cleans</h2>
+  <div class="grid">
+    <div class="card"><h3>Junk &amp; temp files</h3><p>Leftover files from Windows and apps that only take up space.</p></div>
+    <div class="card"><h3>Windows Update leftovers</h3><p>Old update files and the Delivery Optimization cache.</p></div>
+    <div class="card"><h3>Browser cache</h3><p>Chrome, Edge, Firefox, Brave and Opera. Your logins, passwords and history stay.</p></div>
+    <div class="card"><h3>Faster startup</h3><p>Turn off apps that start with Windows. Turn them back on anytime.</p></div>
+    <div class="card"><h3>Big file finder</h3><p>Find the biggest files hiding in your folders. Deleted files go to the Recycle Bin.</p></div>
+    <div class="card"><h3>Safe by design</h3><p>Only caches and leftovers. Files in use are skipped, and you see everything before cleaning.</p></div>
+  </div></div></section>
+<section><div class="wrap"><h2>See it in action</h2>
+  <div class="gallery">
+    <figure><img src="/img/kyrofix-cleaner/scan.jpg" alt="Scan screen" loading="lazy"><figcaption>One click to scan</figcaption></figure>
+    <figure><img src="/img/kyrofix-cleaner/startup.jpg" alt="Startup apps" loading="lazy"><figcaption>Startup apps on or off</figcaption></figure>
+    <figure><img src="/img/kyrofix-cleaner/big.jpg" alt="Big files" loading="lazy"><figcaption>Find big files</figcaption></figure>
+  </div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2><p class="lead">The free version is a full cleaner. Pro adds automation and deep tools.</p>
+  <div class="plans">
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Cleaner Free</h3><div class="price">€0</div><div class="note">Free forever, no time limit</div><ul><li>Junk &amp; temp file cleaning</li><li>Windows Update leftovers</li><li>Browser cache (logins kept)</li><li>Startup manager</li><li>Big file finder</li><li class="x">Automatic cleaning</li><li class="x">Privacy cleaning</li></ul><a class="btn g" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download free</a></div>
+    <div class="plan hl"><span class="badge soon">Pro</span><h3 style="margin-top:12px">Cleaner Pro</h3><div class="price">Soon</div><div class="note">Price announced at launch</div><ul><li>Everything in Free</li><li>Automatic weekly cleaning</li><li>Privacy cleaning (history, cookies)</li><li>Uninstaller with leftover removal</li><li>Duplicate file finder</li><li>Priority support</li></ul><span class="btn p off">Coming soon</span></div>
+  </div>
+</div></section>
+<section><div class="wrap"><h2>System requirements</h2>
+  <div class="grid">
+    <div class="card"><h3>System</h3><p>Windows 10 or 11, 64-bit. Administrator rights to clean system folders.</p></div>
+    <div class="card"><h3>Memory</h3><p>2 GB RAM.</p></div>
+    <div class="card"><h3>Internet</h3><p>Not needed. Everything works offline.</p></div>
+  </div>
+  <p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p>
+</div></section>
+<div class="band"><h2>Free up space in minutes.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Cleaner-Setup.exe" download>Download Kyrofix Cleaner</a></div></div>''')
+
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''
 <section class="hero"><div class="wrap">
@@ -184,6 +229,7 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
     <tbody>
       <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
       <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99/year or €39.99 lifetime (soon)</td><td><span class="badge free">Free available</span></td></tr>
+      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: price at launch</td><td><span class="badge free">Free available</span></td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>

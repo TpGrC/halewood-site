@@ -57,6 +57,7 @@ a.card:hover,.card.hov:hover{border-color:#2c3a50;transform:translateY(-3px)}
 .card .btn{margin-top:22px;align-self:flex-start}
 .ico{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;flex:none}
 .ico img{width:60px;height:60px;border-radius:14px}
+.ico.kc{background:#0d1a22;overflow:hidden}.ico.kc img{width:100%;height:100%;display:block}
 .ico.kf{background:linear-gradient(135deg,#2f7bff,#00d4ff)}
 .ico.sg{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
 .meta{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:14px;margin-top:6px}

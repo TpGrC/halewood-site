@@ -29,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=13">
+<link rel="stylesheet" href="/assets/site.css?v=14">
 </head>
 <body>
 <header id="nav"></header>
@@ -590,8 +590,21 @@ page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Sy
 </div></section>''')
 
 # Pricing
+
+CMP=[('driver','Kyrofix Driver Updater','/products/kyrofix/',['Scan and update drivers','Official sources only','Restore point before installs','Blue screen explanations','Sound &amp; network fixes','AI assistant (daily limit)'],['Automatic updates and weekly checks','Game Boost','Missing DLL fixer','Driver backup &amp; restore','Unlimited AI','Priority support'],'€19.99','€49.99'),
+ ('cleaner','Kyrofix Cleaner','/products/kyrofix-cleaner/',['Junk &amp; temp file cleaning','Windows Update leftovers','Browser cache (logins kept)','Startup manager','Big file finder'],['Automatic weekly cleaning','Privacy cleaning (history, cookies)','Uninstaller with leftover removal','Duplicate file finder','Priority support'],'€14.99','€39.99'),
+ ('backup','Kyrofix Backup','/products/kyrofix-backup/',['Back up any folders','USB, external disk or OneDrive folder','Only changed files are copied','Restore missing files'],['Automatic daily or weekly backups','Version history (older copies)','Reminder when the drive is missing','Priority support'],'€14.99','€39.99'),
+ ('space','Kyrofix Space','/products/kyrofix-space/',['Scan any drive or folder','Biggest folders, drill down','Move to Recycle Bin'],['Biggest 100 files','File types breakdown','Old big files finder','Export report (CSV)'],'€9.99','€24.99'),
+ ('shredder','Kyrofix Shredder','/products/kyrofix-shredder/',['Shred any files and folders','Quick 1-pass shredding','System folders protected'],['3 and 7-pass shredding','Shred the Recycle Bin','Wipe free space','Right-click menu'],'€9.99','€24.99'),
+ ('photo','Kyrofix Photo Cleaner','/products/kyrofix-photo-cleaner/',['Find exact duplicate photos','Keeps the best copy','Everything to the Recycle Bin'],['Similar photos (bursts, re-saves)','Blurry photo finder','Auto-picks the best shot'],'€9.99','€24.99')]
+YES='<span class="ck" aria-label="Yes">✓</span>';NO='<span class="nx" aria-label="No">—</span>'
+def cmptable(k,n,h,fr,pr,y,l):
+    rows=''.join(f'<tr><td>{f}</td><td>{YES}</td><td>{YES}</td></tr>' for f in fr)+''.join(f'<tr><td>{f}</td><td>{NO}</td><td>{YES}</td></tr>' for f in pr)
+    return f'<div class="cmp" id="cmp-{k}"><div class="cmphead"><h3><a href="{h}">{n}</a></h3><a class="btn g s" href="{h}#plans">Details</a></div><div class="tablewrap"><table class="cmpt"><thead><tr><th></th><th>Free<small>€0, no time limit</small></th><th>Pro<small>{y} / year · {l} forever</small></th></tr></thead><tbody>{rows}</tbody></table></div></div>'
+CMPALL='<section id="free-vs-pro" class="alt"><div class="wrap"><h2>Free vs Pro: what you get</h2><p class="lead">Free is the full app with no time limit and no ads. Pro adds automation and extra tools. One key works on up to 3 PCs.</p>'+''.join(cmptable(*c) for c in CMP)+'</div></section>'
+
 page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova and Kyrofix. Every product has a free version. Prices include VAT where applicable.',f'''
-<section class="hero"><div class="wrap"><h1>Pricing</h1><p class="lead">Every product has a free version. Paid plans are coming soon.</p></div></section>
+<section class="hero"><div class="wrap"><h1>Pricing</h1><p class="lead">Every product has a free version. Pro is a small yearly or one-time payment.</p><div class="cta"><a class="btn p" href="#free-vs-pro">Compare Free and Pro</a></div></div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="tablewrap" style="margin-top:0"><table>
     <thead><tr><th>Product</th><th>Free</th><th>Paid</th><th>Status</th></tr></thead>
@@ -605,8 +618,9 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
       <tr><td><b>Kyrofix Photo Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['photo'] else '<span class="badge free">Free available</span>'}</td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
+</div></section>'''+CMPALL+f'''<section><div class="wrap">
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>
-  <details><summary>When can I buy a paid plan?</summary><p>Paid plans open soon. Until then, every product is free to use. Follow us on <a href="{YT}" style="color:#7fb0ff">YouTube</a> to hear first.</p></details>
+  <details><summary>What do I lose if I stay on Free?</summary><p>Nothing you already use. Free never expires and has no ads. Pro only adds the extra tools marked in the tables above.</p></details><details><summary>Yearly or forever?</summary><p>Yearly is cheaper to start. Forever is a one-time payment and never runs out. Both work on up to 3 PCs.</p></details>
   <details><summary>Do prices include VAT?</summary><p>Yes. For customers in the EU, prices shown include VAT where it applies.</p></details>
   <details><summary>Can I get a refund?</summary><p>Yes, under EU consumer law. See <a href="/legal/refunds/" style="color:#7fb0ff">Refunds &amp; withdrawal</a>.</p></details>
   <details><summary>Can I cancel a subscription?</summary><p>Yes, at any time. You keep access until the end of the period you paid for.</p></details>
@@ -622,7 +636,7 @@ page('support/index.html','Support & contact — Halewood Systems','Get help wit
   <h2 style="font-size:28px">Frequently asked</h2>
   <details><summary>Is Windrova really free?</summary><p>Yes. All weather maps, models and the 10-day forecast are free, with no account and no ads.</p></details>
   <details><summary>When is the Windrova mobile app coming?</summary><p>Soon. Until then, open windrova.com on your phone and use "Add to home screen". It works like an app.</p></details>
-  <details><summary>Is Kyrofix free?</summary><p>Yes. The free version updates your drivers with no time limit. Pro, with automatic updates and extras, is coming soon.</p></details>
+  <details><summary>Is Kyrofix free?</summary><p>Yes. Every Kyrofix app has a free version with no time limit. Pro adds automation and extra tools. See <a href="/pricing/#free-vs-pro" style="color:#7fb0ff">Free vs Pro</a>.</p></details>
   <details><summary>Something isn't working. What do I send?</summary><p>Tell us which product, what you did, and what happened. A screenshot helps a lot.</p></details>
   <details><summary>How do I delete my data?</summary><p>We keep almost no data. If you emailed us, ask and we'll delete your messages. See our <a href="/legal/privacy/" style="color:#7fb0ff">Privacy policy</a>.</p></details>
 </div></section>''')

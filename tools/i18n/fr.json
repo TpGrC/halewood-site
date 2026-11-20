@@ -881,5 +881,20 @@
 "995": "10 novembre 2026",
 "998": "Kyrofix compte désormais six applis — Halewood Systems",
 "1008": "Windrova : la carte météo du monde entier — Halewood Systems",
-"1014": "<svg aria-hidden=\"true\" height=\"16\" viewbox=\"0 0 24 24\" width=\"16\"><path d=\"M5 3.5v17l14-8.5z\" fill=\"currentColor\"></path></svg>Bientôt sur Google Play"
+"1014": "<svg aria-hidden=\"true\" height=\"16\" viewbox=\"0 0 24 24\" width=\"16\"><path d=\"M5 3.5v17l14-8.5z\" fill=\"currentColor\"></path></svg>Bientôt sur Google Play",
+"1015": "Oui",
+"1016": "Non",
+"1017": "Chaque produit a une version gratuite. Pro est un petit paiement annuel ou unique.",
+"1018": "Comparer Free et Pro",
+"1019": "Free ou Pro : ce que vous obtenez",
+"1020": "Free est l’appli complète, sans limite de temps ni publicité. Pro ajoute l’automatisation et des outils en plus. Une clé fonctionne sur 3 PC maximum.",
+"1021": "Free<small>0 €, sans limite de temps</small>",
+"1025": "Qu’est-ce que je perds en restant sur Free ?",
+"1026": "Rien de ce que vous utilisez déjà. Free n’expire jamais et n’a pas de pub. Pro ajoute seulement les outils indiqués dans les tableaux ci-dessus.",
+"1027": "Annuel ou à vie ?",
+"1028": "L’annuel coûte moins cher au départ. À vie, c’est un paiement unique qui n’expire jamais. Les deux fonctionnent sur 3 PC maximum.",
+"1029": "Oui. Chaque appli Kyrofix a une version gratuite sans limite de temps. Pro ajoute l’automatisation et des outils en plus. Voir <a href=\"/pricing/#free-vs-pro\" style=\"color:#7fb0ff\">Free vs Pro</a>.",
+"1022": "Pro<small>€19.99 / an · €49.99 à vie</small>",
+"1023": "Pro<small>€14.99 / an · €39.99 à vie</small>",
+"1024": "Pro<small>€9.99 / an · €24.99 à vie</small>"
 }

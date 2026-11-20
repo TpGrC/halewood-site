@@ -881,5 +881,20 @@
 "995": "10 listopada 2026",
 "998": "Kyrofix to teraz sześć aplikacji — Halewood Systems",
 "1008": "Windrova: mapa pogody dla całego świata — Halewood Systems",
-"1014": "<svg aria-hidden=\"true\" height=\"16\" viewbox=\"0 0 24 24\" width=\"16\"><path d=\"M5 3.5v17l14-8.5z\" fill=\"currentColor\"></path></svg>Wkrótce w Google Play"
+"1014": "<svg aria-hidden=\"true\" height=\"16\" viewbox=\"0 0 24 24\" width=\"16\"><path d=\"M5 3.5v17l14-8.5z\" fill=\"currentColor\"></path></svg>Wkrótce w Google Play",
+"1015": "Tak",
+"1016": "Nie",
+"1017": "Każdy produkt ma darmową wersję. Pro to niewielka opłata roczna lub jednorazowa.",
+"1018": "Porównaj Free i Pro",
+"1019": "Free czy Pro: co dostajesz",
+"1020": "Free to pełna aplikacja bez limitu czasu i bez reklam. Pro dodaje automatyzację i dodatkowe narzędzia. Jeden klucz działa na maks. 3 komputerach.",
+"1021": "Free<small>0 €, bez limitu czasu</small>",
+"1025": "Co tracę, zostając przy Free?",
+"1026": "Nic z tego, czego już używasz. Free nigdy nie wygasa i nie ma reklam. Pro dodaje tylko narzędzia z tabel powyżej.",
+"1027": "Rocznie czy na zawsze?",
+"1028": "Rocznie jest taniej na start. Na zawsze to jedna płatność, która nie wygasa. Oba działają na maks. 3 komputerach.",
+"1029": "Tak. Każda aplikacja Kyrofix ma darmową wersję bez limitu czasu. Pro dodaje automatyzację i narzędzia. Zobacz <a href=\"/pricing/#free-vs-pro\" style=\"color:#7fb0ff\">Free vs Pro</a>.",
+"1022": "Pro<small>€19.99 / rok · €49.99 na zawsze</small>",
+"1023": "Pro<small>€14.99 / rok · €39.99 na zawsze</small>",
+"1024": "Pro<small>€9.99 / rok · €24.99 na zawsze</small>"
 }

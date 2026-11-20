@@ -20,9 +20,10 @@
     ru:['Продукты','Цены','Поддержка','О нас','Попробовать Windrova','Открыть меню','Быстрые и простые программы. Бесплатно для начала, ничего лишнего.','Компания','Поддержка и контакты','Правовая информация','Условия использования','Политика конфиденциальности','Возврат и отказ','Cookies','Правовая информация','Все права защищены.','Сделано в ЕС','Язык','Программы','Игры'],
     tr:['Ürünler','Fiyatlar','Destek','Hakkımızda','Windrova’yı dene','Menüyü aç','Hızlı, basit yazılım. Başlamak ücretsiz, gereksiz hiçbir şey yok.','Şirket','Destek ve iletişim','Yasal','Kullanım koşulları','Gizlilik politikası','İade ve cayma','Çerezler','Yasal bildirim','Tüm hakları saklıdır.','AB’de yapıldı','Dil','Yazılım','Oyunlar']
   }[L];
+  const W2 = {en:['News','Help','Downloads'],el:['Νέα','Βοήθεια','Λήψεις'],de:['News','Hilfe','Downloads'],es:['Noticias','Ayuda','Descargas'],fr:['Actualités','Aide','Téléchargements'],it:['Novità','Aiuto','Download'],pl:['Aktualności','Pomoc','Pobieranie'],pt:['Notícias','Ajuda','Transferências'],ru:['Новости','Помощь','Загрузки'],tr:['Haberler','Yardım','İndirmeler']}[L];
   const pick = `<select class="langpick" aria-label="${W[17]}">${Object.entries(LANGS).map(([c, n]) => `<option value="${c}"${c === L ? ' selected' : ''}>${n}</option>`).join('')}</select>`;
   const here0 = bare.replace(/index\.html$/, ''), here = /^\/products\/kyrofix|^\/activate/.test(here0) ? '/software/' : /^\/products\/(starfuse|potion-sort|triple-bloom|skystack|slipgate)/.test(here0) ? '/games/' : here0;
-  const links = [['/software/', W[W.length-2]], ['/games/', W[W.length-1]], ['/products/windrova/', 'Windrova'], ['/pricing/', W[1]], ['/support/', W[2]]];
+  const links = [['/software/', W[W.length-2]], ['/games/', W[W.length-1]], ['/products/windrova/', 'Windrova'], ['/download/', W2[2]], ['/news/', W2[0]], ['/help/', W2[1]], ['/pricing/', W[1]]];
   const nav = document.getElementById('nav');
   if (nav) {
     nav.className = 'nav';
@@ -43,8 +44,8 @@
       <div class="cols">
         <div><a class="brand" href="${P}/"><img src="/img/logo-mark-96.png" alt="" width="45" height="28" style="width:auto;height:28px"><span><b style="font-size:16px">HALEWOOD</b><small>SYSTEMS</small></span></a>
           <p style="margin-top:14px;max-width:260px">${W[6]}</p></div>
-        <div><h4>${W[0]}</h4><ul><li><a href="${P}/products/windrova/">Windrova</a></li><li><a href="${P}/software/">${W[W.length-2]}</a></li><li><a href="${P}/games/">${W[W.length-1]}</a></li><li><a href="${P}/pricing/">${W[1]}</a></li><li><a href="${P}/activate/">Kyrofix Pro key</a></li><li><a href="${P}/about/">${W[3]}</a></li></ul></div>
-        <div><h4>${W[7]}</h4><ul><li><a href="${P}/about/">${W[3]}</a></li><li><a href="${P}/support/">${W[8]}</a></li><li><a href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://halewood-systems.itch.io" target="_blank" rel="noopener">itch.io</a></li></ul></div>
+        <div><h4>${W[0]}</h4><ul><li><a href="${P}/products/windrova/">Windrova</a></li><li><a href="${P}/software/">${W[W.length-2]}</a></li><li><a href="${P}/games/">${W[W.length-1]}</a></li><li><a href="${P}/download/">${W2[2]}</a></li><li><a href="${P}/pricing/">${W[1]}</a></li><li><a href="${P}/activate/">Kyrofix Pro key</a></li><li><a href="${P}/about/">${W[3]}</a></li></ul></div>
+        <div><h4>${W[7]}</h4><ul><li><a href="${P}/about/">${W[3]}</a></li><li><a href="${P}/news/">${W2[0]}</a></li><li><a href="${P}/help/">${W2[1]}</a></li><li><a href="${P}/support/">${W[8]}</a></li><li><a href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://halewood-systems.itch.io" target="_blank" rel="noopener">itch.io</a></li></ul></div>
         <div><h4>${W[9]}</h4><ul><li><a href="${P}/legal/terms/">${W[10]}</a></li><li><a href="${P}/legal/privacy/">${W[11]}</a></li><li><a href="${P}/legal/refunds/">${W[12]}</a></li><li><a href="${P}/legal/cookies/">${W[13]}</a></li><li><a href="${P}/legal/notice/">${W[14]}</a></li></ul></div>
       </div>
       <div class="base"><span>© ${new Date().getFullYear()} Halewood Systems. ${W[15]}</span><span>${W[16]} 🇪🇺</span></div>

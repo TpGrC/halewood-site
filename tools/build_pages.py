@@ -29,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=12">
+<link rel="stylesheet" href="/assets/site.css?v=13">
 </head>
 <body>
 <header id="nav"></header>
@@ -37,7 +37,7 @@ def page(path,title,desc,body):
 {body}
 </main>
 <footer id="foot"></footer>
-<script src="/assets/site.js?v=6"></script>
+<script src="/assets/site.js?v=7"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "a11dfd5ee7a843d0b247e834f27c971c"}}'></script>
 </body>
 </html>
@@ -117,6 +117,7 @@ FAQ_GM=[('Is it free?','Yes. You can play every level for free. Optional ads giv
 def _size(url):
     try: return f"{os.path.getsize(os.path.join(R,url.lstrip('/')))/1048576:.1f} MB"
     except Exception: return ''
+GPS='<a class="gpsoon" href="/news/google-play/"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3.5v17l14-8.5z"/></svg>Coming soon to Google Play</a>'
 def enhance(path,body):
     m=re.match(r'products/([a-z0-9-]+)/index\.html$',path)
     if not m or m.group(1) not in SLUG2KEY: return body
@@ -140,6 +141,7 @@ def enhance(path,body):
         ver=re.search(r'Version ([0-9.]+)',left);ver=ver.group(1) if ver else '1.0.0'
         box=f'<div class="dl"><div><b>{url.split("/")[-1]}</b><span>{_size(url)} · version {ver} · {pl}, 64-bit</span></div><span class="dlnote">Installs in under a minute. Remove it any time in Windows Settings.</span></div>'
         left=re.sub(r'<div class="meta"[^>]*>.*?</div>',box,left,count=1,flags=re.S)
+    if not kf: left=re.sub(r'(<div class="cta">.*?</div>)',lambda mm:mm.group(1)+GPS,left,count=1,flags=re.S)
     left=left.replace('<section class="hero"><div class="wrap">','<section class="hero"><div class="wrap phero"><div class="pl">',1)
     if not left.rstrip().endswith('</div>'): return body
     left=left.rstrip()[:-6]
@@ -689,5 +691,75 @@ legal('cookies','Cookies','Cookie information for Halewood Systems websites.',f'
 <h2>Changes</h2><p>If we ever add cookies that need your consent, we will ask you first.</p>''')
 
 # 404
+
+# ---------- news, help, download centre ----------
+NEWS=[
+ ('google-play','20 November 2026','Our games are coming to Google Play','Starfuse, Potion Sort, Triple Bloom, Skystack and Slipgate are getting real Android apps. Here is what changes and when.',
+  '''<p>All five Halewood games are getting their own Android apps on Google Play: <a href="/products/starfuse/">Starfuse</a>, <a href="/products/potion-sort/">Potion Sort</a>, <a href="/products/triple-bloom/">Triple Bloom</a>, <a href="/products/skystack/">Skystack</a> and <a href="/products/slipgate/">Slipgate</a>. The Windrova weather app comes along with them.</p>
+<h2>What is different in the app?</h2>
+<ul><li>It opens straight from your home screen, full screen.</li><li>Everything is inside the app, so it works with no internet at all.</li><li>Your progress, coins and stars stay on your phone.</li></ul>
+<h2>When?</h2>
+<p>New apps on Google Play first go through a short closed test. After that they open to everyone. Until then, every game is free to play right now in your browser, on phone or computer.</p>
+<h2>Want to test early?</h2>
+<p>We are looking for Android testers. <a href="mailto:support@halewoodsystems.com">Email us</a> the Gmail address you use on your phone and we will add you to the test.</p>'''),
+ ('six-kyrofix-apps','18 November 2026','Kyrofix is now six apps','Space, Shredder and Photo Cleaner join Driver Updater, Cleaner and Backup. All free to download.',
+  '''<p>Kyrofix started as a driver updater. It is now a small family of six Windows tools, each one doing one job well.</p>
+<ul><li><a href="/products/kyrofix/">Driver Updater</a> keeps your drivers up to date.</li><li><a href="/products/kyrofix-cleaner/">Cleaner</a> removes junk and speeds up startup.</li><li><a href="/products/kyrofix-backup/">Backup</a> copies your files to a USB drive.</li><li><a href="/products/kyrofix-space/">Space</a> shows what is filling your disk.</li><li><a href="/products/kyrofix-shredder/">Shredder</a> deletes files for good.</li><li><a href="/products/kyrofix-photo-cleaner/">Photo Cleaner</a> finds duplicate and blurry photos.</li></ul>
+<h2>Same rules for all of them</h2>
+<p>No admin prompt to install, no toolbars, no extra programs. Every app has a free version with no time limit, and you can remove it in Windows Settings any time.</p>'''),
+ ('five-games','15 November 2026','Five free games you can play right now','From merging planets to sorting potions: five quick games that run on any phone or computer.',
+  '''<p>No download, no account. Open a game and play. On your phone, add it to your home screen and it works offline.</p>
+<ul><li><a href="/products/starfuse/">Starfuse</a>: drop and merge planets until you make a black hole.</li><li><a href="/products/potion-sort/">Potion Sort</a>: pour until every bottle holds one colour.</li><li><a href="/products/triple-bloom/">Triple Bloom</a>: match three tiles to clear the garden.</li><li><a href="/products/skystack/">Skystack</a>: tap at the right moment to build a tower.</li><li><a href="/products/slipgate/">Slipgate</a>: slide every block out through its own gate. 200 levels.</li></ul>
+<p>Every puzzle level is checked by a computer before it ships, so it can always be solved.</p>'''),
+ ('windrova-launch','10 November 2026','Windrova: the weather map for the whole world','Wind, rain, waves and three forecast models in one free map, in 23 languages.',
+  '''<p><a href="/products/windrova/">Windrova</a> is a live weather map you can use anywhere in the world, for free and with no account.</p>
+<ul><li>Wind, rain, temperature, waves, clouds and satellite.</li><li>Three forecast models side by side: ECMWF, GFS and GEM.</li><li>An activity planner that tells you the best time to go out.</li></ul>
+<p>Open <a href="https://windrova.com" target="_blank" rel="noopener">windrova.com</a> on your phone and add it to your home screen. The Android app is on its way.</p>'''),
+]
+def ncard(s,d,t,x,_): return f'<a class="card post" href="/news/{s}/"><span class="date">{d}</span><h3>{t}</h3><p>{x}</p><span class="more">Read more</span></a>'
+page('news/index.html','News — Halewood Systems','News and updates from Halewood Systems: new apps, new games and what is coming next.',
+ '<section class="hero"><div class="wrap"><h1>News</h1><p class="lead">New apps, new games and what we are working on.</p></div></section><section><div class="wrap"><div class="grid two">'+''.join(ncard(*n) for n in NEWS)+'</div></div></section>')
+for s,d,t,x,b in NEWS:
+    page(f'news/{s}/index.html',f'{t} — Halewood Systems',x,f'<section class="hero"><div class="wrap doc"><p class="crumb"><a href="/news/">News</a></p><h1>{t}</h1><p class="updated">{d}</p><p class="lead">{x}</p>{b}<p style="margin-top:34px"><a href="/news/">All news</a></p></div></section>')
+
+HELP=[
+ ('install-kyrofix','Install a Kyrofix app','Download, install and open any Kyrofix app on Windows 10 or 11.',
+  '''<ol><li>Open the app's page, for example <a href="/products/kyrofix/">Kyrofix Driver Updater</a>, and click <b>Download</b>.</li><li>Open the downloaded file. If Windows shows "Windows protected your PC", click <b>More info</b>, then <b>Run anyway</b>. This happens with new apps from small studios.</li><li>Click <b>Install</b>. No admin password is needed.</li><li>The app opens by itself. You will also find it in the Start menu.</li></ol>
+<h2>Remove it</h2><p>Open Windows <b>Settings</b>, then <b>Apps</b>, find the Kyrofix app and click <b>Uninstall</b>.</p>'''),
+ ('activate-pro','Activate Kyrofix Pro','Turn on Pro with your key after you buy.',
+  '''<ol><li>After you buy, your receipt email has a licence key.</li><li>Go to <a href="/activate/">halewoodsystems.com/activate</a>, paste that key and click the button. You get your Kyrofix key (it starts with KYRO).</li><li>Open the Kyrofix app, click <b>Pro</b>, paste the KYRO key and click <b>Activate</b>.</li></ol>
+<h2>New PC?</h2><p>One key works on up to 3 PCs. If you need more, <a href="mailto:support@halewoodsystems.com">email us</a>.</p>'''),
+ ('free-up-space','Free up disk space','A quick, safe way to make room on a full drive.',
+  '''<ol><li>Run <a href="/products/kyrofix-cleaner/">Kyrofix Cleaner</a> and clean junk files. This is always safe.</li><li>Open <a href="/products/kyrofix-space/">Kyrofix Space</a> and scan your drive. The biggest folders are at the top.</li><li>Look in Downloads and Videos first. Old installers and videos are often the biggest.</li><li>Use <a href="/products/kyrofix-photo-cleaner/">Photo Cleaner</a> to remove duplicate photos.</li></ol>
+<p>Everything you delete goes to the Recycle Bin first, so you can get it back.</p>'''),
+ ('backup-files','Back up your files','Keep a copy of your photos and documents on a USB drive.',
+  '''<ol><li>Plug in a USB drive or external disk.</li><li>Open <a href="/products/kyrofix-backup/">Kyrofix Backup</a> and pick the folders to save. Documents, Desktop and Pictures are chosen for you.</li><li>Pick the USB drive and click <b>Back up now</b>.</li></ol>
+<h2>Get files back</h2><p>Open Kyrofix Backup, click <b>Restore</b>, pick the backup and choose where to put the files.</p>'''),
+ ('games-home-screen','Play games offline on your phone','Add a Halewood game to your home screen so it opens like an app.',
+  '''<h2>iPhone</h2><ol><li>Open the game in Safari.</li><li>Tap the <b>Share</b> button, then <b>Add to Home Screen</b>.</li></ol>
+<h2>Android</h2><ol><li>Open the game in Chrome.</li><li>Tap the menu (three dots), then <b>Install app</b> or <b>Add to Home screen</b>.</li></ol>
+<p>Open it once with internet. After that it works offline. Your coins and progress are saved on your phone.</p>'''),
+ ('windows-smartscreen','"Windows protected your PC"','Why you see this message and what to do.',
+  '''<p>Windows shows this blue message for apps that are new or not downloaded by many people yet. It does not mean the app is harmful.</p>
+<ol><li>Click <b>More info</b>.</li><li>Check that the publisher or file name says Kyrofix.</li><li>Click <b>Run anyway</b>.</li></ol>
+<p>Only download Kyrofix from halewoodsystems.com. If you got it anywhere else, delete it.</p>'''),
+]
+page('help/index.html','Help and guides — Halewood Systems','Step-by-step guides for Kyrofix, our games and Windrova.',
+ '<section class="hero"><div class="wrap"><h1>Help and guides</h1><p class="lead">Short, step-by-step answers. Still stuck? <a href="/support/">Contact support</a>.</p></div></section><section><div class="wrap"><div class="grid">'+''.join(f'<a class="card post" href="/help/{s}/"><h3>{t}</h3><p>{x}</p><span class="more">Open guide</span></a>' for s,t,x,_ in HELP)+'</div></div></section>')
+for s,t,x,b in HELP:
+    page(f'help/{s}/index.html',f'{t} — Halewood Systems help',x,f'<section class="hero"><div class="wrap doc"><p class="crumb"><a href="/help/">Help</a></p><h1>{t}</h1><p class="lead">{x}</p>{b}<p style="margin-top:34px"><a href="/help/">All guides</a> · <a href="/support/">Contact support</a></p></div></section>')
+
+def drow(key):
+    h,n,d,pl,c1,c2,url,lab,ic=CAT[key]
+    kf=key in KY_ALL
+    right=f'<span class="dsize">{_size(url)}</span><a class="btn p s" href="{url}">Download</a>' if kf else f'<span class="gpsmall">Google Play soon</span><a class="btn p s" href="{url}"{" target=_blank rel=noopener" if url.startswith("http") else ""}>Play free</a>'
+    return f'<div class="drow"><a href="{h}" class="dico">{ic}</a><div class="dtxt"><a href="{h}"><b>{n}</b></a><span>{d}</span></div><div class="dact">{right}</div></div>'
+page('download/index.html','Downloads — Halewood Systems','Download every Halewood Systems app in one place: Kyrofix for Windows, free games and Windrova.',f'''
+<section class="hero"><div class="wrap"><h1>Downloads</h1><p class="lead">Every app in one place. All free to start.</p></div></section>
+<section><div class="wrap"><h2>Kyrofix for Windows</h2><p class="updated">Windows 10 and 11, 64-bit. No admin password needed. <a href="/help/install-kyrofix/">How to install</a></p><div class="dlist">{''.join(drow(k) for k in KY_ALL)}</div>
+<h2 style="margin-top:56px">Games</h2><p class="updated">Play in your browser now. Android apps are coming to Google Play. <a href="/help/games-home-screen/">Play offline</a></p><div class="dlist">{''.join(drow(k) for k in GM_ALL)}</div>
+<h2 style="margin-top:56px">Weather</h2><div class="dlist"><div class="drow"><a href="/products/windrova/" class="dico"><img src="/img/windrova-icon.png" alt="" width="56" height="56"></a><div class="dtxt"><a href="/products/windrova/"><b>Windrova</b></a><span>Live weather map for the whole world.</span></div><div class="dact"><span class="gpsmall">Google Play soon</span><a class="btn p s" href="https://windrova.com" target="_blank" rel="noopener">Open</a></div></div></div>
+</div></section>''')
+
 page('404.html','Page not found — Halewood Systems','Page not found.','<section class="hero center"><div class="wrap"><h1>Page not found</h1><p class="lead">The page you were looking for doesn\'t exist.</p><div class="cta"><a class="btn p" href="/">Go home</a><a class="btn g" href="/products/">See products</a></div></div></section>')
 print('ok')

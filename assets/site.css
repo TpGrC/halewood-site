@@ -228,3 +228,15 @@ a.card,.card{transition:border-color .2s,box-shadow .2s,transform .2s}a.card:hov
 .pnstart span{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);background:#fff;color:#2b1650;font-weight:700;font-size:17px;padding:12px 24px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.35);white-space:nowrap}
 .pnstart:hover span{background:#ffd76a}
 @media(max-width:900px){.pn{grid-template-columns:minmax(0,1fr)}.pnphone{width:300px;height:620px}}
+/* google play soon, news, help, downloads */
+.gpsoon{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 14px 8px 12px;border-radius:10px;background:#111827;color:#fff;font-size:14px;font-weight:600;text-decoration:none}
+.gpsoon svg{color:#34d399}.gpsoon:hover{background:#1f2937}
+.card.post{text-decoration:none;color:inherit}.card.post:hover{border-color:var(--acc)}
+.card.post .date{font-size:13px;color:var(--mut)}.card.post .more{margin-top:14px;font-weight:600;color:var(--acc);font-size:15px}
+.dlist{border:1px solid var(--line);border-radius:12px;margin-top:18px;overflow:hidden;background:#fff}
+.drow{display:flex;align-items:center;gap:16px;padding:16px 20px;border-top:1px solid var(--line)}.drow:first-child{border-top:0}
+.drow .dico{flex:none;width:56px;height:56px;display:flex;align-items:center;justify-content:center}.drow .dico img{border-radius:12px}
+.drow .dtxt{flex:1;min-width:0;display:flex;flex-direction:column}.drow .dtxt a{color:var(--txt);text-decoration:none}.drow .dtxt span{color:var(--mut);font-size:14px}
+.drow .dact{display:flex;align-items:center;gap:14px;flex:none}.dsize,.gpsmall{font-size:13px;color:var(--mut)}
+@media(max-width:640px){.drow{flex-wrap:wrap}.drow .dact{width:100%;justify-content:space-between}}
+.menu a{white-space:nowrap}@media(min-width:900px) and (max-width:1320px){.menu{gap:0}.menu a{padding-left:9px;padding-right:9px;font-size:14.5px}}

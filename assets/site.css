@@ -159,3 +159,17 @@ details p{color:var(--mut);padding-bottom:16px}
   .famhead{flex-wrap:wrap}.famhead p{flex-basis:100%;order:3}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* hero stage: the three things we make, shown as they really look */
+.stage{position:relative;height:440px}
+.stage .win{position:absolute;right:0;top:20px;width:88%;border-radius:10px;overflow:hidden;background:#0b0d10;border:1px solid #c5cedb;box-shadow:0 30px 70px -25px rgba(15,27,45,.45)}
+.stage .wbar{height:28px;background:#1a1d23;display:flex;align-items:center;gap:6px;padding:0 10px}.stage .wbar i{width:9px;height:9px;border-radius:50%;background:#3a3f48}.stage .wbar span{font-size:11px;color:#9aa3b0;margin-left:8px}
+.stage .wx{position:absolute;left:0;top:0;width:42%;border-radius:10px;overflow:hidden;border:4px solid #fff;box-shadow:0 18px 40px -16px rgba(15,27,45,.45);transform:rotate(-3deg)}
+.stage .wx span{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.92);font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px;color:#0f1b2d}
+.stage .phone{position:absolute;right:-6px;bottom:-30px;width:150px;border-radius:26px;padding:7px;background:#0f1b2d;box-shadow:0 30px 60px -20px rgba(15,27,45,.6)}
+.stage .phone img{border-radius:20px}
+.strip{padding:0;border-bottom:1px solid var(--line);background:#fff}
+.strip .wrap{display:grid;grid-template-columns:repeat(5,1fr)}
+.strip .wrap div{padding:22px 0;text-align:center;color:var(--mut);font-size:14px;border-left:1px solid var(--line)}.strip .wrap div:first-child{border-left:0}
+.strip b{display:block;font-size:28px;color:var(--txt);font-weight:700;line-height:1.1;font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif}
+@media(max-width:980px){.stage{height:auto;min-height:300px}.stage .win{position:relative;width:100%;top:0}.stage .wx{width:46%;top:-20px;z-index:2}.stage .phone{width:110px;bottom:-24px}
+ .strip .wrap{grid-template-columns:repeat(3,1fr)}.strip .wrap div:nth-child(4){border-left:0}}

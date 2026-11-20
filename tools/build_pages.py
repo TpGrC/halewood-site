@@ -28,7 +28,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=7">
+<link rel="stylesheet" href="/assets/site.css?v=8">
 </head>
 <body>
 <header id="nav"></header>
@@ -111,8 +111,13 @@ page('index.html','Halewood Systems — PC software, games and weather','Halewoo
     <div class="cta"><a class="btn p" href="/software/">Browse PC software</a><a class="btn g" href="/games/">Play a game</a></div>
     <div class="facts"><div><b>Free versions</b>for every product</div><div><b>No bundled extras</b>no toolbars or add-ons</div><div><b>EU company</b>GDPR privacy</div><div><b>14-day refund</b>on Pro</div></div>
   </div>
-  <div class="shot"><img src="/img/kyrofix-space/s1.jpg" alt="Kyrofix Space showing the biggest folders on a PC" width="1100" height="740"></div>
+  <div class="stage" aria-hidden="true">
+    <div class="win"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div>
+    <div class="wx"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"><span>Windrova · live wind</span></div>
+    <div class="phone"><img src="/img/potion-sort/s1.jpg" alt="" width="390" height="844"></div>
+  </div>
 </div></section>
+<section class="strip"><div class="wrap"><div><b>12</b> products</div><div><b>6</b> Windows tools</div><div><b>5</b> free games</div><div><b>9</b> languages</div><div><b>0</b> bundled extras</div></div></section>
 <section><div class="wrap">
   '''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','All PC software'))+fam('gm','Games','Free to play on phone and computer, no download.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+f'''
 </div></section>

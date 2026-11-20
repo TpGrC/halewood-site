@@ -28,7 +28,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=6">
+<link rel="stylesheet" href="/assets/site.css?v=7">
 </head>
 <body>
 <header id="nav"></header>
@@ -71,66 +71,85 @@ def gameCard(h):
     ext=' target="_blank" rel="noopener"' if GPLAY[h].startswith('http') else ''
     return f'<div class="card gcard">{icon}<h3 style="margin-top:14px">{m.group(1)}</h3><p>{m.group(2)}</p><div class="cta" style="margin-top:16px"><a class="btn p s" href="{GPLAY[h]}"{ext}>▶ Play free</a><a class="btn g s" href="{h}">Details</a></div></div>'
 
+# ---------- catalogue ----------
+KY=lambda slug:f'<img src="/img/{slug}/icon.png" alt="" width="56" height="56">'
+CAT={
+ 'driver':('/products/kyrofix/','Kyrofix Driver Updater','Finds outdated drivers and updates them safely, with an assistant that explains each fix.','Windows 10 / 11','Free','Pro €19.99 / year','/downloads/Kyrofix-Driver-Updater-Setup.exe','Download','<div class="ico kf">'+KF_ICO+'</div>'),
+ 'cleaner':('/products/kyrofix-cleaner/','Kyrofix Cleaner','Removes junk files, browser cache and update leftovers, and speeds up startup.','Windows 10 / 11','Free','Pro €14.99 / year','/downloads/Kyrofix-Cleaner-Setup.exe','Download',KY('kyrofix-cleaner')),
+ 'space':('/products/kyrofix-space/','Kyrofix Space','Shows which folders and files fill your disk, so you know what to clear.','Windows 10 / 11','Free','Pro €9.99 / year','/downloads/Kyrofix-Space-Setup.exe','Download',KY('kyrofix-space')),
+ 'photo':('/products/kyrofix-photo-cleaner/','Kyrofix Photo Cleaner','Finds duplicate, near-identical and blurry photos and keeps the best copy.','Windows 10 / 11','Free','Pro €9.99 / year','/downloads/Kyrofix-Photo-Cleaner-Setup.exe','Download',KY('kyrofix-photo-cleaner')),
+ 'backup':('/products/kyrofix-backup/','Kyrofix Backup','Copies your documents and photos to a USB drive or external disk, and brings them back.','Windows 10 / 11','Free','Pro €14.99 / year','/downloads/Kyrofix-Backup-Setup.exe','Download',KY('kyrofix-backup')),
+ 'shredder':('/products/kyrofix-shredder/','Kyrofix Shredder','Overwrites files before deleting them, so they cannot be recovered.','Windows 10 / 11','Free','Pro €9.99 / year','/downloads/Kyrofix-Shredder-Setup.exe','Download',KY('kyrofix-shredder')),
+ 'starfuse':('/products/starfuse/','Starfuse','Drop planets and merge matching ones until you make a black hole.','Phone and browser','Free','optional ads','/games/starfuse/','Play','<img src="/img/starfuse/icon.png" alt="" width="56" height="56">'),
+ 'potion':('/products/potion-sort/','Potion Sort','Pour coloured potions until every bottle holds one colour.','Phone and browser','Free','optional ads','/games/potion-sort/','Play','<img src="/img/potion-sort/icon.png" alt="" width="56" height="56">'),
+ 'bloom':('/products/triple-bloom/','Triple Bloom','Match three garden tiles at a time and clear the board.','Phone and browser','Free','optional ads','/games/triple-bloom/','Play','<img src="/img/triple-bloom/icon.png" alt="" width="56" height="56">'),
+ 'stack':('/products/skystack/','Skystack','Tap to drop each block and build the tallest tower you can.','Phone and browser','Free','optional ads','/games/skystack/','Play','<img src="/img/skystack/icon.png" alt="" width="56" height="56">'),
+ 'slipgate':('/products/slipgate/','Slipgate','Slide blocks out through the gates of their colour. 200 levels.','Browser','Free','','https://halewood-systems.itch.io/slipgate','Play','<div class="ico sg">'+SG_ICO+'</div>'),
+ 'windrova':('/products/windrova/','Windrova','Live wind, rain, waves and three forecast models for every place on Earth.','Web, Android soon','Free','Premium later','https://windrova.com','Open','<img src="/img/windrova-icon.png" alt="" width="56" height="56">'),
+}
+NEW={'space','photo','shredder','potion','bloom','stack'}
+def rows(keys):
+    out='<ul class="rows">'
+    for k in keys:
+        h,n,d,pl,c1,c2,url,lab,ic=CAT[k]
+        ext=' target="_blank" rel="noopener"' if url.startswith('http') else (' download' if url.endswith('.exe') else '')
+        nw='<span class="new">New</span>' if k in NEW else ''
+        bc='g' if lab=='Download' else 'p'
+        out+=f'<li><a class="ri" href="{h}" aria-hidden="true" tabindex="-1">{ic}</a><div class="rn"><a href="{h}">{n}</a>{nw}<p>{d}</p></div><div class="rp">{pl}</div><div class="rc"><b>{c1}</b><span>{c2}</span></div><div class="ra"><a class="btn {bc} s" href="{url}"{ext}>{lab}</a></div></li>'
+    return out+'</ul>'
+def fam(cls,title,desc,keys,more=None):
+    m=f'<a href="{more[0]}">{more[1]}</a>' if more else ''
+    return f'<div class="fam"><div class="famhead {cls}"><i></i><h2>{title}</h2><p>{desc}</p>{m}</div>{rows(keys)}</div>'
+KY_ALL=['driver','cleaner','space','photo','backup','shredder'];GM_ALL=['starfuse','potion','bloom','stack','slipgate']
+
 # ---------- home ----------
-page('index.html','Halewood Systems — Software that just works','Halewood Systems makes fast, simple software: Windrova live weather map, Kyrofix PC tools and games. Free to start.',f'''
-<section class="hero center"><div class="wrap">
-  <span class="badge free" style="margin-bottom:24px">Independent software studio · EU</span>
-  <h1 style="max-width:900px">Software that <span>just works.</span></h1>
-  <p class="lead" style="max-width:620px">Halewood Systems builds fast, simple tools for everyday life, from live weather to PC care and games. Free to start, no clutter.</p>
-  <div class="cta"><a class="btn p" href="/software/">PC software</a><a class="btn g" href="/games/">Play games</a><a class="btn g" href="{YT}" target="_blank" rel="noopener">Watch on YouTube</a></div>
-</div></section>
-<section style="padding-top:20px"><div class="wrap feat">
+page('index.html','Halewood Systems — PC software, games and weather','Halewood Systems makes Kyrofix PC tools for Windows, free games for phone and browser, and the Windrova weather map. Every product has a free version.',f'''
+<section class="hero"><div class="wrap hhero">
   <div>
-    <span class="badge live">● Live now</span>
-    <h2 style="margin-top:16px">Windrova. The whole world's weather, live.</h2>
+    <h1>Tools for your PC, games for your phone, weather for everywhere.</h1>
+    <p class="lead">Halewood Systems is a small software studio in the EU. Everything we make has a free version that does the job, with nothing extra installed.</p>
+    <div class="cta"><a class="btn p" href="/software/">Browse PC software</a><a class="btn g" href="/games/">Play a game</a></div>
+    <div class="facts"><div><b>Free versions</b>for every product</div><div><b>No bundled extras</b>no toolbars or add-ons</div><div><b>EU company</b>GDPR privacy</div><div><b>14-day refund</b>on Pro</div></div>
+  </div>
+  <div class="shot"><img src="/img/kyrofix-space/s1.jpg" alt="Kyrofix Space showing the biggest folders on a PC" width="1100" height="740"></div>
+</div></section>
+<section><div class="wrap">
+  '''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','All PC software'))+fam('gm','Games','Free to play on phone and computer, no download.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+f'''
+</div></section>
+<section class="alt"><div class="wrap feat">
+  <div>
+    <h2>Windrova: the whole world's weather, live.</h2>
     <p class="lead">A live weather map for every place on Earth. Open it in any browser, no account needed.</p>
     <ul class="ticks"><li>Live wind, rain, temperature, clouds and sea waves</li><li>ECMWF, GFS and GEM forecast models in one click</li><li>Hurricanes, lightning, earthquakes, fires and live satellite</li><li>Best hours for the beach, sailing, kitesurf and hiking</li></ul>
-    <div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova, free →</a><a class="btn g" href="/products/windrova/">Learn more</a></div>
+    <div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova</a><a class="btn g" href="/products/windrova/">Learn more</a></div>
   </div>
   <div class="shot"><img src="/img/windrova/hero.jpg" alt="Windrova live wind map over Europe" width="1440" height="810"></div>
 </div></section>
-<section class="alt"><div class="wrap"><h2>What we make</h2><p class="lead">Every product has a free version.</p><div class="cats" style="margin-top:36px">
-  <a class="cat c1" href="/products/windrova/"><img src="/img/windrova-icon.png" alt="" width="64" height="64"><h2>Weather</h2><p>Windrova, the live weather map for the whole world.</p><span>Open Windrova →</span></a>
-  <a class="cat c2" href="/software/"><div class="icos"><img src="/img/kyrofix-cleaner/icon.png" alt=""><img src="/img/kyrofix-space/icon.png" alt=""><img src="/img/kyrofix-backup/icon.png" alt=""></div><h2>PC software</h2><p>Kyrofix: 6 Windows tools to fix, clean, free up space and protect your files.</p><span>See all 6 tools →</span></a>
-  <a class="cat c3" href="/games/"><div class="icos"><img src="/img/starfuse/icon.png" alt=""><img src="/img/potion-sort/icon.png" alt=""><img src="/img/triple-bloom/icon.png" alt=""></div><h2>Games</h2><p>5 free puzzle and arcade games. Play instantly on phone or computer.</p><span>Play now →</span></a>
-</div></div></section>
-<section><div class="wrap"><h2>New this week</h2><div class="grid">''' + ''.join(gameCard(h) for h in ['/products/potion-sort/','/products/triple-bloom/','/products/skystack/']) + f'''</div>
-  <div class="grid">'''+FULL['/products/kyrofix-space/']+FULL['/products/kyrofix-shredder/']+FULL['/products/kyrofix-photo-cleaner/']+f'''</div></div></section>
-<section><div class="wrap"><h2>Why Halewood</h2>
-  <div class="grid">
-    <div class="card"><h3>Free to start</h3><p>Every product has a free version that's actually useful, not a demo.</p></div>
-    <div class="card"><h3>No clutter</h3><p>No bundled extras, no pop-ups, no tricks. Just the tool you came for.</p></div>
-    <div class="card"><h3>Privacy first</h3><p>No ads and no tracking cookies. We follow EU privacy law (GDPR).</p></div>
-  </div></div></section>
-<div class="band"><h2>Try Windrova today.</h2><p class="lead">Free, live, and ready in your browser.</p><div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova</a><a class="btn g" href="{DON}" target="_blank" rel="noopener">❤ Support us</a></div></div>
+<div class="band"><h2>Questions about a product or a purchase?</h2><p class="lead">We answer every email, usually within a day.</p><div class="cta"><a class="btn p" href="/support/">Contact support</a><a class="btn g" href="{DON}" target="_blank" rel="noopener">Support the studio</a></div></div>
 ''')
 
 # ---------- products ----------
-page('products/index.html','Products — Halewood Systems','Halewood Systems products: Windrova weather map, Kyrofix PC software for Windows and free games.',f'''
-<section class="hero"><div class="wrap"><h1>Products</h1><p class="lead">Three families. Pick one.</p></div></section>
-<section style="padding-top:0"><div class="wrap"><div class="cats">
-  <a class="cat c1" href="/products/windrova/"><img src="/img/windrova-icon.png" alt="" width="64" height="64"><h2>Weather</h2><p>Windrova, the live weather map for the whole world.</p><span>Open Windrova →</span></a>
-  <a class="cat c2" href="/software/"><div class="icos"><img src="/img/kyrofix-cleaner/icon.png" alt=""><img src="/img/kyrofix-space/icon.png" alt=""><img src="/img/kyrofix-backup/icon.png" alt=""></div><h2>PC software</h2><p>Kyrofix: 6 Windows tools to fix, clean, free up space and protect your files.</p><span>See all 6 tools →</span></a>
-  <a class="cat c3" href="/games/"><div class="icos"><img src="/img/starfuse/icon.png" alt=""><img src="/img/potion-sort/icon.png" alt=""><img src="/img/triple-bloom/icon.png" alt=""></div><h2>Games</h2><p>5 free puzzle and arcade games. Play instantly on phone or computer.</p><span>Play now →</span></a>
+page('products/index.html','All products — Halewood Systems','Every Halewood Systems product: Kyrofix PC software for Windows, free games and the Windrova weather map.',f'''
+<section class="hero"><div class="wrap"><h1>All products</h1><p class="lead">Every product has a free version. Kyrofix Pro adds extra features and works on up to 3 PCs.</p></div></section>
+<section><div class="wrap">'''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','More about Kyrofix'))+fam('gm','Games','Free to play on phone and computer.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+'''</div></section>''')
+
+page('software/index.html','Kyrofix PC software for Windows — Halewood Systems','Kyrofix: free Windows tools to update drivers, clean junk, free up space, back up and shred files. Pro from €9.99 a year.',f'''
+<section class="hero"><div class="wrap hhero">
+  <div><h1>Kyrofix PC tools</h1>
+  <p class="lead">Six small Windows programs that keep your PC fast, tidy and safe. Each one is a free download and tells you what it will do before it does it.</p>
+  <div class="facts"><div><b>Windows 10 and 11</b>64-bit</div><div><b>No admin needed</b>for most tools</div><div><b>Pro on 3 PCs</b>per licence</div></div></div>
+  <div class="shot"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="Kyrofix Photo Cleaner showing duplicate photos" width="1100" height="740"></div>
+</div></section>
+<section><div class="wrap">'''+fam('kf','Fix and speed up','Keep Windows quick and drivers up to date.',['driver','cleaner'])+fam('kf','Free up space','Find what fills your disk and clear it.',['space','photo'])+fam('kf','Protect your files','Keep copies safe, and make deleted files really gone.',['backup','shredder'])+f'''</div></section>
+<section class="alt"><div class="wrap"><h2>How Pro works</h2><div class="grid">
+  <div class="card"><h3>One payment</h3><p>Pay once for a year, or once for good. Nothing renews by itself.</p></div>
+  <div class="card"><h3>Your key</h3><p>After buying, you get the key for that program at <a href="/activate/" style="color:var(--acc)">halewoodsystems.com/activate</a>.</p></div>
+  <div class="card"><h3>Up to 3 PCs</h3><p>Use the same key on three of your own PCs. Refund within 14 days if it is not for you.</p></div>
 </div></div></section>''')
 
-page('software/index.html','Kyrofix PC software for Windows — Halewood Systems','Kyrofix: free Windows tools to update drivers, clean junk, free up space, back up and shred files. Pro from €9.99.',f'''
-<section class="hero"><div class="wrap">
-  <span class="badge free">Windows 10 / 11 · Free to start</span>
-  <h1 style="margin-top:16px">Kyrofix <span>PC tools</span></h1>
-  <p class="lead">Six simple tools that keep your PC fast, tidy and safe. Every one is a free download, and each explains what it does before it does it.</p>
-  <div class="meta" style="margin-top:18px"><span>No bundled extras</span><span>No admin needed for most tools</span><span>Pro works on up to 3 PCs</span></div>
-</div></section>
-<section class="alt"><div class="wrap"><h2>Fix &amp; speed up</h2><p class="lead">Keep Windows fast and drivers up to date.</p><div class="grid two">'''+FULL['/products/kyrofix/']+FULL['/products/kyrofix-cleaner/']+f'''</div></div></section><section><div class="wrap"><h2>Free up space</h2><p class="lead">Find what fills your disk and clear it.</p><div class="grid two">'''+FULL['/products/kyrofix-space/']+FULL['/products/kyrofix-photo-cleaner/']+f'''</div></div></section><section class="alt"><div class="wrap"><h2>Protect your files</h2><p class="lead">Keep copies safe, and make deleted files really gone.</p><div class="grid two">'''+FULL['/products/kyrofix-backup/']+FULL['/products/kyrofix-shredder/']+f'''</div></div></section>
-<div class="band"><h2>Bought Kyrofix Pro?</h2><p class="lead">Get your key from your receipt.</p><div class="cta"><a class="btn p" href="/activate/">Get my key</a><a class="btn g" href="/pricing/">See prices</a></div></div>''')
-
 page('games/index.html','Free games — Halewood Systems','Free puzzle and arcade games by Halewood Systems. Play instantly on your phone or computer, no download.',f'''
-<section class="hero"><div class="wrap">
-  <span class="badge live">Free to play · No download</span>
-  <h1 style="margin-top:16px">Our <span>games</span></h1>
-  <p class="lead">Quick to learn, hard to put down. Every game plays right in your browser, on phone or computer. Add it to your home screen and it works offline.</p>
-</div></section>
-<section style="padding-top:0"><div class="wrap"><div class="grid">'''+''.join(gameCard(h) for h in GAMES)+f'''</div></div></section>''')
+<section class="hero"><div class="wrap"><h1>Games</h1><p class="lead">Quick to learn and hard to put down. Every game runs in your browser on phone or computer. Add one to your home screen and it works offline.</p></div></section>
+<section><div class="wrap">'''+fam('gm','Puzzle','',['starfuse','potion','bloom','slipgate'])+fam('gm','Arcade','',['stack'])+'''</div></section>''')
 
 # Windrova
 page('products/windrova/index.html','Windrova — Live weather map for the whole world','Windrova: free live weather map with wind, rain, waves, satellite, hurricanes and ECMWF, GFS and GEM models. 23 languages.',f'''

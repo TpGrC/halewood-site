@@ -68,3 +68,12 @@ def build():
 
 if __name__ == '__main__':
     build()
+
+# translated game folders need the same icons, manifest and offline file as the English ones
+import shutil, glob
+for lang in LANGS:
+    for g in glob.glob('games/*/'):
+        dst = os.path.join(lang, g)
+        if os.path.isdir(dst):
+            for f in os.listdir(g):
+                if not f.endswith('.html'): shutil.copy(os.path.join(g, f), dst)

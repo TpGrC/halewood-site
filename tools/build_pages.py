@@ -15,6 +15,7 @@ PRONOTE='<p class="updated" style="text-align:center">One-time payment, no subsc
 KF_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>'
 SG_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/></svg>'
 def page(path,title,desc,body):
+    body=enhance(path,body) if 'enhance' in globals() else body
     html=f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=8">
+<link rel="stylesheet" href="/assets/site.css?v=9">
 </head>
 <body>
 <header id="nav"></header>
@@ -101,6 +102,52 @@ def fam(cls,title,desc,keys,more=None):
     m=f'<a href="{more[0]}">{more[1]}</a>' if more else ''
     return f'<div class="fam"><div class="famhead {cls}"><i></i><h2>{title}</h2><p>{desc}</p>{m}</div>{rows(keys)}</div>'
 KY_ALL=['driver','cleaner','space','photo','backup','shredder'];GM_ALL=['starfuse','potion','bloom','stack','slipgate']
+
+# ---------- product page upgrade: two-column hero, download box, questions, related ----------
+SLUG2KEY={v[0].strip('/').split('/')[-1]:k for k,v in CAT.items()}
+FAQ_KF=[('Is it safe to install?','Yes. Kyrofix installs only itself, with no toolbars or extra programs, and you can remove it any time in Windows Settings, Apps.'),
+ ('Why does Windows show a SmartScreen warning?','New programs from small studios are not yet known to SmartScreen. Click "More info" and then "Run anyway". The warning goes away as more people use the app.'),
+ ('Is the free version really free?','Yes, for as long as you want. Pro adds extra features, it does not unlock basic ones.'),
+ ('How do I activate Pro?','After buying, open halewoodsystems.com/activate, paste the licence key from your receipt and copy your Kyrofix key into the app, under Pro. One key works on up to 3 of your PCs.'),
+ ('Can I get a refund?','Yes, within 14 days of buying, even if you already activated the key. Email support@halewoodsystems.com.')]
+FAQ_GM=[('Is it free?','Yes. You can play every level for free. Optional ads give you extra coins, power-ups or a second chance.'),
+ ('Do I need to download anything?','No. It plays in your browser on phone or computer. To keep it on your phone, choose "Add to Home Screen" in Safari or "Install app" in Chrome.'),
+ ('Is my progress saved?','Yes, on your device, in your browser. Clearing your browser data resets it.'),
+ ('Does it work offline?','Yes, after you have opened it once.')]
+def _size(url):
+    try: return f"{os.path.getsize(os.path.join(R,url.lstrip('/')))/1048576:.1f} MB"
+    except Exception: return ''
+def enhance(path,body):
+    m=re.match(r'products/([a-z0-9-]+)/index\.html$',path)
+    if not m or m.group(1) not in SLUG2KEY: return body
+    key=SLUG2KEY[m.group(1)]
+    if key=='windrova': return body
+    h,n,d,pl,c1,c2,url,lab,ic=CAT[key];kf=key in KY_ALL
+    hs=body.find('<section class="hero">');he=body.find('</section>',hs)
+    hero=body[hs:he];sm=re.search(r'\s*<div class="shot"[^>]*>.*?</div>',hero,re.S)
+    if hs<0: return body
+    slug=m.group(1)
+    if sm:
+        shot=sm.group(0).strip().replace(' style="margin-top:34px"','');left=hero.replace(sm.group(0),'')
+    else:
+        im=next((f'/img/{slug}/{n}' for n in ('s1.jpg','play.jpg') if os.path.exists(os.path.join(R,'img',slug,n))),None)
+        shot=f'<div class="pphone"><img src="{im}" alt="{n} on a phone" width="390" height="844"></div>' if im else '';left=hero
+    if kf:
+        ver=re.search(r'Version ([0-9.]+)',left);ver=ver.group(1) if ver else '1.0.0'
+        box=f'<div class="dl"><div><b>{url.split("/")[-1]}</b><span>{_size(url)} · version {ver} · {pl}, 64-bit</span></div><span class="dlnote">Installs in under a minute. Remove it any time in Windows Settings.</span></div>'
+        left=re.sub(r'<div class="meta"[^>]*>.*?</div>',box,left,count=1,flags=re.S)
+    left=left.replace('<section class="hero"><div class="wrap">','<section class="hero"><div class="wrap phero"><div class="pl">',1)
+    if not left.rstrip().endswith('</div>'): return body
+    left=left.rstrip()[:-6]
+    hero=left+'</div><div class="pr">'+shot+'</div></div>'
+    body=body[:hs]+hero+body[he:]
+    # strip the closing </div> that belonged to the old wrap (hero ended with '</div>' before </section>)
+    faq=FAQ_KF if kf else FAQ_GM
+    qa='<section><div class="wrap"><h2>Questions</h2><div class="faq">'+''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in faq)+'</div></div></section>'
+    pool=KY_ALL if kf else GM_ALL;i=pool.index(key);others=[pool[(i+j)%len(pool)] for j in range(1,4)]
+    rel='<section class="alt"><div class="wrap">'+fam('kf' if kf else 'gm','More from Kyrofix' if kf else 'More games','',others,('/software/','All PC software') if kf else ('/games/','All games'))+'</div></section>'
+    bi=body.rfind('<div class="band">')
+    return body[:bi]+qa+rel+body[bi:] if bi>0 else body+qa+rel
 
 # ---------- home ----------
 page('index.html','Halewood Systems — PC software, games and weather','Halewood Systems makes Kyrofix PC tools for Windows, free games for phone and browser, and the Windrova weather map. Every product has a free version.',f'''

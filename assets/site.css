@@ -218,3 +218,13 @@ a.card,.card{transition:border-color .2s,box-shadow .2s,transform .2s}a.card:hov
 @media(max-width:900px){.show{grid-template-columns:minmax(0,1fr)}.show .st{padding:30px 26px 0}.kfa{height:250px}.kfa img{width:82%}.kfa img:first-child{top:20px}.kfa img:last-child{top:70px}.pair{grid-template-columns:minmax(0,1fr)}.pair .show{min-height:380px}}
 @media(prefers-reduced-motion:reduce){.stage .win,.stage .wx,.stage .phone{animation:none}}
 .pphone video{display:block;width:100%;height:auto;border-radius:30px;background:#000}
+/* play right here */
+.playnow{background:radial-gradient(80% 120% at 85% 20%,#efe6ff,transparent 60%),#fff}
+.pn{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:60px;align-items:center}
+.pnphone{width:340px;height:700px;justify-self:center;border-radius:46px;padding:12px;background:#0f1b2d;box-shadow:0 40px 80px -30px rgba(43,22,80,.6)}
+.pnphone iframe,.pnstart{width:100%;height:100%;border:0;border-radius:36px;display:block;background:#1a0f2e}
+.pnstart{position:relative;padding:0;cursor:pointer;overflow:hidden}
+.pnstart video{width:100%;height:100%;object-fit:cover;display:block}
+.pnstart span{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);background:#fff;color:#2b1650;font-weight:700;font-size:17px;padding:12px 24px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.35);white-space:nowrap}
+.pnstart:hover span{background:#ffd76a}
+@media(max-width:900px){.pn{grid-template-columns:minmax(0,1fr)}.pnphone{width:300px;height:620px}}

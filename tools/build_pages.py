@@ -29,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=11">
+<link rel="stylesheet" href="/assets/site.css?v=12">
 </head>
 <body>
 <header id="nav"></header>
@@ -179,8 +179,14 @@ page('index.html','Halewood Systems — PC software, games and weather','Halewoo
     <div class="sa wra"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"></div></a>
   </div>
 </div></section>
-<section><div class="wrap">
-  '''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','All PC software'))+fam('gm','Games','Free to play on phone and computer, no download.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+f'''
+<section class="playnow"><div class="wrap pn">
+  <div>
+    <h2>Play right here.</h2>
+    <p class="lead">This is Potion Sort, one of our free games. Tap a bottle, tap another, and pour until every bottle holds one colour.</p>
+    <ul class="ticks"><li>Endless levels, every one can be solved</li><li>Works on phone and computer, no download</li><li>Four more games to try</li></ul>
+    <div class="cta"><a class="btn p" href="/games/">All games</a><a class="btn g" href="/games/potion-sort/">Play full screen</a></div>
+  </div>
+  <div class="pnphone"><button class="pnstart" type="button" onclick="this.outerHTML='<iframe src=&quot;/games/potion-sort/&quot; title=&quot;Potion Sort&quot; loading=&quot;lazy&quot; allow=&quot;autoplay&quot;></iframe>'"><video src="/img/potion-sort/play.mp4" poster="/img/potion-sort/poster.jpg" autoplay muted loop playsinline></video><span>▶ Tap to play</span></button></div>
 </div></section>
 <section class="alt"><div class="wrap feat">
   <div>

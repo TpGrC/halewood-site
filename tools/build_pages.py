@@ -16,6 +16,9 @@ KF_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff
 SG_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/></svg>'
 def page(path,title,desc,body):
     body=enhance(path,body) if 'enhance' in globals() else body
+    if path.startswith('products/kyrofix'):  # one download place per page: the top of the page
+        body=re.sub(r'<a class="btn g" href="/downloads/[^"]+\.exe" download>[^<]*</a>','',body)
+        body=re.sub(r'(<div class="band">.*?)<a class="btn p" href="/downloads/[^"]+\.exe" download>[^<]*</a>',r'\1<a class="btn p" href="/pricing/#free-vs-pro">Compare Free and Pro</a>',body,flags=re.S)
     html=f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +99,7 @@ def rows(keys):
         ext=' target="_blank" rel="noopener"' if url.startswith('http') else (' download' if url.endswith('.exe') else '')
         nw='<span class="new">New</span>' if k in NEW else ''
         bc='g' if lab=='Download' else 'p'
+        if url.endswith('.exe'): url,lab,ext=h,'Details',''   # downloads only on the app's own page
         out+=f'<li><a class="ri" href="{h}" aria-hidden="true" tabindex="-1">{ic}</a><div class="rn"><a href="{h}">{n}</a>{nw}<p>{d}</p></div><div class="rp">{pl}</div><div class="rc"><b>{c1}</b><span>{c2}</span></div><div class="ra"><a class="btn {bc} s" href="{url}"{ext}>{lab}</a></div></li>'
     return out+'</ul>'
 def fam(cls,title,desc,keys,more=None):

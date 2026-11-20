@@ -29,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=9">
+<link rel="stylesheet" href="/assets/site.css?v=10">
 </head>
 <body>
 <header id="nav"></header>
@@ -165,6 +165,16 @@ page('index.html','Halewood Systems — PC software, games and weather','Halewoo
   </div>
 </div></section>
 <section class="strip"><div class="wrap"><div><b>12</b> products</div><div><b>6</b> Windows tools</div><div><b>5</b> free games</div><div><b>9</b> languages</div><div><b>0</b> bundled extras</div></div></section>
+<section class="shows"><div class="wrap">
+  <a class="show kf" href="/software/"><div class="st"><h2>Kyrofix PC tools</h2><p>Six Windows programs to fix, clean, free up space and protect your files. Free to download.</p><span class="btn w s">See the tools</span></div>
+    <div class="sa kfa"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="" width="1100" height="740"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div></a>
+  <div class="pair">
+  <a class="show gm" href="/games/"><div class="st"><h2>Games</h2><p>Five free puzzle and arcade games for phone and computer.</p><span class="btn w s">Play now</span></div>
+    <div class="sa gma"><img src="/img/starfuse/play.jpg" alt="" width="390" height="844"><img src="/img/potion-sort/s1.jpg" alt="" width="390" height="844"><img src="/img/triple-bloom/s1.jpg" alt="" width="390" height="844"></div></a>
+  <a class="show wr" href="/products/windrova/"><div class="st"><h2>Windrova</h2><p>Live weather for every place on Earth.</p><span class="btn w s">Open the map</span></div>
+    <div class="sa wra"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"></div></a>
+  </div>
+</div></section>
 <section><div class="wrap">
   '''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','All PC software'))+fam('gm','Games','Free to play on phone and computer, no download.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+f'''
 </div></section>

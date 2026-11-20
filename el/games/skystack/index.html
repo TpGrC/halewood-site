@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="el"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
+<title>Skystack — One-Tap Tower</title>
+<meta content="Tap to stack the blocks as high as you can. Perfect drops grow your tower back. A free one-tap game by Halewood Systems." name="description"/>
+<meta content="#2a2f6b" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/><link href="icon-192.png" rel="icon"/><link href="icon-192.png" rel="apple-touch-icon"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{height:100%;overflow:hidden;background:#2a2f6b;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;touch-action:manipulation}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.score{position:fixed;top:calc(40px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:72px;font-weight:900;text-shadow:0 4px 24px rgba(0,0,0,.25);pointer-events:none;z-index:2}
+.combo{position:fixed;top:calc(130px + env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:18px;font-weight:800;letter-spacing:2px;pointer-events:none;z-index:2;opacity:0;transition:opacity .2s}
+.coin{position:fixed;top:calc(12px + env(safe-area-inset-top));right:14px;background:rgba(0,0,0,.2);border-radius:20px;padding:6px 12px;font-weight:800;display:flex;gap:6px;align-items:center;z-index:3}.coin i{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffc83d 45%,#d98a00);display:inline-block}
+.ov{position:fixed;inset:0;z-index:5;display:none;align-items:center;justify-content:center;padding:24px}
+.ov.on{display:flex;animation:fi .25s}@keyframes fi{from{opacity:0}to{opacity:1}}
+.card{width:min(360px,100%);text-align:center}
+.logo{font-size:56px;font-weight:900;line-height:.95;letter-spacing:1px;text-shadow:0 6px 30px rgba(0,0,0,.25)}
+.tag{margin:12px 0 22px;font-size:15px;opacity:.9}
+.big{display:block;width:100%;padding:17px;border:0;border-radius:18px;font-size:20px;font-weight:800;color:#222;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.2);cursor:pointer;margin-top:12px}
+.big.alt{background:#5ce1a6;color:#06301e}.big.gh{background:rgba(255,255,255,.15);color:#fff;box-shadow:none;font-size:16px;padding:14px}
+.big:active{transform:scale(.97)}
+.tap{position:fixed;bottom:calc(16% + env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-weight:800;letter-spacing:3px;animation:bl 1.2s infinite;z-index:2;pointer-events:none}@keyframes bl{50%{opacity:.35}}
+.stats{display:flex;gap:10px;justify-content:center;margin-top:8px}.stats div{background:rgba(0,0,0,.18);border-radius:14px;padding:10px 14px;min-width:100px}.stats b{display:block;font-size:26px}.stats span{font-size:10px;letter-spacing:1.5px;opacity:.8;text-transform:uppercase;font-weight:700}
+.skins{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.skins button{aspect-ratio:1;border-radius:16px;border:3px solid transparent;cursor:pointer;position:relative;font-weight:800;color:#fff;font-size:12px;text-shadow:0 1px 4px #0008}
+.skins button.on{border-color:#fff}.skins button.lock:after{content:attr(data-p);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:13px}
+.sm{font-size:12px;opacity:.75;margin-top:16px}.sm a{color:#fff}
+</style>
+<script async="" src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
+<link href="https://halewoodsystems.com/games/skystack/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/skystack/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/skystack/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/skystack/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/skystack/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/skystack/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/skystack/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/skystack/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/skystack/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/skystack/" hreflang="x-default" rel="alternate"/></head><body>
+<canvas id="c"></canvas>
+<div class="score" id="score" style="display:none">0</div>
+<div class="combo" id="combo">PERFECT</div>
+<div class="coin"><i></i><span id="coins">0</span></div>
+<div class="tap" id="tapHint">TAP TO START</div>
+<div class="ov on" id="menu" style="align-items:flex-start;padding-top:18vh;pointer-events:none"><div class="card" style="pointer-events:auto">
+<div class="logo">SKY<br/>STACK</div><div class="tag">Tap to drop. Stack as high as you can.</div>
+<div class="stats"><div><span>Best</span><b id="mBest">0</b></div><div><span>Games</span><b id="mGames">0</b></div></div>
+<button class="big gh" id="skinB" style="margin-top:18px">🎨 Colours</button>
+</div></div>
+<div class="ov" id="over" style="background:rgba(0,0,0,.25)"><div class="card">
+<div class="logo" id="oT" style="font-size:44px">GAME OVER</div>
+<div class="stats" style="margin-top:14px"><div><span>Score</span><b id="oS">0</b></div><div><span>Best</span><b id="oB">0</b></div></div>
+<div class="tag" id="oC"></div>
+<button class="big alt" id="contB">▶ Watch ad · Continue</button>
+<button class="big" id="againB">PLAY AGAIN</button>
+<button class="big gh" id="dblB">▶ Watch ad · coins ×3</button>
+</div></div>
+<div class="ov" id="skins" style="background:rgba(0,0,0,.4)"><div class="card">
+<div class="logo" style="font-size:36px">COLOURS</div><div class="skins" id="skinGrid"></div>
+<button class="big gh" id="skinBack">Back</button>
+<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · <span id="sndT" style="cursor:pointer;text-decoration:underline">Sound: on</span> · Skystack v1.0</div>
+</div></div>
+<div class="ov" id="adOv" style="background:rgba(0,0,0,.6)"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const S={get(k,d){try{const v=localStorage.getItem('ss_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('ss_'+k,JSON.stringify(v))}catch(e){}}};
+let best=S.get('best',0),coins=S.get('coins',0),games=S.get('games',0),skin=S.get('skin',0),owned=S.get('owned',[0]),snd=S.get('snd',true);
+let paused=false;
+const Ads={sdk:null,async init(){try{if(window.CrazyGames&&CrazyGames.SDK){await CrazyGames.SDK.init();if(CrazyGames.SDK.environment!=='disabled')this.sdk=CrazyGames.SDK}}catch(e){}},
+ ev(n){try{this.sdk&&this.sdk.game[n]()}catch(e){}},
+ show(type,done){if(!this.sdk){if(type==='rewarded')fakeAd(done);else done(false);return}A.mute(1);paused=true;
+  this.sdk.ad.requestAd(type,{adStarted(){},adFinished(){A.mute(0);paused=false;done(true)},adError(){A.mute(0);paused=false;done(type!=='rewarded')}})}};
+function fakeAd(done){const o=$('#adOv');o.classList.add('on');let t=2;$('#adT').textContent='Reward in '+t+'…';const iv=setInterval(()=>{t--;if(t<=0){clearInterval(iv);o.classList.remove('on');done(true)}else $('#adT').textContent='Reward in '+t+'…'},700)}
+const A={x:null,g:null,init(){if(this.x)return;try{this.x=new(window.AudioContext||window.webkitAudioContext)();this.g=this.x.createGain();this.g.gain.value=.5;this.g.connect(this.x.destination)}catch(e){}},mute(m){if(this.g)this.g.gain.value=m?0:.5},
+ t(f,d,ty='sine',v=.2,sl=0,dl=0){if(!snd||!this.x)return;const t=this.x.currentTime+dl,o=this.x.createOscillator(),a=this.x.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(sl)o.frequency.exponentialRampToValueAtTime(f*sl,t+d);a.gain.setValueAtTime(0,t);a.gain.linearRampToValueAtTime(v,t+.01);a.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(a);a.connect(this.g);o.start(t);o.stop(t+d+.02)}};
+const NOTES=[262,294,330,349,392,440,494,523,587,659,698,784,880,988,1047];
+/* skins: base hue, hue step, background colours */
+const SKINS=[{n:'Sunset',h:340,st:4,bg:['#ff9a8b','#6a4c93'],p:0},{n:'Ocean',h:190,st:3,bg:['#4facfe','#1b2a6b'],p:100},{n:'Forest',h:110,st:3,bg:['#a8e063','#1e5631'],p:150},{n:'Candy',h:300,st:9,bg:['#fbc2eb','#a18cd1'],p:200},
+ {n:'Lava',h:15,st:2,bg:['#f83600','#3a0a00'],p:300},{n:'Mint',h:160,st:5,bg:['#d4fc79','#1d8a72'],p:300},{n:'Night',h:240,st:6,bg:['#30cfd0','#1a1446'],p:400},{n:'Rainbow',h:0,st:18,bg:['#ffffff','#7f7fd5'],p:600}];
+const cv=$('#c'),ctx=cv.getContext('2d');let VW,VH,dpr;
+function resize(){dpr=Math.min(2,devicePixelRatio||1);VW=innerWidth;VH=innerHeight;cv.width=VW*dpr;cv.height=VH*dpr}
+addEventListener('resize',resize);resize();
+/* world: x/z on the floor, y up; block height H */
+const H=.24,BASE=2.4,C30=Math.cos(Math.PI/6),S30=Math.sin(Math.PI/6);
+let stack=[],moving=null,falling=[],score=0,state='menu',camY=0,camT=0,combo=0,speed=1.6,dir=0,shakeT=0,usedCont=false,flashT=0,gameCoins=0,rings=[];
+function col(i,l=.62,sat=.62){const s=SKINS[skin];return`hsl(${(s.h+i*s.st)%360},${sat*100}%,${l*100}%)`}
+function reset(){stack=[{x:0,z:0,w:BASE,d:BASE,y:0,i:0}];for(let i=1;i<=3;i++)stack.unshift({x:0,z:0,w:BASE,d:BASE,y:-i*H,i:-i});
+ falling=[];rings=[];score=0;combo=0;speed=1.6;dir=0;camY=0;camT=0;usedCont=false;gameCoins=0;spawn()}
+function topB(){return stack[stack.length-1]}
+function spawn(){const t=topB(),i=t.i+1;dir=1-dir;const span=3.2;moving={x:dir===0?-span:t.x,z:dir===1?-span:t.z,w:t.w,d:t.d,y:t.y+H,i,v:speed,t:0}}
+function place(){if(!moving)return;const t=topB(),m=moving;
+ const ax=dir===0?'x':'z',sz=dir===0?'w':'d',delta=m[ax]-t[ax],ov=t[sz]-Math.abs(delta);
+ if(ov<=0){falling.push({...m,vy:0,rot:0,vr:(Math.random()-.5)*2});moving=null;over();return}
+ const tol=.07;
+ if(Math.abs(delta)<tol){m[ax]=t[ax];combo++;
+  const grow=combo>=6?.12:0;if(grow){m[sz]=Math.min(BASE,m[sz]+grow);}
+  A.t(NOTES[Math.min(14,combo)],.25,'sine',.2,1.02);if(navigator.vibrate)try{navigator.vibrate(15)}catch(e){}
+  rings.push({x:m.x,z:m.z,w:m[ax==='x'?'w':'w'],d:m.d,y:m.y,t:0});showCombo();
+ }else{combo=0;const cut=Math.abs(delta);m[sz]=ov;m[ax]=t[ax]+delta/2;
+  const piece={...m,vy:0,rot:0,vr:(Math.random()-.5)*1.5};piece[sz]=cut;piece[ax]=delta>0?m[ax]+ov/2+cut/2:m[ax]-ov/2-cut/2;falling.push(piece);
+  A.t(220,.12,'triangle',.15,.8)}
+ delete m.v;delete m.t;stack.push(m);moving=null;score++;camT=Math.max(0,m.y-1.2);$('#score').textContent=score;
+ if(score%10===0){gameCoins+=1}if(score%25===0)Ads.ev('happytime');
+ speed=Math.min(3.6,1.6+score*.025);spawn()}
+function showCombo(){const e=$('#combo');e.textContent=combo>=6?'PERFECT ×'+combo+' · GROW!':combo>1?'PERFECT ×'+combo:'PERFECT';e.style.opacity=1;clearTimeout(e._t);e._t=setTimeout(()=>e.style.opacity=0,700)}
+function over(){state='over';shakeT=.3;A.t(150,.4,'sawtooth',.12,.5);Ads.ev('gameplayStop');games++;S.set('games',games);
+ const nb=score>best;if(nb){best=score;S.set('best',best)}const c=gameCoins+Math.floor(score/5);gameCoinsFinal=c;addCoins(c);
+ setTimeout(()=>{$('#oT').textContent=nb&&score>0?'NEW BEST!':'GAME OVER';$('#oS').textContent=score;$('#oB').textContent=best;$('#oC').textContent='+'+c+' coins';
+  $('#contB').style.display=usedCont||score<5?'none':'block';$('#dblB').style.display=c>0?'block':'none';show('over')},800)}
+let gameCoinsFinal=0;
+function addCoins(n){coins+=n;S.set('coins',coins);$('#coins').textContent=coins}
+/* iso drawing */
+function P(x,y,z){const s=Math.min(VW,VH*.75)/7.2;return[VW/2+(x-z)*C30*s,VH*.62+(x+z)*S30*s-(y-camY)*s*1.15]}
+function box(b,ci,alpha=1){const x0=b.x-b.w/2,x1=b.x+b.w/2,z0=b.z-b.d/2,z1=b.z+b.d/2,y0=b.y,y1=b.y+H;
+ const p=(x,y,z)=>P(x,y,z);ctx.globalAlpha=alpha;
+ // right face (x=x1)
+ ctx.fillStyle=col(ci,.42);poly([p(x1,y0,z0),p(x1,y1,z0),p(x1,y1,z1),p(x1,y0,z1)]);
+ // left face (z=z1)
+ ctx.fillStyle=col(ci,.52);poly([p(x0,y0,z1),p(x0,y1,z1),p(x1,y1,z1),p(x1,y0,z1)]);
+ // top
+ ctx.fillStyle=col(ci,.66);poly([p(x0,y1,z0),p(x1,y1,z0),p(x1,y1,z1),p(x0,y1,z1)]);ctx.globalAlpha=1}
+function poly(pts){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();ctx.fill()}
+let last=performance.now(),now=0;
+function frame(t){requestAnimationFrame(frame);let dt=Math.min(.05,(t-last)/1000);last=t;now+=dt;
+ if(!paused&&state==='play'&&moving){moving.t+=dt*moving.v;const span=3.2,ph=(Math.sin(moving.t*1.0-Math.PI/2)+1)/2;const val=-span+ph*2*span;const tp=topB();if(dir===0)moving.x=tp.x+val-0+0*(0);else moving.z=tp.z+val;}
+ camY+=(camT-camY)*Math.min(1,dt*5);
+ for(const f of falling){f.vy-=9*dt;f.y+=f.vy*dt;f.rot+=f.vr*dt}falling=falling.filter(f=>f.y>camY-8);
+ for(const r of rings)r.t+=dt;rings=rings.filter(r=>r.t<.6);shakeT=Math.max(0,shakeT-dt);
+ draw()}
+function draw(){ctx.setTransform(dpr,0,0,dpr,0,0);const s=SKINS[skin];const hue=(s.h+(topB()?topB().i:0)*s.st*.6)%360;
+ const g=ctx.createLinearGradient(0,0,0,VH);g.addColorStop(0,`hsl(${hue},55%,72%)`);g.addColorStop(1,`hsl(${(hue+40)%360},45%,28%)`);ctx.fillStyle=g;ctx.fillRect(0,0,VW,VH);
+ if(shakeT>0)ctx.translate((Math.random()-.5)*12*shakeT/.3,(Math.random()-.5)*12*shakeT/.3);
+ const vis=stack.filter(b=>b.y>camY-6);for(const b of vis)box(b,b.i);
+ for(const r of rings){const k=r.t/.6,e=.15+k*.5;ctx.strokeStyle=`rgba(255,255,255,${1-k})`;ctx.lineWidth=3;const y=r.y+H;
+  const pts=[P(r.x-r.w/2-e,y,r.z-r.d/2-e),P(r.x+r.w/2+e,y,r.z-r.d/2-e),P(r.x+r.w/2+e,y,r.z+r.d/2+e),P(r.x-r.w/2-e,y,r.z+r.d/2+e)];ctx.beginPath();ctx.moveTo(...pts[0]);pts.slice(1).forEach(p=>ctx.lineTo(...p));ctx.closePath();ctx.stroke()}
+ if(moving)box(moving,moving.i);
+ for(const f of falling)box(f,f.i,Math.max(0,Math.min(1,1+(f.y-camY)/6)))}
+requestAnimationFrame(frame);
+function show(id){for(const o of['menu','over','skins'])$('#'+o).classList.toggle('on',o===id)}
+function startGame(){A.init();reset();state='play';$('#score').style.display='block';$('#score').textContent='0';$('#tapHint').style.display='none';show(null);Ads.ev('gameplayStart')}
+function onTap(e){if(e.target.closest&&e.target.closest('button'))return;A.init();
+ if(state==='menu'){if($('#skins').classList.contains('on'))return;startGame();return}
+ if(state==='play'&&!paused)place()}
+addEventListener('pointerdown',onTap);addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();onTap({target:document.body})}});
+$('#againB').onclick=()=>{if(games%3===0)Ads.show('midgame',()=>startGame());else startGame()};
+$('#contB').onclick=()=>Ads.show('rewarded',ok=>{if(!ok)return;usedCont=true;state='play';show(null);spawn();Ads.ev('gameplayStart')});
+$('#dblB').onclick=()=>Ads.show('rewarded',ok=>{if(ok){addCoins(gameCoinsFinal*2);$('#oC').textContent='+'+gameCoinsFinal*3+' coins';$('#dblB').style.display='none'}});
+function skinsUI(){const g=$('#skinGrid');g.innerHTML='';SKINS.forEach((s,i)=>{const b=document.createElement('button');const own=owned.includes(i);b.className=(i===skin?'on':'')+(own?'':' lock');b.dataset.p=own?'':'🪙'+s.p;
+ b.style.background=`linear-gradient(135deg,${s.bg[0]},${s.bg[1]})`;b.textContent=own?s.n:'';b.onclick=()=>{if(own){skin=i;S.set('skin',skin);skinsUI()}else if(coins>=s.p){addCoins(-s.p);owned.push(i);S.set('owned',owned);skin=i;S.set('skin',skin);skinsUI()}else{Ads.show('rewarded',ok=>{if(ok){addCoins(30);skinsUI()}})}};g.appendChild(b)})}
+$('#skinB').onclick=()=>{skinsUI();show('skins')};$('#skinBack').onclick=()=>show('menu');
+$('#sndT').textContent='Sound: '+(snd?'on':'off');$('#sndT').onclick=()=>{snd=!snd;S.set('snd',snd);$('#sndT').textContent='Sound: '+(snd?'on':'off')};
+$('#mBest').textContent=best;$('#mGames').textContent=games;$('#coins').textContent=coins;
+reset();moving=null;
+document.addEventListener('visibilitychange',()=>{if(document.hidden)Ads.ev('gameplayStop')});
+Ads.init();
+if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+window.__ss={startGame,place,get state(){return state},get moving(){return moving},get topB(){return topB()},get dir(){return dir},get score(){return score}};
+</script></body></html>

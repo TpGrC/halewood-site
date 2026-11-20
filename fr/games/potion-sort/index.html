@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
+<title>Potion Sort — Colour Puzzle</title>
+<meta content="Pour the potions until every bottle holds one colour. Thousands of relaxing levels. Free by Halewood Systems." name="description"/>
+<meta content="#1a0f2e" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/><link href="icon-192.png" rel="icon"/><link href="icon-192.png" rel="apple-touch-icon"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{height:100%;overflow:hidden;background:#1a0f2e;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;touch-action:manipulation}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.top{position:fixed;top:0;left:0;right:0;padding:calc(12px + env(safe-area-inset-top)) 14px 0;display:flex;justify-content:space-between;align-items:center;z-index:2;pointer-events:none}
+.top>*{pointer-events:auto}
+.lv{font-size:24px;font-weight:900;letter-spacing:.5px;text-shadow:0 3px 12px #0008}.lv small{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;color:#d7b8ff;text-transform:uppercase}
+.coin{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:6px 12px;font-weight:800;display:flex;gap:6px;align-items:center}.coin i{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffc83d 45%,#d98a00);display:inline-block}
+.ib{width:42px;height:42px;border-radius:13px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:#fff;font-size:18px;cursor:pointer}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:0 14px calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:12px;z-index:2}
+.bar button{position:relative;width:64px;height:64px;border-radius:20px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,#5b3c9e,#2e1c58);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 6px 18px #0007}
+.bar button small{position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;background:#ffc83d;color:#3a2400;border-radius:8px;padding:1px 6px;white-space:nowrap}
+.bar button small.ad{background:#5ce1a6;color:#06301e}
+.bar button:active{transform:scale(.94)}
+.ov{position:fixed;inset:0;z-index:5;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(110,60,190,.6),rgba(15,8,30,.94));padding:24px}
+.ov.on{display:flex;animation:fi .25s}@keyframes fi{from{opacity:0}to{opacity:1}}
+.card{width:min(360px,100%);text-align:center}
+.logo{font-size:48px;font-weight:900;line-height:1;background:linear-gradient(180deg,#fff,#ffb3f0 50%,#b06bff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 22px #b06bff99)}
+.tag{color:#e0cdfa;margin:10px 0 24px;font-size:15px}
+.big{display:block;width:100%;padding:17px;border:0;border-radius:18px;font-size:20px;font-weight:800;color:#2a0f3a;background:linear-gradient(180deg,#fff2a8,#ffc83d);box-shadow:0 8px 30px #ffc83d55,inset 0 -3px 0 #0002;cursor:pointer;margin-top:12px}
+.big.alt{background:linear-gradient(180deg,#9ff7cd,#3fd598);box-shadow:0 8px 30px #3fd59855}
+.big.gh{background:rgba(255,255,255,.08);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.2);font-size:16px;padding:14px}
+.big:active{transform:scale(.97)}
+.toast{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:6;font-weight:900;font-size:28px;pointer-events:none;opacity:0;text-shadow:0 4px 20px #000;white-space:nowrap}
+.toast.go{animation:tt 1.3s ease-out}@keyframes tt{0%{opacity:0;transform:translate(-50%,20px) scale(.6)}15%{opacity:1;transform:translate(-50%,0) scale(1.1)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-30px)}}
+.sm{font-size:12px;color:#b69ad8;margin-top:18px}.sm a{color:#e0cdfa}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-size:16px;text-align:left}
+.sw{width:50px;height:28px;border-radius:14px;background:#4a3570;position:relative;border:0}.sw.on{background:#5ce1a6}.sw:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}.sw.on:after{left:25px}
+</style>
+<script async="" src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
+<link href="https://halewoodsystems.com/games/potion-sort/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/potion-sort/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/potion-sort/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/potion-sort/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/potion-sort/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/potion-sort/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/potion-sort/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/potion-sort/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/potion-sort/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/potion-sort/" hreflang="x-default" rel="alternate"/></head><body>
+<canvas id="c"></canvas>
+<div class="top" id="top" style="display:none"><button aria-label="Menu" class="ib" id="homeB">☰</button><div class="lv" style="text-align:center"><small id="lvTier">Apprentice</small><span id="lvN">Level 1</span></div><div class="coin"><i></i><span id="coins">0</span></div></div>
+<div class="bar" id="bar" style="display:none">
+<button aria-label="Undo" id="undoB">↶<small>5</small></button>
+<button aria-label="Restart" id="restB">⟳</button>
+<button aria-label="Extra bottle" id="tubeB">🧪<small>AD</small></button>
+</div>
+<div class="toast" id="toast"></div>
+<div class="ov on" id="menu"><div class="card">
+<div class="logo">POTION<br/>SORT</div><div class="tag">Pour until every bottle holds one colour.</div>
+<button class="big" id="playB">PLAY</button>
+<button class="big gh" id="dailyB">Daily bonus</button>
+<button class="big gh" id="setB">Settings</button>
+<div class="sm">by Halewood Systems</div>
+</div></div>
+<div class="ov" id="win"><div class="card">
+<div class="logo" style="font-size:40px">BREWED!</div><div class="tag" id="wInfo"></div>
+<button class="big" id="nextB">NEXT LEVEL</button>
+<button class="big alt" id="dblB">▶ Watch ad · coins ×3</button>
+</div></div>
+<div class="ov" id="sets"><div class="card">
+<div class="logo" style="font-size:36px">SETTINGS</div>
+<div class="row">Sound <button class="sw" id="sSnd"></button></div>
+<div class="row">Vibration <button class="sw" id="sVib"></button></div>
+<div class="row">Colour-blind symbols <button class="sw" id="sSym"></button></div>
+<button class="big gh" id="setBack">Back</button>
+<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · Potion Sort v1.0</div>
+</div></div>
+<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const S={get(k,d){try{const v=localStorage.getItem('ps_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('ps_'+k,JSON.stringify(v))}catch(e){}}};
+let level=S.get('level',1),coins=S.get('coins',30),opt=S.get('opt',{snd:true,vib:true,sym:false});
+/* ads: CrazyGames SDK when hosted there, otherwise rewards are granted after a short wait */
+let paused=false;
+const Ads={sdk:null,async init(){try{if(window.CrazyGames&&CrazyGames.SDK){await CrazyGames.SDK.init();if(CrazyGames.SDK.environment!=='disabled')this.sdk=CrazyGames.SDK}}catch(e){}},
+ ev(n){try{this.sdk&&this.sdk.game[n]()}catch(e){}},
+ show(type,done){if(!this.sdk){if(type==='rewarded')fakeAd(done);else done(false);return}A.mute(1);paused=true;
+  this.sdk.ad.requestAd(type,{adStarted(){},adFinished(){A.mute(0);paused=false;done(true)},adError(){A.mute(0);paused=false;done(type!=='rewarded')}})}};
+function fakeAd(done){const o=$('#adOv');o.classList.add('on');let t=2;$('#adT').textContent='Reward in '+t+'…';const iv=setInterval(()=>{t--;if(t<=0){clearInterval(iv);o.classList.remove('on');done(true)}else $('#adT').textContent='Reward in '+t+'…'},700)}
+/* audio */
+const A={x:null,g:null,init(){if(this.x)return;try{this.x=new(window.AudioContext||window.webkitAudioContext)();this.g=this.x.createGain();this.g.gain.value=.5;this.g.connect(this.x.destination)}catch(e){}},mute(m){if(this.g)this.g.gain.value=m?0:.5},
+ t(f,d,ty='sine',v=.2,sl=0,dl=0){if(!opt.snd||!this.x)return;const t=this.x.currentTime+dl,o=this.x.createOscillator(),a=this.x.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(sl)o.frequency.exponentialRampToValueAtTime(f*sl,t+d);a.gain.setValueAtTime(0,t);a.gain.linearRampToValueAtTime(v,t+.01);a.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(a);a.connect(this.g);o.start(t);o.stop(t+d+.02)},
+ pick(){this.t(520,.08,'triangle',.15,1.3)},pour(){for(let i=0;i<5;i++)this.t(300+Math.random()*200,.09,'sine',.07,1.8,i*.07)},full(){this.t(784,.15,'sine',.2,1);this.t(1175,.25,'sine',.15,1,.08)},
+ bad(){this.t(160,.15,'square',.08,.7)},win(){[523,659,784,1047,1319].forEach((f,i)=>this.t(f,.3,'triangle',.18,1,i*.09))}};
+const vib=m=>{if(opt.vib&&navigator.vibrate)try{navigator.vibrate(m)}catch(e){}};
+/* colours */
+const COL=['#ff4d6d','#3fa9ff','#ffd23f','#3ddc84','#b26bff','#ff9a3c','#ff7ad9','#2ee6d6','#9b6b43','#c7d0e0','#2f3b9e','#8bd450','#e63946','#14213d'];
+const SYM=['♥','●','★','◆','▲','■','✚','☾','♣','♠','✦','⬟','✿','☀'];
+/* seeded RNG */
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const CAP=4;
+function params(n){const c=Math.min(12,3+Math.floor(Math.sqrt(n*1.6)));return{colors:c,empty:c>=9?2:2}}
+function solvable(tubes,limit=60000){const seen=new Set();let nodes=0;
+ const key=t=>t.map(x=>x.join(',')).sort().join('|');
+ const done=t=>t.every(x=>x.length===0||(x.length===CAP&&x.every(v=>v===x[0])));
+ function dfs(t){if(done(t))return true;if(++nodes>limit)return false;const k=key(t);if(seen.has(k))return false;seen.add(k);
+  for(let i=0;i<t.length;i++){const a=t[i];if(!a.length)continue;const top=a[a.length-1];if(a.length===CAP&&a.every(v=>v===top))continue;
+   let run=0;for(let k2=a.length-1;k2>=0&&a[k2]===top;k2--)run++;
+   for(let j=0;j<t.length;j++){if(i===j)continue;const b=t[j];if(b.length>=CAP)continue;if(b.length&&b[b.length-1]!==top)continue;if(!b.length&&run===a.length)continue;
+    const n=Math.min(run,CAP-b.length);const nt=t.map(x=>x.slice());for(let q=0;q<n;q++)nt[j].push(nt[i].pop());if(dfs(nt))return true}}
+  return false}
+ return dfs(tubes)}
+function makeLevel(n){const{colors,empty}=params(n);const r=rng(n*7919+13);
+ for(let tries=0;tries<40;tries++){const u=[];for(let c=0;c<colors;c++)for(let k=0;k<CAP;k++)u.push(c);
+  for(let i=u.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[u[i],u[j]]=[u[j],u[i]]}
+  const t=[];for(let c=0;c<colors;c++)t.push(u.slice(c*CAP,c*CAP+CAP));for(let e=0;e<empty;e++)t.push([]);
+  if(t.some(x=>x.length&&x.every(v=>v===x[0])))continue;
+  if(solvable(t.map(x=>x.slice())))return t}
+ const t=[];for(let c=0;c<colors;c++)t.push([c,c,c,c]);t[0][3]=1;t[1][3]=0;for(let e=0;e<empty;e++)t.push([]);return t}
+function tierName(n){return n<20?'Apprentice':n<50?'Alchemist':n<100?'Sorcerer':n<200?'Archmage':'Grand Wizard'}
+/* game */
+const cv=$('#c'),ctx=cv.getContext('2d');let VW,VH,dpr;
+function resize(){dpr=Math.min(2,devicePixelRatio||1);VW=innerWidth;VH=innerHeight;cv.width=VW*dpr;cv.height=VH*dpr;layout()}
+let tubes=[],hist=[],sel=-1,state='menu',anim=null,undos=5,extraUsed=false,pos=[],TW=0,TH=0,parts=[],now=0,done=new Set(),moves=0;
+function layout(){if(!tubes.length)return;const n=tubes.length,rows=n>7?2:1,per=Math.ceil(n/rows);const top=110,bot=120,availH=VH-top-bot;
+ TW=Math.min(64,(VW-20)/per*.7);TH=Math.min(TW*3.6,availH/rows*.78);TW=Math.min(TW,TH/3.2);const gap=(VW-per*TW)/(per+1);pos=[];
+ for(let i=0;i<n;i++){const r=Math.floor(i/per),c=i%per,inRow=r===rows-1?n-per*(rows-1):per,g2=(VW-inRow*TW)/(inRow+1);pos.push({x:g2+(c)*(TW+g2),y:top+(availH/rows)*r+(availH/rows-TH)/2+10})}}
+addEventListener('resize',resize);
+function start(n){level=n;S.set('level',level);tubes=makeLevel(n);hist=[];sel=-1;undos=5;extraUsed=false;anim=null;moves=0;done=new Set();tubes.forEach((t,i)=>{if(isDone(t))done.add(i)});
+ state='play';layout();ui();show(null);$('#top').style.display='flex';$('#bar').style.display='flex';Ads.ev('gameplayStart')}
+const isDone=t=>t.length===CAP&&t.every(v=>v===t[0]);
+function topRun(t){if(!t.length)return 0;const v=t[t.length-1];let r=0;for(let k=t.length-1;k>=0&&t[k]===v;k--)r++;return r}
+function canPour(i,j){const a=tubes[i],b=tubes[j];if(!a.length||b.length>=CAP)return false;return!b.length||b[b.length-1]===a[a.length-1]}
+function tap(x,y){if(state!=='play'||anim||paused)return;A.init();let hit=-1;pos.forEach((p,i)=>{if(x>p.x-12&&x<p.x+TW+12&&y>p.y-30&&y<p.y+TH+16)hit=i});
+ if(hit<0){sel=-1;return}
+ if(sel<0){if(!tubes[hit].length||done.has(hit))return;sel=hit;A.pick();return}
+ if(hit===sel){sel=-1;return}
+ if(!canPour(sel,hit)){A.bad();vib(20);const s=sel;sel=hit&&tubes[hit].length&&!done.has(hit)?hit:-1;if(sel===s)sel=-1;return}
+ const n=Math.min(topRun(tubes[sel]),CAP-tubes[hit].length);hist.push(tubes.map(t=>t.slice()));
+ anim={from:sel,to:hit,n,c:tubes[sel][tubes[sel].length-1],t:0,dur:.75,applied:false};sel=-1;A.pour();moves++}
+function step(dt){if(!anim)return;anim.t+=dt;const k=anim.t/anim.dur;
+ if(k>.45&&!anim.applied){anim.applied=true;for(let q=0;q<anim.n;q++)tubes[anim.to].push(tubes[anim.from].pop())}
+ if(k>=1){const j=anim.to;anim=null;if(isDone(tubes[j])&&!done.has(j)){done.add(j);A.full();vib(25);const p=pos[j];burst(p.x+TW/2,p.y,COL[tubes[j][0]],26)}
+  if(tubes.every(t=>!t.length||isDone(t)))win()}}
+function win(){state='win';A.win();vib([30,40,60]);Ads.ev('gameplayStop');Ads.ev('happytime');for(let i=0;i<70;i++)burst(VW/2,VH*.4,COL[i%COL.length],1);
+ const c=8+Math.min(12,Math.floor(level/10));winCoins=c;addCoins(c);$('#wInfo').textContent='Level '+level+' · '+moves+' moves · +'+c+' coins';$('#dblB').style.display='block';
+ setTimeout(()=>show('win'),700)}
+let winCoins=0;
+function burst(x,y,c,n){for(let i=0;i<n;i++){const a=Math.random()*7,v=100+Math.random()*320;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-200,l:1+Math.random()*.6,c,s:3+Math.random()*4,r:Math.random()*6})}}
+function addCoins(n){coins+=n;S.set('coins',coins);ui()}
+function ui(){$('#coins').textContent=coins;$('#lvN').textContent='Level '+level;$('#lvTier').textContent=tierName(level);
+ const u=$('#undoB small');if(undos>0){u.textContent=undos;u.className=''}else{u.textContent='AD';u.className='ad'}
+ const tb=$('#tubeB small');tb.textContent=extraUsed?'USED':coins>=60?'60':'AD';tb.className=extraUsed?'':coins>=60?'':'ad'}
+/* draw */
+function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function tubePath(x,y,w,h){const r=w/2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h-r);ctx.arc(x+r,y+h-r,r,Math.PI,0,true);ctx.lineTo(x+w,y);ctx.closePath()}
+function drawTube(i,x,y,ang,fillOverride){const t=fillOverride||tubes[i],w=TW,h=TH,inner=h-14,seg=inner/CAP;
+ ctx.save();ctx.translate(x+w/2,y);ctx.rotate(ang);ctx.translate(-w/2,0);
+ // liquid
+ ctx.save();tubePath(3,8,w-6,h-10);ctx.clip();
+ for(let k=0;k<t.length;k++){const yy=h-4-(k+1)*seg;const g=ctx.createLinearGradient(0,0,w,0);const c=COL[t[k]];g.addColorStop(0,shade(c,-25));g.addColorStop(.35,c);g.addColorStop(1,shade(c,-35));ctx.fillStyle=g;
+  if(ang){ctx.save();ctx.rotate(-ang);ctx.fillRect(-w*2,yy-seg*.0-20,w*5,seg+20+(k===0?60:0));ctx.restore()}else ctx.fillRect(0,yy,w,seg+1);
+  if(k===t.length-1&&!ang){ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillRect(0,yy,w,3)}
+  if(opt.sym&&!ang){ctx.fillStyle='rgba(0,0,0,.45)';ctx.font=`700 ${Math.round(seg*.42)}px system-ui`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(SYM[t[k]],w/2,yy+seg/2)}}
+ ctx.restore();
+ // glass
+ tubePath(2,4,w-4,h-4);ctx.strokeStyle=done.has(i)?'rgba(255,240,170,.9)':'rgba(230,220,255,.55)';ctx.lineWidth=2.5;ctx.stroke();
+ ctx.fillStyle='rgba(255,255,255,.07)';tubePath(2,4,w-4,h-4);ctx.fill();
+ ctx.fillStyle='rgba(255,255,255,.28)';rr(w*.18,14,w*.12,h*.62,4);ctx.fill();
+ rr(-3,0,w+6,9,4);ctx.fillStyle='rgba(230,220,255,.6)';ctx.fill();
+ if(done.has(i)){ctx.fillStyle='#8a5a2b';rr(w*.15,-14,w*.7,16,5);ctx.fill();ctx.fillStyle='#b07a40';rr(w*.15,-14,w*.7,6,4);ctx.fill()}
+ ctx.restore()}
+function shade(hex,p){const n=parseInt(hex.slice(1),16);let r=(n>>16)+p,g=(n>>8&255)+p,b=(n&255)+p;r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));return`rgb(${r},${g},${b})`}
+const BUB=Array.from({length:40},()=>({x:Math.random(),y:Math.random(),s:1+Math.random()*3,v:.01+Math.random()*.03}));
+function draw(){ctx.setTransform(dpr,0,0,dpr,0,0);const bg=ctx.createLinearGradient(0,0,0,VH);bg.addColorStop(0,'#2b1650');bg.addColorStop(1,'#0f0820');ctx.fillStyle=bg;ctx.fillRect(0,0,VW,VH);
+ const gl=ctx.createRadialGradient(VW/2,VH*.45,10,VW/2,VH*.45,VW*.9);gl.addColorStop(0,'rgba(190,110,255,.18)');gl.addColorStop(1,'transparent');ctx.fillStyle=gl;ctx.fillRect(0,0,VW,VH);
+ for(const b of BUB){b.y-=b.v*.016;if(b.y<-.05)b.y=1.05;ctx.fillStyle='rgba(220,190,255,.12)';ctx.beginPath();ctx.arc(b.x*VW,b.y*VH,b.s,0,7);ctx.fill()}
+ if(state==='menu')return drawMenuBottles();
+ // shelf
+ tubes.forEach((_,i)=>{if(anim&&i===anim.from)return;const p=pos[i];let y=p.y;if(i===sel)y-=22;
+  ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.ellipse(p.x+TW/2,p.y+TH+6,TW*.6,5,0,0,7);ctx.fill();drawTube(i,p.x,y,0)});
+ if(anim){const a=anim,k=Math.min(1,a.t/a.dur),P=pos[a.from],Q=pos[a.to],dir=Q.x>=P.x?-1:1;
+  const lift=k<.25?k/.25:k>.75?(1-k)/.25:1,ease=x=>x*x*(3-2*x),e=ease(lift);
+  const tx=P.x+(Q.x+dir*TW*.55-P.x)*e,ty=P.y+(Q.y-TH*.55-P.y)*e,ang=-dir*1.2*e;
+  if(k>.28&&k<.7){const mx=tx+TW/2+(-dir)*TW*.42,my=ty+TH*.18;ctx.strokeStyle=COL[a.c];ctx.lineWidth=Math.max(3,TW*.12);ctx.lineCap='round';ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(Q.x+TW/2,Q.y+TH-8-tubes[a.to].length*(TH-14)/CAP);ctx.stroke()}
+  drawTube(a.from,tx,ty,ang)}
+ for(const p of parts){ctx.globalAlpha=Math.max(0,Math.min(1,p.l));ctx.fillStyle=p.c;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r+=.1);ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);ctx.restore()}ctx.globalAlpha=1}
+function drawMenuBottles(){const cols=[0,1,2,3,4];const w=34,h=120;cols.forEach((c,i)=>{const x=VW/2-((cols.length*w+(cols.length-1)*18)/2)+i*(w+18),y=VH*.82+Math.sin(now*2+i)*4;
+ ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,h-w/2);ctx.arc(w/2,h-w/2,w/2,Math.PI,0,true);ctx.lineTo(w,0);ctx.closePath();ctx.save();ctx.clip();ctx.fillStyle=COL[c];ctx.fillRect(0,h*.35,w,h);ctx.restore();ctx.strokeStyle='rgba(230,220,255,.6)';ctx.lineWidth=2.5;ctx.stroke();ctx.restore()})}
+let last=performance.now();
+function frame(t){requestAnimationFrame(frame);const dt=Math.min(.05,(t-last)/1000);last=t;now+=dt;if(!paused)step(dt);
+ for(const p of parts){p.l-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=600*dt;p.vx*=.98}parts=parts.filter(p=>p.l>0&&p.y<VH+20);draw()}
+resize();requestAnimationFrame(frame);
+cv.addEventListener('pointerdown',e=>tap(e.clientX,e.clientY));
+/* UI */
+function show(id){for(const o of['menu','win','sets'])$('#'+o).classList.toggle('on',o===id)}
+function toast(t,c){const e=$('#toast');e.textContent=t;e.style.color=c||'#fff';e.classList.remove('go');void e.offsetWidth;e.classList.add('go')}
+$('#playB').onclick=()=>{A.init();start(level)};
+$('#homeB').onclick=()=>{state='menu';tubes=[];$('#top').style.display='none';$('#bar').style.display='none';Ads.ev('gameplayStop');show('menu')};
+$('#nextB').onclick=()=>{const n=level+1;if(n%3===0)Ads.show('midgame',()=>start(n));else start(n)};
+$('#dblB').onclick=()=>Ads.show('rewarded',ok=>{if(ok){addCoins(winCoins*2);toast('+'+winCoins*2+' COINS','#ffd76a');$('#dblB').style.display='none'}});
+$('#restB').onclick=()=>{if(state==='play'&&!anim)start(level)};
+$('#undoB').onclick=()=>{if(state!=='play'||anim||!hist.length)return;const go=()=>{tubes=hist.pop();done=new Set();tubes.forEach((t,i)=>{if(isDone(t))done.add(i)});sel=-1;ui()};
+ if(undos>0){undos--;go()}else Ads.show('rewarded',ok=>{if(ok){undos+=5;go()}})};
+$('#tubeB').onclick=()=>{if(state!=='play'||anim||extraUsed)return;const add=()=>{extraUsed=true;tubes.push([]);layout();ui();toast('EXTRA BOTTLE!','#9ff7cd')};
+ if(coins>=60){addCoins(-60);add()}else Ads.show('rewarded',ok=>{if(ok)add()})};
+$('#setB').onclick=()=>{sync();show('sets')};$('#setBack').onclick=()=>show('menu');
+function sync(){$('#sSnd').classList.toggle('on',opt.snd);$('#sVib').classList.toggle('on',opt.vib);$('#sSym').classList.toggle('on',opt.sym)}
+for(const[k,id]of[['snd','#sSnd'],['vib','#sVib'],['sym','#sSym']])$(id).onclick=()=>{opt[k]=!opt[k];S.set('opt',opt);sync()};
+$('#dailyB').onclick=()=>{const d=new Date().toDateString();if(S.get('daily','')===d){Ads.show('rewarded',ok=>{if(ok){addCoins(25);toast('+25 COINS','#ffd76a')}});return}
+ S.set('daily',d);addCoins(40);A.init();A.full();toast('+40 DAILY COINS','#ffd76a');$('#dailyB').textContent='▶ Watch ad · +25 coins'};
+if(S.get('daily','')===new Date().toDateString())$('#dailyB').textContent='▶ Watch ad · +25 coins';
+$('#playB').textContent=level>1?'PLAY · LEVEL '+level:'PLAY';
+document.addEventListener('visibilitychange',()=>{if(document.hidden)Ads.ev('gameplayStop')});
+Ads.init();ui();
+if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+window.__ps={get tubes(){return tubes},get state(){return state},start,tap:(i)=>{const p=pos[i];tap(p.x+TW/2,p.y+TH/2)},makeLevel,solvable};
+</script></body></html>

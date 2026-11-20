@@ -47,6 +47,9 @@ CARDS=f'''<div class="grid">
   <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-cleaner/"><div class="ico kc"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Cleaner</h3><p>Cleans junk files, browser cache and update leftovers, and speeds up Windows startup.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-backup/"><div class="ico kc"><img src="/img/kyrofix-backup/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Backup</h3><p>Backs up your documents and photos to a USB drive or external disk, and gets them back when you need them.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/potion-sort/"><div class="ico kc"><img src="/img/potion-sort/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Potion Sort</h3><p>Pour the potions until every bottle holds one colour. Endless relaxing levels.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
+  <a class="card" href="/products/triple-bloom/"><div class="ico kc"><img src="/img/triple-bloom/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Triple Bloom</h3><p>Tap tiles and match three of a kind to clear the garden.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
+  <a class="card" href="/products/skystack/"><div class="ico kc"><img src="/img/skystack/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Skystack</h3><p>Tap to drop the block. Stack as high as you can.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
   <a class="card" href="/products/starfuse/"><div class="ico kc"><img src="/img/starfuse/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Starfuse</h3><p>Drop planets, merge matching ones and grow them into stars and black holes. Plays on any phone.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
   <a class="card" href="/products/slipgate/"><div class="ico sg">{SG_ICO}</div><span class="badge free">Free to play</span><h3>Slipgate</h3><p>A tricky puzzle game that starts easy and gets hard fast. Play it free in your browser.</p><div class="meta"><span>Browser · Free</span></div></a>
 </div>'''
@@ -90,6 +93,9 @@ page('products/index.html','Products — Halewood Systems','All Halewood Systems
       <tr><td><a href="/products/kyrofix/"><b>Kyrofix Driver Updater</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix-cleaner/"><b>Kyrofix Cleaner</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
       <tr><td><a href="/products/kyrofix-backup/"><b>Kyrofix Backup</b></a></td><td>Windows 10 / 11</td><td><span class="badge free">Available</span></td><td class="y">✓ Free</td><td>Pro, coming soon</td></tr>
+      <tr><td><a href="/products/potion-sort/"><b>Potion Sort</b></a></td><td>Phone &amp; browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
+      <tr><td><a href="/products/triple-bloom/"><b>Triple Bloom</b></a></td><td>Phone &amp; browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
+      <tr><td><a href="/products/skystack/"><b>Skystack</b></a></td><td>Phone &amp; browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
       <tr><td><a href="/products/starfuse/"><b>Starfuse</b></a></td><td>Phone &amp; browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
       <tr><td><a href="/products/slipgate/"><b>Slipgate</b></a></td><td>Browser</td><td><span class="badge live">Live</span></td><td class="y">✓ Free</td><td class="n">—</td></tr>
     </tbody></table></div>
@@ -301,6 +307,58 @@ $('#lic').onkeydown=e=>{{if(e.key==='Enter')$('#go').click();}};
 $('#cp').onclick=()=>{{navigator.clipboard.writeText($('#key').textContent);$('#cp').textContent='Copied';}};
 </script>''')
 
+# New games
+page('products/potion-sort/index.html','Potion Sort — Free game for phones','Potion Sort: Pour the potions until every bottle holds one colour. Endless relaxing levels. Free to play on any phone or computer, no download needed.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Potion Sort</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/potion-sort/icon.png" alt="" width="64" height="64"></div>
+  <span class="badge live">Free to play · Phone &amp; browser</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Potion Sort</h1>
+  <p class="lead">A colour-sorting puzzle with endless levels. Tap a bottle, tap another, and pour. Every level can be solved.</p>
+  <div class="cta"><a class="btn p" href="/games/potion-sort/">Play free now</a></div>
+  <div class="meta" style="margin-top:22px"><span>No download</span><span>Works offline after first play</span><span>Add to your home screen</span></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>Screenshots</h2><div class="gallery">
+  <figure><img src="/img/potion-sort/s0.jpg" alt="Potion Sort menu" loading="lazy"></figure><figure><img src="/img/potion-sort/s1.jpg" alt="Potion Sort gameplay" loading="lazy"></figure>
+</div></div></section>
+<section><div class="wrap"><h2>How to play</h2><div class="grid"><div class="card"><h3>1</h3><p>Tap a bottle to pick it up, tap another to pour.</p></div><div class="card"><h3>2</h3><p>You can only pour onto the same colour or into an empty bottle.</p></div><div class="card"><h3>3</h3><p>Finish when every bottle holds one colour.</p></div></div>
+  <p class="updated">On iPhone: open the game in Safari, tap Share, then "Add to Home Screen". On Android: Chrome menu, then "Install app".</p></div></section>
+<div class="band"><h2>Ready to play?</h2><div class="cta"><a class="btn p" href="/games/potion-sort/">Play Potion Sort free</a></div></div>''')
+
+page('products/triple-bloom/index.html','Triple Bloom — Free game for phones','Triple Bloom: Tap tiles and match three of a kind to clear the garden. Free to play on any phone or computer, no download needed.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Triple Bloom</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/triple-bloom/icon.png" alt="" width="64" height="64"></div>
+  <span class="badge live">Free to play · Phone &amp; browser</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Triple Bloom</h1>
+  <p class="lead">A tile-matching puzzle in a garden. Tap a free tile to put it in your tray; three of the same disappear. Clear the board before the tray fills up.</p>
+  <div class="cta"><a class="btn p" href="/games/triple-bloom/">Play free now</a></div>
+  <div class="meta" style="margin-top:22px"><span>No download</span><span>Works offline after first play</span><span>Add to your home screen</span></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>Screenshots</h2><div class="gallery">
+  <figure><img src="/img/triple-bloom/s0.jpg" alt="Triple Bloom menu" loading="lazy"></figure><figure><img src="/img/triple-bloom/s1.jpg" alt="Triple Bloom gameplay" loading="lazy"></figure>
+</div></div></section>
+<section><div class="wrap"><h2>How to play</h2><div class="grid"><div class="card"><h3>1</h3><p>Tap any tile that is not covered.</p></div><div class="card"><h3>2</h3><p>Three of the same in the tray disappear.</p></div><div class="card"><h3>3</h3><p>Clear every tile before your 7-slot tray is full.</p></div></div>
+  <p class="updated">On iPhone: open the game in Safari, tap Share, then "Add to Home Screen". On Android: Chrome menu, then "Install app".</p></div></section>
+<div class="band"><h2>Ready to play?</h2><div class="cta"><a class="btn p" href="/games/triple-bloom/">Play Triple Bloom free</a></div></div>''')
+
+page('products/skystack/index.html','Skystack — Free game for phones','Skystack: Tap to drop the block. Stack as high as you can. Free to play on any phone or computer, no download needed.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Skystack</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/skystack/icon.png" alt="" width="64" height="64"></div>
+  <span class="badge live">Free to play · Phone &amp; browser</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Skystack</h1>
+  <p class="lead">A one-tap tower game. Drop each sliding block onto the tower. What hangs over gets cut off. Hit perfect drops in a row and your tower grows back.</p>
+  <div class="cta"><a class="btn p" href="/games/skystack/">Play free now</a></div>
+  <div class="meta" style="margin-top:22px"><span>No download</span><span>Works offline after first play</span><span>Add to your home screen</span></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>Screenshots</h2><div class="gallery">
+  <figure><img src="/img/skystack/s0.jpg" alt="Skystack menu" loading="lazy"></figure><figure><img src="/img/skystack/s1.jpg" alt="Skystack gameplay" loading="lazy"></figure>
+</div></div></section>
+<section><div class="wrap"><h2>How to play</h2><div class="grid"><div class="card"><h3>1</h3><p>Tap anywhere to drop the sliding block.</p></div><div class="card"><h3>2</h3><p>Anything hanging over the edge falls off.</p></div><div class="card"><h3>3</h3><p>Six perfect drops in a row make the tower bigger again.</p></div></div>
+  <p class="updated">On iPhone: open the game in Safari, tap Share, then "Add to Home Screen". On Android: Chrome menu, then "Install app".</p></div></section>
+<div class="band"><h2>Ready to play?</h2><div class="cta"><a class="btn p" href="/games/skystack/">Play Skystack free</a></div></div>''')
+
 # Starfuse
 page('products/starfuse/index.html','Starfuse — Free space merge game for phones','Starfuse: drop planets, merge matching ones and grow them into stars and black holes. Free to play on any phone or computer, no download needed.',f'''
 <section class="hero"><div class="wrap">
@@ -380,7 +438,7 @@ page('about/index.html','About — Halewood Systems','Halewood Systems is an ind
 <section class="hero"><div class="wrap doc"><h1>About</h1>
   <p class="lead">Halewood Systems is an independent software studio based in the European Union.</p>
   <p style="margin-top:28px">We make tools we want to use ourselves: fast, simple and honest. No bundled extras, no dark patterns, no selling your data.</p>
-  <p>Our first product, <a href="/products/windrova/">Windrova</a>, brings professional weather models to everyone, free. Then came <a href="/products/kyrofix/">Kyrofix</a>, PC care software that explains what it does. We also make games, like <a href="/products/starfuse/">Starfuse</a> and <a href="/products/slipgate/">Slipgate</a>.</p>
+  <p>Our first product, <a href="/products/windrova/">Windrova</a>, brings professional weather models to everyone, free. Then came <a href="/products/kyrofix/">Kyrofix</a>, PC care software that explains what it does. We also make games, like <a href="/products/starfuse/">Starfuse</a>, <a href="/products/potion-sort/">Potion Sort</a>, <a href="/products/triple-bloom/">Triple Bloom</a>, <a href="/products/skystack/">Skystack</a> and <a href="/products/slipgate/">Slipgate</a>.</p>
   <p>Want to follow along? Watch us build on <a href="{YT}" target="_blank" rel="noopener">YouTube</a>.</p>
 </div></section>''')
 

@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://halewoodsystems.com/about/</loc></url>
 <url><loc>https://halewoodsystems.com/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/games/</loc></url>
 <url><loc>https://halewoodsystems.com/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/games/starfuse/</loc></url>
@@ -26,9 +27,11 @@
 <url><loc>https://halewoodsystems.com/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/software/</loc></url>
 <url><loc>https://halewoodsystems.com/support/</loc></url>
 <url><loc>https://halewoodsystems.com/el/about/</loc></url>
 <url><loc>https://halewoodsystems.com/el/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/el/games/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/starfuse/</loc></url>
@@ -53,9 +56,11 @@
 <url><loc>https://halewoodsystems.com/el/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/el/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/el/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/el/software/</loc></url>
 <url><loc>https://halewoodsystems.com/el/support/</loc></url>
 <url><loc>https://halewoodsystems.com/de/about/</loc></url>
 <url><loc>https://halewoodsystems.com/de/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/de/games/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/starfuse/</loc></url>
@@ -80,9 +85,11 @@
 <url><loc>https://halewoodsystems.com/de/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/de/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/de/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/de/software/</loc></url>
 <url><loc>https://halewoodsystems.com/de/support/</loc></url>
 <url><loc>https://halewoodsystems.com/es/about/</loc></url>
 <url><loc>https://halewoodsystems.com/es/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/es/games/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/starfuse/</loc></url>
@@ -107,9 +114,11 @@
 <url><loc>https://halewoodsystems.com/es/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/es/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/es/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/es/software/</loc></url>
 <url><loc>https://halewoodsystems.com/es/support/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/about/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/fr/games/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/starfuse/</loc></url>
@@ -134,9 +143,11 @@
 <url><loc>https://halewoodsystems.com/fr/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/fr/software/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/support/</loc></url>
 <url><loc>https://halewoodsystems.com/it/about/</loc></url>
 <url><loc>https://halewoodsystems.com/it/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/it/games/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/starfuse/</loc></url>
@@ -161,9 +172,11 @@
 <url><loc>https://halewoodsystems.com/it/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/it/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/it/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/it/software/</loc></url>
 <url><loc>https://halewoodsystems.com/it/support/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/about/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/pl/games/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/starfuse/</loc></url>
@@ -188,9 +201,11 @@
 <url><loc>https://halewoodsystems.com/pl/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/pl/software/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/support/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/about/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/pt/games/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/starfuse/</loc></url>
@@ -215,9 +230,11 @@
 <url><loc>https://halewoodsystems.com/pt/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/pt/software/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/support/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/about/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/activate/</loc></url>
+<url><loc>https://halewoodsystems.com/ru/games/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/skystack/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/starfuse/</loc></url>
@@ -242,5 +259,6 @@
 <url><loc>https://halewoodsystems.com/ru/products/starfuse/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/products/triple-bloom/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/products/windrova/</loc></url>
+<url><loc>https://halewoodsystems.com/ru/software/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/support/</loc></url>
 </urlset>

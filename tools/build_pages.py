@@ -6,7 +6,7 @@ MAIL='support@halewoodsystems.com'
 # Gumroad checkout links (fill in when the products exist); empty = "On sale soon"
 LIVE=False   # turn on once the Gumroad products are published
 G='https://thomasknot.gumroad.com/l/'
-BUY={k:(G+v if LIVE else '') for k,v in {'driver':'kyrofix-driver-updater-pro','cleaner':'kyrofix-cleaner-pro','backup':'kyrofix-backup-pro'}.items()}
+BUY={k:(G+v if LIVE else '') for k,v in {'driver':'kyrofix-driver-updater-pro','cleaner':'kyrofix-cleaner-pro','backup':'kyrofix-backup-pro','space':'kyrofix-space-pro','shredder':'kyrofix-shredder-pro','photo':'kyrofix-photo-cleaner-pro'}.items()}
 def buybtn(k,label='Buy Pro'):
     return f'<a class="btn p" href="{BUY[k]}" target="_blank" rel="noopener">{label}</a>' if BUY[k] else '<span class="btn p off">On sale soon</span>'
 SALEBADGE=lambda k:'<span class="badge live">Pro</span>' if BUY[k] else '<span class="badge soon">Pro</span>'
@@ -47,6 +47,9 @@ CARDS=f'''<div class="grid">
   <a class="card" href="/products/kyrofix/"><div class="ico kf">{KF_ICO}</div><span class="badge free">Free download</span><h3>Kyrofix Driver Updater</h3><p>Finds outdated drivers and updates them safely, with an AI assistant that explains every fix.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-cleaner/"><div class="ico kc"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Cleaner</h3><p>Cleans junk files, browser cache and update leftovers, and speeds up Windows startup.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/kyrofix-backup/"><div class="ico kc"><img src="/img/kyrofix-backup/icon.png" alt="" width="34" height="34"></div><span class="badge free">Free download</span><h3>Kyrofix Backup</h3><p>Backs up your documents and photos to a USB drive or external disk, and gets them back when you need them.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix-space/"><div class="ico kc"><img src="/img/kyrofix-space/icon.png" alt="" width="34" height="34"></div><span class="badge free">New · Free download</span><h3>Kyrofix Space</h3><p>What is filling your disk? See the biggest folders and files in seconds and free up space.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix-shredder/"><div class="ico kc"><img src="/img/kyrofix-shredder/icon.png" alt="" width="34" height="34"></div><span class="badge free">New · Free download</span><h3>Kyrofix Shredder</h3><p>Delete files for good. Shredded files cannot be recovered.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
+  <a class="card" href="/products/kyrofix-photo-cleaner/"><div class="ico kc"><img src="/img/kyrofix-photo-cleaner/icon.png" alt="" width="34" height="34"></div><span class="badge free">New · Free download</span><h3>Kyrofix Photo Cleaner</h3><p>Find duplicate, similar and blurry photos and free up space.</p><div class="meta"><span>Windows · Free &amp; Pro</span></div></a>
   <a class="card" href="/products/potion-sort/"><div class="ico kc"><img src="/img/potion-sort/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Potion Sort</h3><p>Pour the potions until every bottle holds one colour. Endless relaxing levels.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
   <a class="card" href="/products/triple-bloom/"><div class="ico kc"><img src="/img/triple-bloom/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Triple Bloom</h3><p>Tap tiles and match three of a kind to clear the garden.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
   <a class="card" href="/products/skystack/"><div class="ico kc"><img src="/img/skystack/icon.png" alt="" width="34" height="34"></div><span class="badge live">New · Free to play</span><h3>Skystack</h3><p>Tap to drop the block. Stack as high as you can.</p><div class="meta"><span>Phone &amp; browser · Free</span></div></a>
@@ -275,6 +278,73 @@ page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup f
 </div></section>
 <div class="band"><h2>Don't lose your files.</h2><p class="lead">Free download for Windows 10 and 11.</p><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Backup-Setup.exe" download>Download Kyrofix Backup</a></div></div>''')
 
+# Kyrofix utilities
+page('products/kyrofix-space/index.html','Kyrofix Space — Free for Windows','Kyrofix Space for Windows 10 and 11: What is filling your disk? See the biggest folders and files in seconds and free up space. Free download.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Space</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-space/icon.png" alt="" width="56" height="56"></div>
+  <span class="badge free">Free download · Windows 10 / 11</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Space</h1>
+  <p class="lead">Your disk is full and you don’t know why. Kyrofix Space scans a drive in seconds and shows you exactly which folders and files take the space.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Space-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No admin rights needed</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-space/s1.jpg" alt="Kyrofix Space" width="1100" height="740"></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>What it does</h2><div class="grid"><div class="card"><h3>Disk map</h3><p>See every folder sorted by size and drill down.</p></div><div class="card"><h3>Free up space</h3><p>Move what you don’t need to the Recycle Bin, safely.</p></div><div class="card"><h3>Protected</h3><p>Windows and program folders can’t be touched.</p></div><div class="card"><h3>Biggest files (Pro)</h3><p>The 100 largest files on your PC.</p></div><div class="card"><h3>File types (Pro)</h3><p>How much space videos, games and photos use.</p></div><div class="card"><h3>Old files (Pro)</h3><p>Big files you haven’t opened in over a year.</p></div></div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2>
+  <div class="plans">
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Free</h3><div class="price">€0</div><div class="note">Free forever</div><ul><li>Scan any drive or folder</li><li>Biggest folders, drill down</li><li>Move to Recycle Bin</li></ul><a class="btn g" href="/downloads/Kyrofix-Space-Setup.exe" download>Download free</a></div>
+    <div class="plan hl">{SALEBADGE("space")}<h3 style="margin-top:12px">Pro</h3><div class="price">€9.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €24.99 one-time, forever</div><ul><li>Everything in Free</li><li>Biggest 100 files</li><li>File types breakdown</li><li>Old big files finder</li><li>Export report (CSV)</li></ul>{buybtn("space")}</div>
+  </div>
+  {PRONOTE}
+</div></section>
+<section><div class="wrap"><p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p></div></section>
+<div class="band"><h2>Try Kyrofix Space free.</h2><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Space-Setup.exe" download>Download Kyrofix Space</a></div></div>''')
+
+page('products/kyrofix-shredder/index.html','Kyrofix Shredder — Free for Windows','Kyrofix Shredder for Windows 10 and 11: Delete files for good. Shredded files cannot be recovered. Free download.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Shredder</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-shredder/icon.png" alt="" width="56" height="56"></div>
+  <span class="badge free">Free download · Windows 10 / 11</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Shredder</h1>
+  <p class="lead">When you delete a file, it can often be brought back with recovery tools. Kyrofix Shredder overwrites the file first, so it is gone for good. Ideal before selling or giving away a PC.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Shredder-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No admin rights needed</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-shredder/s1.jpg" alt="Kyrofix Shredder" width="1100" height="740"></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>What it does</h2><div class="grid"><div class="card"><h3>Shred files & folders</h3><p>Add anything and shred it in one click.</p></div><div class="card"><h3>Safe by design</h3><p>Windows, program folders and your main folders are protected.</p></div><div class="card"><h3>3 & 7 passes (Pro)</h3><p>Overwrite several times for maximum security.</p></div><div class="card"><h3>Recycle Bin (Pro)</h3><p>Shred everything you already deleted.</p></div><div class="card"><h3>Wipe free space (Pro)</h3><p>Make old deleted files unrecoverable.</p></div><div class="card"><h3>Right-click menu (Pro)</h3><p>"Shred with Kyrofix" in Explorer.</p></div></div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2>
+  <div class="plans">
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Free</h3><div class="price">€0</div><div class="note">Free forever</div><ul><li>Shred any files and folders</li><li>Quick 1-pass shredding</li><li>System folders protected</li></ul><a class="btn g" href="/downloads/Kyrofix-Shredder-Setup.exe" download>Download free</a></div>
+    <div class="plan hl">{SALEBADGE("shredder")}<h3 style="margin-top:12px">Pro</h3><div class="price">€9.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €24.99 one-time, forever</div><ul><li>Everything in Free</li><li>3 and 7-pass shredding</li><li>Shred the Recycle Bin</li><li>Wipe free space</li><li>Right-click menu</li></ul>{buybtn("shredder")}</div>
+  </div>
+  {PRONOTE}
+</div></section>
+<section><div class="wrap"><p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p></div></section>
+<div class="band"><h2>Try Kyrofix Shredder free.</h2><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Shredder-Setup.exe" download>Download Kyrofix Shredder</a></div></div>''')
+
+page('products/kyrofix-photo-cleaner/index.html','Kyrofix Photo Cleaner — Free for Windows','Kyrofix Photo Cleaner for Windows 10 and 11: Find duplicate, similar and blurry photos and free up space. Free download.',f'''
+<section class="hero"><div class="wrap">
+  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Photo Cleaner</p>
+  <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-photo-cleaner/icon.png" alt="" width="56" height="56"></div>
+  <span class="badge free">Free download · Windows 10 / 11</span>
+  <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Photo Cleaner</h1>
+  <p class="lead">Thousands of photos, the same picture saved three times, ten shots of the same sunset. Kyrofix Photo Cleaner finds them, keeps the best one and clears the rest.</p>
+  <div class="cta"><a class="btn p" href="/downloads/Kyrofix-Photo-Cleaner-Setup.exe" download>Download free</a><a class="btn g" href="#plans">Free vs Pro</a></div>
+  <div class="meta" style="margin-top:22px"><span>Version 1.0.0</span><span>Windows 10 / 11, 64-bit</span><span>No admin rights needed</span></div>
+  <div class="shot" style="margin-top:34px"><img src="/img/kyrofix-photo-cleaner/s1.jpg" alt="Kyrofix Photo Cleaner" width="1100" height="740"></div>
+</div></section>
+<section class="alt"><div class="wrap"><h2>What it does</h2><div class="grid"><div class="card"><h3>Exact duplicates</h3><p>Finds copies of the same photo anywhere you choose.</p></div><div class="card"><h3>Keeps the best</h3><p>Picks the highest quality copy automatically.</p></div><div class="card"><h3>Nothing lost</h3><p>Everything goes to the Recycle Bin.</p></div><div class="card"><h3>Similar shots (Pro)</h3><p>Bursts and near-identical photos.</p></div><div class="card"><h3>Blurry photos (Pro)</h3><p>Out-of-focus and shaken pictures.</p></div><div class="card"><h3>Private</h3><p>Your photos never leave your PC.</p></div></div></div></section>
+<section class="alt" id="plans"><div class="wrap"><h2>Free vs Pro</h2>
+  <div class="plans">
+    <div class="plan"><span class="badge free">Free</span><h3 style="margin-top:12px">Free</h3><div class="price">€0</div><div class="note">Free forever</div><ul><li>Find exact duplicate photos</li><li>Keeps the best copy</li><li>Everything to the Recycle Bin</li></ul><a class="btn g" href="/downloads/Kyrofix-Photo-Cleaner-Setup.exe" download>Download free</a></div>
+    <div class="plan hl">{SALEBADGE("photo")}<h3 style="margin-top:12px">Pro</h3><div class="price">€9.99<small style="font-size:16px;color:var(--mut)"> / year</small></div><div class="note">Up to 3 PCs · or €24.99 one-time, forever</div><ul><li>Everything in Free</li><li>Similar photos (bursts, re-saves)</li><li>Blurry photo finder</li><li>Auto-picks the best shot</li></ul>{buybtn("photo")}</div>
+  </div>
+  {PRONOTE}
+</div></section>
+<section><div class="wrap"><p class="updated">Windows may show a SmartScreen warning for new apps: click "More info" then "Run anyway".</p></div></section>
+<div class="band"><h2>Try Kyrofix Photo Cleaner free.</h2><div class="cta"><a class="btn p" href="/downloads/Kyrofix-Photo-Cleaner-Setup.exe" download>Download Kyrofix Photo Cleaner</a></div></div>''')
+
 # Activate: exchange a Gumroad licence key for a Kyrofix key
 page('activate/index.html','Get your Kyrofix key — Halewood Systems','Bought Kyrofix Pro? Paste the licence key from your Gumroad receipt to get your Kyrofix key.',f'''
 <section class="hero"><div class="wrap" style="max-width:720px">
@@ -409,6 +479,9 @@ page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova an
       <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99 / year or €49.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['driver'] else '<span class="badge free">Free available</span>'}</td></tr>
       <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['cleaner'] else '<span class="badge free">Free available</span>'}</td></tr>
       <tr><td><b>Kyrofix Backup</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['backup'] else '<span class="badge free">Free available</span>'}</td></tr>
+      <tr><td><b>Kyrofix Space</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['space'] else '<span class="badge free">Free available</span>'}</td></tr>
+      <tr><td><b>Kyrofix Shredder</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['shredder'] else '<span class="badge free">Free available</span>'}</td></tr>
+      <tr><td><b>Kyrofix Photo Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['photo'] else '<span class="badge free">Free available</span>'}</td></tr>
       <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
     </tbody></table></div>
   <h2 style="margin-top:64px;font-size:28px">Questions</h2>

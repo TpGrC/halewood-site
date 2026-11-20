@@ -29,7 +29,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=10">
+<link rel="stylesheet" href="/assets/site.css?v=11">
 </head>
 <body>
 <header id="nav"></header>
@@ -131,7 +131,11 @@ def enhance(path,body):
         shot=sm.group(0).strip().replace(' style="margin-top:34px"','');left=hero.replace(sm.group(0),'')
     else:
         im=next((f'/img/{slug}/{n}' for n in ('s1.jpg','play.jpg') if os.path.exists(os.path.join(R,'img',slug,n))),None)
-        shot=f'<div class="pphone"><img src="{im}" alt="{n} on a phone" width="390" height="844"></div>' if im else '';left=hero
+        if os.path.exists(os.path.join(R,'img',slug,'play.mp4')):
+            shot=f'<div class="pphone"><video src="/img/{slug}/play.mp4" poster="/img/{slug}/poster.jpg" autoplay muted loop playsinline width="360" height="780" aria-label="{n} being played"></video></div>'
+        else:
+            shot=f'<div class="pphone"><img src="{im}" alt="{n} on a phone" width="390" height="844"></div>' if im else ''
+        left=hero
     if kf:
         ver=re.search(r'Version ([0-9.]+)',left);ver=ver.group(1) if ver else '1.0.0'
         box=f'<div class="dl"><div><b>{url.split("/")[-1]}</b><span>{_size(url)} · version {ver} · {pl}, 64-bit</span></div><span class="dlnote">Installs in under a minute. Remove it any time in Windows Settings.</span></div>'

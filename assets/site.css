@@ -217,3 +217,4 @@ a.card,.card{transition:border-color .2s,box-shadow .2s,transform .2s}a.card:hov
 .stage .phone{animation:rise .7s .45s cubic-bezier(.2,.7,.2,1) both}
 @media(max-width:900px){.show{grid-template-columns:minmax(0,1fr)}.show .st{padding:30px 26px 0}.kfa{height:250px}.kfa img{width:82%}.kfa img:first-child{top:20px}.kfa img:last-child{top:70px}.pair{grid-template-columns:minmax(0,1fr)}.pair .show{min-height:380px}}
 @media(prefers-reduced-motion:reduce){.stage .win,.stage .wx,.stage .phone{animation:none}}
+.pphone video{display:block;width:100%;height:auto;border-radius:30px;background:#000}

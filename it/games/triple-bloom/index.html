@@ -3,8 +3,8 @@
 <html lang="it"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
-<title>Triple Bloom — Tile Match Puzzle</title>
-<meta content="Tap tiles, match three of a kind and clear the garden. A relaxing tile-matching puzzle with endless levels. Free by Halewood Systems." name="description"/>
+<title>Triple Bloom — Puzzle di tessere</title>
+<meta content="Tocca le tessere, abbina tre uguali e libera il giardino. Un puzzle rilassante con livelli infiniti. Gratis da Halewood Systems." name="description"/>
 <meta content="#1f4d3a" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/><link href="icon-192.png" rel="icon"/><link href="icon-192.png" rel="apple-touch-icon"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
@@ -49,34 +49,34 @@ body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(r
 </style>
 <script async="" src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
 <link href="https://halewoodsystems.com/games/triple-bloom/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/triple-bloom/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/triple-bloom/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/triple-bloom/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/triple-bloom/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/triple-bloom/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/triple-bloom/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/triple-bloom/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/triple-bloom/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/triple-bloom/" hreflang="x-default" rel="alternate"/></head><body>
-<div class="top" id="top" style="display:none"><button aria-label="Menu" class="ib" id="homeB">☰</button><div class="lv"><small id="lvSub">Garden</small><span id="lvN">Level 1</span></div><div class="coin"><i></i><span id="coins">0</span></div></div>
+<div class="top" id="top" style="display:none"><button aria-label="Menu" class="ib" id="homeB">☰</button><div class="lv"><small id="lvSub">Giardino</small><span id="lvN">Livello 1</span></div><div class="coin"><i></i><span id="coins">0</span></div></div>
 <div id="board"></div>
 <div class="tray" id="tray" style="display:none"></div>
 <div class="bar" id="bar" style="display:none">
-<button aria-label="Undo" id="undoB">↶<small>20</small></button>
-<button aria-label="Return three tiles" id="backB">⤴<small>40</small></button>
-<button aria-label="Shuffle" id="shufB">🔀<small>30</small></button>
+<button aria-label="Annulla" id="undoB">↶<small>20</small></button>
+<button aria-label="Restituisci tre tessere" id="backB">⤴<small>40</small></button>
+<button aria-label="Mescola" id="shufB">🔀<small>30</small></button>
 </div>
 <div class="toast" id="toast"></div>
 <div class="ov on" id="menu"><div class="card">
-<div class="logo">TRIPLE<br/><em>BLOOM</em></div><div class="tag">Tap tiles. Match three. Clear the garden.</div>
-<button class="big" id="playB">PLAY</button>
-<button class="big gh" id="dailyB">Daily bonus</button>
-<button class="big gh" id="setB">Settings</button>
-<div class="sm">by Halewood Systems</div>
+<div class="logo">TRIPLE<br/><em>BLOOM</em></div><div class="tag">Tocca le tessere. Abbinane tre. Libera il giardino.</div>
+<button class="big" id="playB">GIOCA</button>
+<button class="big gh" id="dailyB">Bonus del giorno</button>
+<button class="big gh" id="setB">Impostazioni</button>
+<div class="sm">di Halewood Systems</div>
 </div></div>
-<div class="ov" id="win"><div class="card"><div class="logo" style="font-size:40px">IN FULL<br/><em>BLOOM!</em></div><div class="stars" id="wStars">★★★</div><div class="tag" id="wInfo"></div>
-<button class="big" id="nextB">NEXT LEVEL</button><button class="big alt" id="dblB">▶ Watch ad · coins ×3</button></div></div>
-<div class="ov" id="lose"><div class="card"><div class="logo" style="font-size:40px">TRAY<br/><em>FULL!</em></div><div class="tag">So close! Clear 3 tiles and keep going?</div>
-<button class="big alt" id="contB">▶ Watch ad · Continue</button><button class="big" id="retryB">Try again</button><button class="big gh" id="loseHome">Menu</button></div></div>
+<div class="ov" id="win"><div class="card"><div class="logo" style="font-size:40px">IN PIENA<br/><em>FIORITURA!</em></div><div class="stars" id="wStars">★★★</div><div class="tag" id="wInfo"></div>
+<button class="big" id="nextB">LIVELLO SUCCESSIVO</button><button class="big alt" id="dblB">▶ Guarda pubblicità · monete ×3</button></div></div>
+<div class="ov" id="lose"><div class="card"><div class="logo" style="font-size:40px">VASSOIO<br/><em>PIENO!</em></div><div class="tag">Per poco! Togliamo 3 tessere e continui?</div>
+<button class="big alt" id="contB">▶ Guarda pubblicità · Continua</button><button class="big" id="retryB">Riprova</button><button class="big gh" id="loseHome">Menu</button></div></div>
 <div class="ov" id="sets"><div class="card">
-<div class="logo" style="font-size:36px">SETTINGS</div>
+<div class="logo" style="font-size:36px">IMPOSTAZIONI</div>
 <div class="row">Sound <button class="sw" id="sSnd"></button></div>
 <div class="row">Vibration <button class="sw" id="sVib"></button></div>
-<button class="big gh" id="setBack">Back</button>
+<button class="big gh" id="setBack">Indietro</button>
 <div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · Triple Bloom v1.0</div>
 </div></div>
-<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Pubblicità</div><div class="tag" id="adT">Caricamento…</div></div></div>
 <script>
 'use strict';
 const $=s=>document.querySelector(s);

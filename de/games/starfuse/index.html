@@ -3,8 +3,8 @@
 <html lang="de"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
-<title>Starfuse — Merge the Cosmos</title>
-<meta content="Drop planets, merge matching ones and grow them into stars and black holes. A free, relaxing and addictive space puzzle by Halewood Systems." name="description"/>
+<title>Starfuse — Verschmelze den Kosmos</title>
+<meta content="Lass Planeten fallen, verschmelze gleiche und lass sie zu Sternen und Schwarzen Löchern wachsen. Ein kostenloses, entspannendes Weltraum-Puzzle von Halewood Systems." name="description"/>
 <meta content="#070816" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/>
 <link href="icon-192.png" rel="icon"/>
@@ -57,62 +57,62 @@ canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
 <link href="https://halewoodsystems.com/games/starfuse/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/starfuse/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/starfuse/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/starfuse/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/starfuse/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/starfuse/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/starfuse/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/starfuse/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/starfuse/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/starfuse/" hreflang="x-default" rel="alternate"/></head><body>
 <canvas id="c"></canvas>
 <div class="hud" id="hud" style="display:none">
-<div class="box sc"><span>Score</span><b id="score">0</b><span id="bestL">Best 0</span></div>
+<div class="box sc"><span>Punkte</span><b id="score">0</b><span id="bestL">Rekord 0</span></div>
 <div class="box goal" id="goalBox" style="display:none"><span class="lbl" id="gLvl">Level 1</span><b id="gTxt"></b><span class="lbl" id="gDrops"></span></div>
 <div class="rt"><div class="box coin"><i></i><span id="coins">0</span></div><button aria-label="Pause" class="ib" id="pauseB">❚❚</button></div>
 </div>
 <div class="pw" id="pw" style="display:none">
-<button aria-label="Shake" id="pShake">🌀<small>50</small></button>
-<button aria-label="Remove smallest" id="pPop">💥<small>60</small></button>
-<button aria-label="Swap next" id="pSwap">🔄<small>30</small></button>
+<button aria-label="Schütteln" id="pShake">🌀<small>50</small></button>
+<button aria-label="Kleinste entfernen" id="pPop">💥<small>60</small></button>
+<button aria-label="Nächsten tauschen" id="pSwap">🔄<small>30</small></button>
 </div>
 <div class="toast" id="toast"></div>
 <div class="ov on" id="menu"><div class="card">
-<div class="logo">STARFUSE</div><div class="tag">Merge planets. Grow stars. Make a black hole.</div>
-<div class="stats"><div class="box"><span class="lbl">Best</span><b id="mBest">0</b></div><div class="box"><span class="lbl">Coins</span><b id="mCoins">0</b></div></div>
-<button class="big" id="lvlB">LEVELS</button>
-<button class="big alt" id="playB" style="background:linear-gradient(180deg,#d6c8ff,#8a74ff);box-shadow:0 8px 30px #8a74ff55,inset 0 -3px 0 #0002">ENDLESS</button>
-<button class="big gh" id="dailyB">Daily bonus</button>
-<button class="big gh" id="setB">Settings</button>
+<div class="logo">STARFUSE</div><div class="tag">Planeten verschmelzen. Sterne wachsen lassen. Ein Schwarzes Loch erschaffen.</div>
+<div class="stats"><div class="box"><span class="lbl">Rekord</span><b id="mBest">0</b></div><div class="box"><span class="lbl">Münzen</span><b id="mCoins">0</b></div></div>
+<button class="big" id="lvlB">LEVEL</button>
+<button class="big alt" id="playB" style="background:linear-gradient(180deg,#d6c8ff,#8a74ff);box-shadow:0 8px 30px #8a74ff55,inset 0 -3px 0 #0002">ENDLOS</button>
+<button class="big gh" id="dailyB">Tagesbonus</button>
+<button class="big gh" id="setB">Einstellungen</button>
 <div class="ladder" id="ladder"></div>
-<div class="sm">by Halewood Systems</div>
+<div class="sm">von Halewood Systems</div>
 </div></div>
 <div class="ov" id="over"><div class="card">
-<div class="logo" style="font-size:40px">COSMOS FULL</div>
-<div class="new" id="newBest" style="display:none">NEW BEST!</div>
-<div class="stats"><div class="box"><span class="lbl">Score</span><b id="oScore">0</b></div><div class="box"><span class="lbl">Best</span><b id="oBest">0</b></div></div>
+<div class="logo" style="font-size:40px">KOSMOS VOLL</div>
+<div class="new" id="newBest" style="display:none">NEUER REKORD!</div>
+<div class="stats"><div class="box"><span class="lbl">Punkte</span><b id="oScore">0</b></div><div class="box"><span class="lbl">Rekord</span><b id="oBest">0</b></div></div>
 <div class="tag" id="oCoins"></div>
-<button class="big alt" id="contB">▶ Watch ad · Continue</button>
-<button class="big" id="againB">PLAY AGAIN</button>
-<button class="big gh" id="homeB">Menu</button>
+<button class="big alt" id="contB">▶ Werbung ansehen · Weiter</button>
+<button class="big" id="againB">NOCHMAL</button>
+<button class="big gh" id="homeB">Menü</button>
 </div></div>
 <div class="ov" id="pause"><div class="card">
-<div class="logo" style="font-size:40px">PAUSED</div>
-<button class="big" id="resB">RESUME</button>
-<button class="big gh" id="restartB">Restart</button>
-<button class="big gh" id="pHomeB">Menu</button>
+<div class="logo" style="font-size:40px">PAUSE</div>
+<button class="big" id="resB">WEITER</button>
+<button class="big gh" id="restartB">Neu starten</button>
+<button class="big gh" id="pHomeB">Menü</button>
 </div></div>
 <div class="ov" id="sets"><div class="card" style="text-align:left">
-<div class="logo" style="font-size:36px;text-align:center">SETTINGS</div>
+<div class="logo" style="font-size:36px;text-align:center">EINSTELLUNGEN</div>
 <div class="row">Sound <button class="sw" id="sSnd"></button></div>
 <div class="row">Vibration <button class="sw" id="sVib"></button></div>
 <div class="row">Show next planet <button class="sw" id="sNext"></button></div>
-<button class="big gh" id="setBack">Back</button>
-<div class="sm" style="text-align:center"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · Starfuse v1.0</div>
+<button class="big gh" id="setBack">Zurück</button>
+<div class="sm" style="text-align:center"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Datenschutz</a> · Starfuse v1.0</div>
 </div></div>
 <div class="ov" id="lvls"><div class="card">
-<div class="logo" style="font-size:36px">LEVELS</div><div class="tag" id="lStars" style="margin-bottom:0"></div>
+<div class="logo" style="font-size:36px">LEVEL</div><div class="tag" id="lStars" style="margin-bottom:0"></div>
 <div class="lgrid" id="lgrid"></div>
-<button class="big gh" id="lBack">Back</button>
+<button class="big gh" id="lBack">Zurück</button>
 </div></div>
 <div class="ov" id="win"><div class="card">
-<div class="logo" id="wTitle" style="font-size:40px">LEVEL CLEAR!</div>
+<div class="logo" id="wTitle" style="font-size:40px">LEVEL GESCHAFFT!</div>
 <div class="stars3" id="wStars">★★★</div>
 <div class="tag" id="wInfo"></div>
-<button class="big" id="wNext">NEXT LEVEL</button>
-<button class="big gh" id="wList">Levels</button>
+<button class="big" id="wNext">NÄCHSTES LEVEL</button>
+<button class="big gh" id="wList">Level</button>
 </div></div>
-<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Werbung</div><div class="tag" id="adT">Lädt…</div></div></div>
 <script>
 'use strict';
 /* ============ data ============ */

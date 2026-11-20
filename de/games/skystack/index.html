@@ -3,8 +3,8 @@
 <html lang="de"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
-<title>Skystack — One-Tap Tower</title>
-<meta content="Tap to stack the blocks as high as you can. Perfect drops grow your tower back. A free one-tap game by Halewood Systems." name="description"/>
+<title>Skystack — Turm mit einem Tipp</title>
+<meta content="Tippe, um die Blöcke so hoch wie möglich zu stapeln. Perfekte Würfe lassen den Turm wieder wachsen. Ein kostenloses Ein-Tipp-Spiel von Halewood Systems." name="description"/>
 <meta content="#2a2f6b" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/><link href="icon-192.png" rel="icon"/><link href="icon-192.png" rel="apple-touch-icon"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
@@ -34,28 +34,28 @@ canvas{position:fixed;inset:0;width:100%;height:100%}
 <link href="https://halewoodsystems.com/games/skystack/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/skystack/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/skystack/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/skystack/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/skystack/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/skystack/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/skystack/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/skystack/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/skystack/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/skystack/" hreflang="x-default" rel="alternate"/></head><body>
 <canvas id="c"></canvas>
 <div class="score" id="score" style="display:none">0</div>
-<div class="combo" id="combo">PERFECT</div>
+<div class="combo" id="combo">PERFEKT</div>
 <div class="coin"><i></i><span id="coins">0</span></div>
-<div class="tap" id="tapHint">TAP TO START</div>
+<div class="tap" id="tapHint">ZUM STARTEN TIPPEN</div>
 <div class="ov on" id="menu" style="align-items:flex-start;padding-top:18vh;pointer-events:none"><div class="card" style="pointer-events:auto">
-<div class="logo">SKY<br/>STACK</div><div class="tag">Tap to drop. Stack as high as you can.</div>
-<div class="stats"><div><span>Best</span><b id="mBest">0</b></div><div><span>Games</span><b id="mGames">0</b></div></div>
-<button class="big gh" id="skinB" style="margin-top:18px">🎨 Colours</button>
+<div class="logo">SKY<br/>STACK</div><div class="tag">Tippen zum Fallenlassen. So hoch stapeln wie möglich.</div>
+<div class="stats"><div><span>Rekord</span><b id="mBest">0</b></div><div><span>Spiele</span><b id="mGames">0</b></div></div>
+<button class="big gh" id="skinB" style="margin-top:18px">🎨 Farben</button>
 </div></div>
 <div class="ov" id="over" style="background:rgba(0,0,0,.25)"><div class="card">
-<div class="logo" id="oT" style="font-size:44px">GAME OVER</div>
-<div class="stats" style="margin-top:14px"><div><span>Score</span><b id="oS">0</b></div><div><span>Best</span><b id="oB">0</b></div></div>
+<div class="logo" id="oT" style="font-size:44px">SPIEL VORBEI</div>
+<div class="stats" style="margin-top:14px"><div><span>Punkte</span><b id="oS">0</b></div><div><span>Rekord</span><b id="oB">0</b></div></div>
 <div class="tag" id="oC"></div>
-<button class="big alt" id="contB">▶ Watch ad · Continue</button>
-<button class="big" id="againB">PLAY AGAIN</button>
-<button class="big gh" id="dblB">▶ Watch ad · coins ×3</button>
+<button class="big alt" id="contB">▶ Werbung ansehen · Weiter</button>
+<button class="big" id="againB">NOCHMAL</button>
+<button class="big gh" id="dblB">▶ Werbung ansehen · Münzen ×3</button>
 </div></div>
 <div class="ov" id="skins" style="background:rgba(0,0,0,.4)"><div class="card">
-<div class="logo" style="font-size:36px">COLOURS</div><div class="skins" id="skinGrid"></div>
-<button class="big gh" id="skinBack">Back</button>
-<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · <span id="sndT" style="cursor:pointer;text-decoration:underline">Sound: on</span> · Skystack v1.0</div>
+<div class="logo" style="font-size:36px">FARBEN</div><div class="skins" id="skinGrid"></div>
+<button class="big gh" id="skinBack">Zurück</button>
+<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Datenschutz</a> · <span id="sndT" style="cursor:pointer;text-decoration:underline">Ton: an</span> · Skystack v1.0</div>
 </div></div>
-<div class="ov" id="adOv" style="background:rgba(0,0,0,.6)"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<div class="ov" id="adOv" style="background:rgba(0,0,0,.6)"><div class="card"><div class="logo" style="font-size:28px">Werbung</div><div class="tag" id="adT">Lädt…</div></div></div>
 <script>
 'use strict';
 const $=s=>document.querySelector(s);

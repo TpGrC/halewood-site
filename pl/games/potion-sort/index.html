@@ -3,8 +3,8 @@
 <html lang="pl"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
-<title>Potion Sort — Colour Puzzle</title>
-<meta content="Pour the potions until every bottle holds one colour. Thousands of relaxing levels. Free by Halewood Systems." name="description"/>
+<title>Potion Sort — Kolorowa łamigłówka</title>
+<meta content="Przelewaj eliksiry, aż w każdej butelce będzie jeden kolor. Tysiące relaksujących poziomów. Za darmo od Halewood Systems." name="description"/>
 <meta content="#1a0f2e" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/><link href="icon-192.png" rel="icon"/><link href="icon-192.png" rel="apple-touch-icon"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
@@ -40,34 +40,34 @@ canvas{position:fixed;inset:0;width:100%;height:100%}
 <script async="" src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
 <link href="https://halewoodsystems.com/games/potion-sort/" hreflang="en" rel="alternate"/><link href="https://halewoodsystems.com/el/games/potion-sort/" hreflang="el" rel="alternate"/><link href="https://halewoodsystems.com/de/games/potion-sort/" hreflang="de" rel="alternate"/><link href="https://halewoodsystems.com/es/games/potion-sort/" hreflang="es" rel="alternate"/><link href="https://halewoodsystems.com/fr/games/potion-sort/" hreflang="fr" rel="alternate"/><link href="https://halewoodsystems.com/it/games/potion-sort/" hreflang="it" rel="alternate"/><link href="https://halewoodsystems.com/pl/games/potion-sort/" hreflang="pl" rel="alternate"/><link href="https://halewoodsystems.com/pt/games/potion-sort/" hreflang="pt" rel="alternate"/><link href="https://halewoodsystems.com/ru/games/potion-sort/" hreflang="ru" rel="alternate"/><link href="https://halewoodsystems.com/games/potion-sort/" hreflang="x-default" rel="alternate"/></head><body>
 <canvas id="c"></canvas>
-<div class="top" id="top" style="display:none"><button aria-label="Menu" class="ib" id="homeB">☰</button><div class="lv" style="text-align:center"><small id="lvTier">Apprentice</small><span id="lvN">Level 1</span></div><div class="coin"><i></i><span id="coins">0</span></div></div>
+<div class="top" id="top" style="display:none"><button aria-label="Menu" class="ib" id="homeB">☰</button><div class="lv" style="text-align:center"><small id="lvTier">Uczeń</small><span id="lvN">Poziom 1</span></div><div class="coin"><i></i><span id="coins">0</span></div></div>
 <div class="bar" id="bar" style="display:none">
-<button aria-label="Undo" id="undoB">↶<small>5</small></button>
-<button aria-label="Restart" id="restB">⟳</button>
-<button aria-label="Extra bottle" id="tubeB">🧪<small>AD</small></button>
+<button aria-label="Cofnij" id="undoB">↶<small>5</small></button>
+<button aria-label="Od nowa" id="restB">⟳</button>
+<button aria-label="Dodatkowa butelka" id="tubeB">🧪<small>REKLAMA</small></button>
 </div>
 <div class="toast" id="toast"></div>
 <div class="ov on" id="menu"><div class="card">
-<div class="logo">POTION<br/>SORT</div><div class="tag">Pour until every bottle holds one colour.</div>
-<button class="big" id="playB">PLAY</button>
-<button class="big gh" id="dailyB">Daily bonus</button>
-<button class="big gh" id="setB">Settings</button>
-<div class="sm">by Halewood Systems</div>
+<div class="logo">POTION<br/>SORT</div><div class="tag">Przelewaj, aż w każdej butelce będzie jeden kolor.</div>
+<button class="big" id="playB">GRAJ</button>
+<button class="big gh" id="dailyB">Dzienny bonus</button>
+<button class="big gh" id="setB">Ustawienia</button>
+<div class="sm">od Halewood Systems</div>
 </div></div>
 <div class="ov" id="win"><div class="card">
-<div class="logo" style="font-size:40px">BREWED!</div><div class="tag" id="wInfo"></div>
-<button class="big" id="nextB">NEXT LEVEL</button>
-<button class="big alt" id="dblB">▶ Watch ad · coins ×3</button>
+<div class="logo" style="font-size:40px">GOTOWE!</div><div class="tag" id="wInfo"></div>
+<button class="big" id="nextB">NASTĘPNY POZIOM</button>
+<button class="big alt" id="dblB">▶ Obejrzyj reklamę · monety ×3</button>
 </div></div>
 <div class="ov" id="sets"><div class="card">
-<div class="logo" style="font-size:36px">SETTINGS</div>
+<div class="logo" style="font-size:36px">USTAWIENIA</div>
 <div class="row">Sound <button class="sw" id="sSnd"></button></div>
 <div class="row">Vibration <button class="sw" id="sVib"></button></div>
 <div class="row">Colour-blind symbols <button class="sw" id="sSym"></button></div>
-<button class="big gh" id="setBack">Back</button>
-<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Privacy</a> · Potion Sort v1.0</div>
+<button class="big gh" id="setBack">Wstecz</button>
+<div class="sm"><a href="https://halewoodsystems.com/legal/privacy/" rel="noopener" target="_blank">Prywatność</a> · Potion Sort v1.0</div>
 </div></div>
-<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Ad</div><div class="tag" id="adT">Loading…</div></div></div>
+<div class="ov" id="adOv"><div class="card"><div class="logo" style="font-size:28px">Reklama</div><div class="tag" id="adT">Ładowanie…</div></div></div>
 <script>
 'use strict';
 const $=s=>document.querySelector(s);

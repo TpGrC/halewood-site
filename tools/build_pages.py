@@ -230,7 +230,7 @@ page('games/index.html','Free games — Halewood Systems','Free puzzle and arcad
 <section><div class="wrap">'''+fam('gm','Puzzle','',['starfuse','potion','bloom','slipgate'])+fam('gm','Arcade','',['stack'])+'''</div></section>''')
 
 # Windrova
-page('products/windrova/index.html','Windrova — Live weather map for the whole world','Windrova: free live weather map with wind, rain, waves, satellite, hurricanes and ECMWF, GFS and GEM models. 23 languages.',f'''
+page('products/windrova/index.html','Windrova — Live weather map for the whole world','Windrova: free live weather map with wind, rain, waves, satellite, hurricanes and ECMWF, GFS and GEM models. 13 languages.',f'''
 <section class="hero"><div class="wrap feat">
   <div>
     <p class="crumb"><a href="/products/">Products</a> / Windrova</p>
@@ -238,7 +238,7 @@ page('products/windrova/index.html','Windrova — Live weather map for the whole
     <h1 style="font-size:clamp(38px,5vw,60px);margin-top:16px">Windrova</h1>
     <p class="lead">The whole world's weather, live. Wind, rain, waves and storms for any place on Earth, right in your browser.</p>
     <div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova, free →</a><span class="btn g off">📱 Mobile app coming soon</span></div>
-    <div class="meta" style="margin-top:22px"><span>Web (any browser)</span><span>23 languages</span><span>No account needed</span></div>
+    <div class="meta" style="margin-top:22px"><span>Web (any browser)</span><span>13 languages</span><span>No account needed</span></div>
   </div>
   <div class="shot"><img src="/img/windrova/hero.jpg" alt="Windrova wind map" width="1440" height="810"></div>
 </div></section>
@@ -254,7 +254,7 @@ page('products/windrova/index.html','Windrova — Live weather map for the whole
 <section><div class="wrap"><h2>Features</h2>
   <div class="grid two">
     <div><ul class="ticks"><li>Wind, gusts, temperature, rain, clouds, pressure, humidity</li><li>Sea waves and wave period</li><li>Thunderstorms, snow depth and isobars</li><li>Live satellite and satellite rain</li></ul></div>
-    <div><ul class="ticks"><li>Hurricanes, lightning, earthquakes and wildfires</li><li>10-day forecast and 48-hour chart for any place</li><li>"Best time for" planner: beach, sailing, kitesurf, hiking</li><li>Search any city in the world, in 23 languages</li></ul></div>
+    <div><ul class="ticks"><li>Hurricanes, lightning, earthquakes and wildfires</li><li>10-day forecast and 48-hour chart for any place</li><li>"Best time for" planner: beach, sailing, kitesurf, hiking</li><li>Search any city in the world, in 13 languages</li></ul></div>
   </div>
   <p class="updated">Weather data: MET Norway, ECMWF, NOAA, Environment Canada, EUMETSAT, NASA and others, under their open licences.</p>
 </div></section>
@@ -729,7 +729,7 @@ NEWS=[
   '''<p>No download, no account. Open a game and play. On your phone, add it to your home screen and it works offline.</p>
 <ul><li><a href="/products/starfuse/">Starfuse</a>: drop and merge planets until you make a black hole.</li><li><a href="/products/potion-sort/">Potion Sort</a>: pour until every bottle holds one colour.</li><li><a href="/products/triple-bloom/">Triple Bloom</a>: match three tiles to clear the garden.</li><li><a href="/products/skystack/">Skystack</a>: tap at the right moment to build a tower.</li><li><a href="/products/slipgate/">Slipgate</a>: slide every block out through its own gate. 200 levels.</li></ul>
 <p>Every puzzle level is checked by a computer before it ships, so it can always be solved.</p>'''),
- ('windrova-launch','10 November 2026','Windrova: the weather map for the whole world','Wind, rain, waves and three forecast models in one free map, in 23 languages.',
+ ('windrova-launch','10 November 2026','Windrova: the weather map for the whole world','Wind, rain, waves and three forecast models in one free map, in 13 languages.',
   '''<p><a href="/products/windrova/">Windrova</a> is a live weather map you can use anywhere in the world, for free and with no account.</p>
 <ul><li>Wind, rain, temperature, waves, clouds and satellite.</li><li>Three forecast models side by side: ECMWF, GFS and GEM.</li><li>An activity planner that tells you the best time to go out.</li></ul>
 <p>Open <a href="https://windrova.com" target="_blank" rel="noopener">windrova.com</a> on your phone and add it to your home screen. The Android app is on its way.</p>'''),

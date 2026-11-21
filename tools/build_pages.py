@@ -14,6 +14,25 @@ SALEBADGE=lambda k:'<span class="badge live">Pro</span>' if BUY[k] else '<span c
 PRONOTE='<p class="updated" style="text-align:center">One-time payment, no subscription. After buying you get your key at <a href="/activate/">halewoodsystems.com/activate</a>.</p>'
 KF_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>'
 SG_ICO='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M15 12h.01M18 13h.01"/></svg>'
+import json as _json
+def ldjson(path):
+    """Structured data so search engines understand the page."""
+    org={"@type":"Organization","name":"Halewood Systems","url":"https://halewoodsystems.com/","logo":"https://halewoodsystems.com/apple-touch-icon.png","sameAs":["https://www.youtube.com/@HalewoodSystems","https://windrova.com/"]}
+    if path=='index.html':
+        d={"@context":"https://schema.org","@graph":[org,{"@type":"WebSite","name":"Halewood Systems","url":"https://halewoodsystems.com/"}]}
+        return '<script type="application/ld+json">'+_json.dumps(d,ensure_ascii=False)+'</script>'
+    if 'CAT' not in globals(): return ''
+    for k,v in CAT.items():
+        if path=='products'+v[0][len('/products'):]+'index.html'.lstrip('/') or path==v[0].lstrip('/')+'index.html':
+            game=v[3].lower().startswith(('phone','browser','web')) or 'play' in v[7].lower()
+            win='Windows' in v[3]
+            d={"@context":"https://schema.org","@type":"SoftwareApplication","name":v[1],"description":v[2],
+               "url":"https://halewoodsystems.com"+v[0],"applicationCategory":"UtilitiesApplication" if win else ("WeatherApplication" if "windrova" in v[0] else "GameApplication"),
+               "operatingSystem":"Windows 10, Windows 11" if win else "Web, Android",
+               "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":org}
+            return '<script type="application/ld+json">'+_json.dumps(d,ensure_ascii=False)+'</script>'
+    return ''
+
 def page(path,title,desc,body):
     body=enhance(path,body) if 'enhance' in globals() else body
     if path.startswith('products/kyrofix'):  # one download place per page: the top of the page
@@ -33,6 +52,7 @@ def page(path,title,desc,body):
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css?v=14">
+{ldjson(path)}
 </head>
 <body>
 <header id="nav"></header>

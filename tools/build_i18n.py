@@ -19,13 +19,14 @@ def extract():
     json.dump(allu, open('tools/i18n/_en.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
     return allu
 
-def alternates(soup, u):
+def alternates(soup, u, lang=''):
     head = soup.head
     for l in head.find_all('link', rel='alternate'): l.decompose()
     for l in head.find_all('link', rel='canonical'): l.decompose()
     for code, pre in [('en', '')] + [(x, '/' + x) for x in LANGS]:
         head.append(soup.new_tag('link', rel='alternate', hreflang=code, href=SITE + pre + u))
     head.append(soup.new_tag('link', rel='alternate', hreflang='x-default', href=SITE + u))
+    head.append(soup.new_tag('link', rel='canonical', href=SITE + ('/' + lang if lang else '') + u))
 
 def build():
     src = json.load(open('tools/i18n/_en.json', encoding='utf-8'))
@@ -58,7 +59,7 @@ def build():
                 if h.startswith('/') and not h.startswith(KEEP) and not re.match(r'^/(%s)/' % '|'.join(LANGS), h):
                     a['href'] = '/' + lang + h
             s.html['lang'] = lang
-            u = url_of(f); alternates(s, u)
+            u = url_of(f); alternates(s, u, lang)
             out = os.path.join(lang, f); os.makedirs(os.path.dirname(out) or lang, exist_ok=True)
             open(out, 'w', encoding='utf-8').write(str(s)); urls.append('/' + lang + u)
     eng = [url_of(f) for f in pages() if f != '404.html']

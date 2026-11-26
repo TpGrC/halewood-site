@@ -4,7 +4,7 @@ LANGS=['el','de','es','fr','it','pl','pt','ru']
 BLOCK={'p','li','h1','h2','h3','h4','td','th','summary','figcaption','dt','dd','button','label','small'}
 INLINE_STANDALONE={'a','span','div'}
 def pages():
-    return [f for f in sorted(glob.glob('**/*.html',recursive=True)) if f.split('/')[0] not in LANGS+['tools','downloads','rechnung','e-rechnung'] and 'http-equiv="refresh"' not in open(f,encoding='utf-8').read(600)]
+    return [f for f in sorted(glob.glob('**/*.html',recursive=True)) if f.split('/')[0] not in LANGS+['tools','downloads','rechnung','e-rechnung'] and not f.startswith('google') and 'http-equiv="refresh"' not in open(f,encoding='utf-8').read(600)]
 def has_text(s): return bool(re.search(r'[A-Za-zΑ-Ω]{2}',s))
 def units(soup):
     """yield (kind, obj, text). kind: 'html' element innerHTML, 'attr' (el,attr)"""

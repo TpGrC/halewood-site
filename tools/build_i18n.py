@@ -64,8 +64,12 @@ def build():
             open(out, 'w', encoding='utf-8').write(str(s)); urls.append('/' + lang + u)
     eng = [url_of(f) for f in pages() if f != '404.html']
     open('sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + ''.join(f'<url><loc>{SITE}{u}</loc></url>\n' for u in eng + urls) + '</urlset>\n')
+        + ''.join(f'<url><loc>{SITE}{u}</loc></url>\n' for u in eng + urls + EXTRA_DE()) + '</urlset>\n')
     print('i18n ok:', len(LANGS), 'languages,', len(urls), 'pages')
+
+def EXTRA_DE():  # German-only E-Rechnung pages (not translated)
+    import glob as g
+    return ['/rechnung/'] + sorted('/' + os.path.dirname(f) + '/' for f in g.glob('e-rechnung/**/index.html', recursive=True))
 
 if __name__ == '__main__':
     build()

@@ -7,6 +7,7 @@
 <meta name="description" content="E-Rechnungen im XRechnung-Format erstellen, speichern und empfangene E-Rechnungen lesbar anzeigen. Für Selbstständige und kleine Unternehmen.">
 <meta name="theme-color" content="#0f1b2d">
 <link rel="icon" href="/favicon-48.png" type="image/png">
+<link rel="canonical" href="https://halewoodsystems.com/rechnung/">
 <style>
 :root{--bg:#f4f6fa;--card:#fff;--txt:#0f1b2d;--mut:#5b6678;--line:#e2e7ef;--acc:#1f5bff;--ok:#11875d;--bad:#c8323c}
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt)}
@@ -506,6 +507,7 @@ $('imp').onchange = e => { const f = e.target.files[0]; if (!f) return; const rd
 
 // ---------- start ----------
 loadSet(); fillCustPick(); resetInv(); applyLang(); checkSet(); renderLic();
+if (location.hash === '#view') document.querySelector('nav button[data-tab=view]').click();
 window.__erech = { buildXml, calc, parseInvoice, DB: () => DB };
 })();
 </script>

@@ -6,7 +6,7 @@ DON='https://buy.stripe.com/14AcMY4rr24U6Pqec0dUY02'
 MAIL='support@halewoodsystems.com'
 # Gumroad checkout links (fill in when the products exist); empty = "On sale soon"
 LIVE=False   # turn on once the Gumroad products are published
-G='https://thomasknot.gumroad.com/l/'
+G='https://halewoodsystems.gumroad.com/l/'
 BUY={k:(G+v if LIVE else '') for k,v in {'driver':'kyrofix-driver-updater-pro','cleaner':'kyrofix-cleaner-pro','backup':'kyrofix-backup-pro','space':'kyrofix-space-pro','shredder':'kyrofix-shredder-pro','photo':'kyrofix-photo-cleaner-pro'}.items()}
 def buybtn(k,label='Buy Pro'):
     return f'<a class="btn p" href="{BUY[k]}" target="_blank" rel="noopener">{label}</a>' if BUY[k] else '<span class="btn p off">On sale soon</span>'

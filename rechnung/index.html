@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halewood E-Rechnung — XRechnung einfach erstellen</title>
+<meta name="description" content="E-Rechnungen im XRechnung-Format erstellen, speichern und empfangene E-Rechnungen lesbar anzeigen. Für Selbstständige und kleine Unternehmen.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="icon" href="/favicon-48.png" type="image/png">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--txt:#0f1b2d;--mut:#5b6678;--line:#e2e7ef;--acc:#1f5bff;--ok:#11875d;--bad:#c8323c}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:#0f1b2d;color:#fff}header .w{display:flex;align-items:center;gap:18px;height:60px}
+header b{font-size:17px;letter-spacing:.3px}header b span{color:#7fb0ff}
+nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}nav button{background:none;border:0;color:#c9d4e6;font:inherit;padding:8px 12px;border-radius:8px;cursor:pointer}
+nav button.on,nav button:hover{background:#1e2d47;color:#fff}
+.lang{width:auto;margin:0;background:#1e2d47;color:#fff;border:0;border-radius:8px;padding:6px 8px;font:inherit}header b{white-space:nowrap}nav button{white-space:nowrap}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+main{padding:28px 0 60px}h1{font-size:24px;margin:0 0 6px}h2{font-size:17px;margin:0 0 12px}
+.lead{color:var(--mut);margin:0 0 22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+label{display:block;font-size:13px;color:var(--mut);margin-bottom:10px}
+input,select,textarea{display:block;width:100%;margin-top:4px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--txt);background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid #c9d8ff;border-color:var(--acc)}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:9px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.g{background:#fff;color:var(--txt);border:1px solid var(--line)}.btn.s{padding:6px 10px;font-size:13px}.btn.r{background:#fff;color:var(--bad);border:1px solid #f0c9cc}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:12px;color:var(--mut);font-weight:600;padding:6px 6px;border-bottom:1px solid var(--line)}
+td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,td select{margin:0}
+.num{text-align:right}.tot{margin-left:auto;max-width:320px}.tot div{display:flex;justify-content:space-between;padding:4px 0}.tot .big{font-weight:700;font-size:17px;border-top:1px solid var(--line);padding-top:8px}
+.msg{padding:10px 14px;border-radius:9px;margin:12px 0;font-size:14px}.msg.bad{background:#fdecee;color:var(--bad)}.msg.ok{background:#e6f6ef;color:var(--ok)}
+.hide{display:none!important}.mut{color:var(--mut);font-size:13px}
+.drop{border:2px dashed var(--line);border-radius:14px;padding:40px;text-align:center;color:var(--mut);cursor:pointer;background:#fff}.drop.on{border-color:var(--acc);background:#f0f4ff}
+.inv{background:#fff;border:1px solid var(--line);border-radius:14px;padding:32px}.inv h3{margin:0 0 4px}.inv .hd{display:flex;justify-content:space-between;gap:20px;margin-bottom:24px}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}header .w{height:auto;flex-wrap:wrap;padding:10px 20px}nav{margin-left:0}}
+@media print{header,.noprint,.lead,h1{display:none!important}body{background:#fff}main{padding:0}.inv{border:0;padding:0}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <b>Halewood <span>E-Rechnung</span></b>
+  <nav>
+    <button data-tab="new" class="on" data-t="tNew">Neue Rechnung</button>
+    <button data-tab="list" data-t="tList">Rechnungen</button>
+    <button data-tab="cust" data-t="tCust">Kunden</button>
+    <button data-tab="view" data-t="tView">E-Rechnung ansehen</button>
+    <button data-tab="set" data-t="tSet">Mein Unternehmen</button>
+  </nav>
+  <select class="lang" id="lang" aria-label="Sprache"><option value="de">DE</option><option value="en">EN</option></select>
+</div></header>
+
+<main class="w">
+
+<!-- NEW INVOICE -->
+<section id="new">
+  <h1 data-t="hNew">Neue Rechnung</h1>
+  <p class="lead" data-t="lNew">Füllen Sie die Rechnung aus und laden Sie sie als XRechnung (XML) herunter. Ihre Daten bleiben in diesem Browser.</p>
+  <div id="needset" class="msg bad hide" data-t="needSet">Bitte zuerst unter „Mein Unternehmen“ Ihre Firmendaten eintragen.</div>
+  <div class="g2">
+    <div class="card">
+      <h2 data-t="cust">Kunde</h2>
+      <label><span data-t="pickCust">Gespeicherten Kunden wählen</span><select id="custPick"></select></label>
+      <label><span data-t="cName">Firmenname</span> *<input id="b_name"></label>
+      <label><span data-t="street">Straße und Hausnummer</span> *<input id="b_street"></label>
+      <div class="g3"><label><span data-t="zip">PLZ</span> *<input id="b_zip"></label><label style="grid-column:span 2"><span data-t="city">Ort</span> *<input id="b_city"></label></div>
+      <div class="g2"><label><span data-t="country">Land</span> *<select id="b_country"></select></label><label><span data-t="email">E-Mail</span> *<input id="b_email" type="email"></label></div>
+      <label><span data-t="vatOpt">USt-IdNr. des Kunden (optional)</span><input id="b_vat"></label>
+      <label class="row" style="color:var(--txt)"><input type="checkbox" id="b_save" style="width:auto;margin:0"> <span data-t="saveCust">Kunden speichern</span></label>
+    </div>
+    <div class="card">
+      <h2 data-t="invData">Rechnungsdaten</h2>
+      <div class="g2"><label><span data-t="invNo">Rechnungsnummer</span> *<input id="i_no"></label><label><span data-t="invDate">Rechnungsdatum</span> *<input id="i_date" type="date"></label></div>
+      <div class="g2"><label><span data-t="delDate">Leistungsdatum</span> *<input id="i_deliv" type="date"></label><label><span data-t="payDays">Zahlungsziel (Tage)</span><input id="i_days" type="number" min="0" value="14"></label></div>
+      <label><span data-t="buyerRef">Käuferreferenz / Leitweg-ID</span> *<input id="i_ref"><span class="mut" data-t="buyerRefHint">Pflicht in der XRechnung. Bei Behörden die Leitweg-ID, sonst z. B. Ihre Kundennummer oder Bestellnummer.</span></label>
+      <label><span data-t="note">Hinweis auf der Rechnung (optional)</span><textarea id="i_note" rows="2"></textarea></label>
+    </div>
+  </div>
+  <div class="card">
+    <h2 data-t="items">Positionen</h2>
+    <table><thead><tr><th style="width:42%" data-t="desc">Beschreibung</th><th data-t="qty">Menge</th><th data-t="unit">Einheit</th><th data-t="price">Einzelpreis netto €</th><th data-t="vat">USt %</th><th class="num" data-t="net">Netto €</th><th></th></tr></thead><tbody id="lines"></tbody></table>
+    <div class="row" style="margin-top:12px"><button class="btn g s" id="addLine" data-t="addLine">+ Position</button></div>
+    <div class="tot" id="totals"></div>
+  </div>
+  <div id="errs"></div>
+  <div class="row noprint">
+    <button class="btn" id="dlXml" data-t="dlXml">XRechnung herunterladen (XML)</button>
+    <button class="btn g" id="preview" data-t="preview">Ansehen / Drucken (PDF)</button>
+    <button class="btn g" id="resetInv" data-t="resetInv">Neue leere Rechnung</button>
+  </div>
+  <p class="mut" style="margin-top:14px" data-t="pdfNote">Hinweis: Eine normale PDF-Datei ist keine E-Rechnung. Senden Sie Ihrem Kunden die XML-Datei (gerne zusammen mit der PDF).</p>
+</section>
+
+<!-- LIST -->
+<section id="list" class="hide">
+  <h1 data-t="tList">Rechnungen</h1>
+  <p class="lead" data-t="lList">Alle Rechnungen, die Sie hier erstellt haben.</p>
+  <div class="card"><table><thead><tr><th data-t="invNo">Rechnungsnummer</th><th data-t="invDate">Rechnungsdatum</th><th data-t="cust">Kunde</th><th class="num" data-t="gross">Brutto €</th><th></th></tr></thead><tbody id="invList"></tbody></table></div>
+</section>
+
+<!-- CUSTOMERS -->
+<section id="cust" class="hide">
+  <h1 data-t="tCust">Kunden</h1>
+  <p class="lead" data-t="lCust">Gespeicherte Kunden. Neue Kunden speichern Sie beim Erstellen einer Rechnung.</p>
+  <div class="card"><table><thead><tr><th data-t="cName">Firmenname</th><th data-t="city">Ort</th><th data-t="email">E-Mail</th><th></th></tr></thead><tbody id="custList"></tbody></table></div>
+</section>
+
+<!-- VIEWER -->
+<section id="view" class="hide">
+  <h1 data-t="tView">E-Rechnung ansehen</h1>
+  <p class="lead" data-t="lView">Sie haben eine XRechnung oder ZUGFeRD-Rechnung (XML) bekommen und können sie nicht lesen? Ziehen Sie die Datei hierher. Die Datei wird nicht hochgeladen.</p>
+  <div class="drop noprint" id="drop"><b data-t="dropT">XML-Datei hier ablegen</b><br><span data-t="dropS">oder klicken, um eine Datei zu wählen</span><input type="file" id="file" accept=".xml,text/xml" class="hide"></div>
+  <div id="viewOut" style="margin-top:18px"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="set" class="hide">
+  <h1 data-t="tSet">Mein Unternehmen</h1>
+  <p class="lead" data-t="lSet">Diese Angaben stehen auf jeder Rechnung. Pflichtfelder sind mit * markiert.</p>
+  <div class="g2">
+    <div class="card">
+      <h2 data-t="company">Unternehmen</h2>
+      <label><span data-t="cName">Firmenname</span> *<input id="s_name"></label>
+      <label><span data-t="street">Straße und Hausnummer</span> *<input id="s_street"></label>
+      <div class="g3"><label><span data-t="zip">PLZ</span> *<input id="s_zip"></label><label style="grid-column:span 2"><span data-t="city">Ort</span> *<input id="s_city"></label></div>
+      <label><span data-t="country">Land</span> *<select id="s_country"></select></label>
+      <label><span data-t="vatId">USt-IdNr.</span><input id="s_vat" placeholder="DE123456789"></label>
+      <label><span data-t="taxNo">Steuernummer (wenn keine USt-IdNr.)</span><input id="s_taxno"></label>
+      <label class="row" style="color:var(--txt)"><input type="checkbox" id="s_klein" style="width:auto;margin:0"> <span data-t="klein">Kleinunternehmer nach § 19 UStG (keine Umsatzsteuer)</span></label>
+    </div>
+    <div class="card">
+      <h2 data-t="contact">Kontakt und Bank</h2>
+      <label><span data-t="cPerson">Ansprechpartner</span> *<input id="s_person"></label>
+      <div class="g2"><label><span data-t="phone">Telefon</span> *<input id="s_phone"></label><label><span data-t="email">E-Mail</span> *<input id="s_email" type="email"></label></div>
+      <label>IBAN *<input id="s_iban"></label>
+      <div class="g2"><label>BIC<input id="s_bic"></label><label><span data-t="accName">Kontoinhaber</span><input id="s_accname"></label></div>
+      <div class="g2"><label><span data-t="nextNo">Nächste Rechnungsnummer</span><input id="s_next" type="number" min="1" value="1"></label><label><span data-t="prefix">Präfix</span><input id="s_prefix" value="RE-"></label></div>
+    </div>
+  </div>
+  <div class="row"><button class="btn" id="saveSet" data-t="save">Speichern</button><span id="setMsg"></span></div>
+  <div class="card" style="margin-top:22px">
+    <h2 data-t="backup">Datensicherung</h2>
+    <p class="mut" data-t="backupT">Ihre Daten liegen nur in diesem Browser. Laden Sie regelmäßig eine Sicherung herunter.</p>
+    <div class="row"><button class="btn g" id="exp" data-t="exp">Sicherung herunterladen</button><label class="btn g" style="margin:0"><span data-t="imp">Sicherung laden</span><input type="file" id="imp" accept=".json" class="hide"></label></div>
+  </div>
+</section>
+
+<div id="printArea" class="hide"></div>
+</main>
+
+<script>
+(() => {
+'use strict';
+// ---------- storage ----------
+const KEY = 'hw-erechnung-v1';
+let DB; try { DB = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { DB = {}; }
+DB.me = DB.me || { country: 'DE', next: 1, prefix: 'RE-' }; DB.customers = DB.customers || []; DB.invoices = DB.invoices || [];
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) { alert('Speichern nicht möglich: ' + e.message); } };
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
+const r2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
+const f2 = n => r2(n).toFixed(2);
+const eur = n => r2(n).toLocaleString(LANG === 'de' ? 'de-DE' : 'en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+
+// ---------- texts ----------
+const EN = { tNew: 'New invoice', tList: 'Invoices', tCust: 'Customers', tView: 'View e-invoice', tSet: 'My company', hNew: 'New invoice',
+  lNew: 'Fill in the invoice and download it as an XRechnung (XML). Your data stays in this browser.', needSet: 'First enter your company details under "My company".',
+  cust: 'Customer', pickCust: 'Choose a saved customer', cName: 'Company name', street: 'Street and number', zip: 'Postcode', city: 'City', country: 'Country', email: 'Email',
+  vatOpt: "Customer's VAT ID (optional)", saveCust: 'Save customer', invData: 'Invoice details', invNo: 'Invoice number', invDate: 'Invoice date', delDate: 'Delivery date',
+  payDays: 'Payment due (days)', buyerRef: 'Buyer reference / Leitweg-ID', buyerRefHint: 'Required in XRechnung. For public bodies the Leitweg-ID, otherwise e.g. your customer or order number.',
+  note: 'Note on the invoice (optional)', items: 'Line items', desc: 'Description', qty: 'Qty', unit: 'Unit', price: 'Unit price net €', vat: 'VAT %', net: 'Net €', addLine: '+ Line',
+  dlXml: 'Download XRechnung (XML)', preview: 'View / print (PDF)', resetInv: 'New empty invoice', pdfNote: 'Note: a normal PDF is not an e-invoice. Send your customer the XML file (with the PDF if you like).',
+  lList: 'All invoices you created here.', gross: 'Gross €', lCust: 'Saved customers. Save new customers while creating an invoice.',
+  lView: 'Got an XRechnung or ZUGFeRD invoice (XML) you cannot read? Drop the file here. It is not uploaded anywhere.', dropT: 'Drop the XML file here', dropS: 'or click to choose a file',
+  lSet: 'These details appear on every invoice. Required fields are marked *.', company: 'Company', vatId: 'VAT ID', taxNo: 'Tax number (if no VAT ID)',
+  klein: 'Small business under § 19 UStG (no VAT)', contact: 'Contact and bank', cPerson: 'Contact person', phone: 'Phone', accName: 'Account holder', nextNo: 'Next invoice number',
+  prefix: 'Prefix', save: 'Save', backup: 'Backup', backupT: 'Your data is stored only in this browser. Download a backup regularly.', exp: 'Download backup', imp: 'Load backup' };
+const DE = {}; document.querySelectorAll('[data-t]').forEach(e => { DE[e.dataset.t] = DE[e.dataset.t] || e.textContent; });
+let LANG = 'de'; try { LANG = localStorage.getItem('hw-er-lang') || ((navigator.language || 'de').startsWith('de') ? 'de' : 'en'); } catch (e) {}
+const T = k => (LANG === 'en' ? EN[k] : DE[k]) || DE[k] || k;
+const MSG = {
+  de: { saved: 'Gespeichert.', need: 'Bitte ausfüllen', noLines: 'Mindestens eine Position mit Beschreibung, Menge und Preis eintragen.', badMail: 'E-Mail-Adresse prüfen', badIban: 'IBAN prüfen', vatOrTax: 'USt-IdNr. oder Steuernummer eintragen',
+    net: 'Summe netto', tax: 'Umsatzsteuer', total: 'Gesamtbetrag', invoice: 'Rechnung', due: 'Fällig am', deliv: 'Leistungsdatum', ref: 'Ihre Referenz', pay: 'Bitte überweisen Sie den Betrag auf', klein: 'Kein Ausweis von Umsatzsteuer, da Kleinunternehmer gemäß § 19 UStG.',
+    del: 'Löschen', xml: 'XML', pdf: 'PDF', none: 'Noch nichts gespeichert.', delQ: 'Wirklich löschen?', notInv: 'Diese Datei ist keine bekannte E-Rechnung (XRechnung UBL oder ZUGFeRD/CII).', seller: 'Verkäufer', buyer: 'Käufer', format: 'Format', created: 'XRechnung erstellt und gespeichert.', imported: 'Sicherung geladen.' },
+  en: { saved: 'Saved.', need: 'Please fill in', noLines: 'Add at least one line with description, quantity and price.', badMail: 'Check the email address', badIban: 'Check the IBAN', vatOrTax: 'Enter a VAT ID or a tax number',
+    net: 'Total net', tax: 'VAT', total: 'Total', invoice: 'Invoice', due: 'Due', deliv: 'Delivery date', ref: 'Your reference', pay: 'Please transfer the amount to', klein: 'No VAT shown: small business under § 19 UStG.',
+    del: 'Delete', xml: 'XML', pdf: 'PDF', none: 'Nothing saved yet.', delQ: 'Delete for sure?', notInv: 'This file is not a known e-invoice (XRechnung UBL or ZUGFeRD/CII).', seller: 'Seller', buyer: 'Buyer', format: 'Format', created: 'XRechnung created and saved.', imported: 'Backup loaded.' } };
+const M = k => MSG[LANG][k];
+function applyLang() {
+  document.documentElement.lang = LANG; $('lang').value = LANG;
+  document.querySelectorAll('[data-t]').forEach(e => { e.textContent = T(e.dataset.t); });
+  renderLines(); renderLists();
+}
+$('lang').onchange = e => { LANG = e.target.value; try { localStorage.setItem('hw-er-lang', LANG); } catch (x) {} applyLang(); };
+
+// ---------- tabs ----------
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('main > section').forEach(s => s.classList.toggle('hide', s.id !== b.dataset.tab));
+  $('printArea').classList.add('hide'); renderLists(); checkSet();
+});
+
+// ---------- countries ----------
+const COUNTRIES = [['DE', 'Deutschland'], ['AT', 'Österreich'], ['CH', 'Schweiz'], ['NL', 'Niederlande'], ['BE', 'Belgien'], ['LU', 'Luxemburg'], ['FR', 'Frankreich'], ['IT', 'Italien'], ['ES', 'Spanien'], ['PL', 'Polen'], ['CZ', 'Tschechien'], ['DK', 'Dänemark'], ['GR', 'Griechenland'], ['PT', 'Portugal'], ['IE', 'Irland'], ['SE', 'Schweden'], ['FI', 'Finnland'], ['GB', 'Vereinigtes Königreich'], ['US', 'USA']];
+['b_country', 's_country'].forEach(id => { $(id).innerHTML = COUNTRIES.map(([c, n]) => `<option value="${c}">${n}</option>`).join(''); });
+
+// ---------- settings ----------
+const SF = ['name', 'street', 'zip', 'city', 'country', 'vat', 'taxno', 'person', 'phone', 'email', 'iban', 'bic', 'accname', 'prefix'];
+function loadSet() { SF.forEach(k => { $('s_' + k).value = DB.me[k] ?? ''; }); $('s_klein').checked = !!DB.me.klein; $('s_next').value = DB.me.next || 1; if (!DB.me.country) $('s_country').value = 'DE'; }
+const ibanOk = s => { s = s.replace(/\s+/g, '').toUpperCase(); if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(s)) return false; const r = (s.slice(4) + s.slice(0, 4)).replace(/[A-Z]/g, c => c.charCodeAt(0) - 55); let m = 0; for (const d of r) m = (m * 10 + +d) % 97; return m === 1; };
+const mailOk = s => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+function setMissing(me) {
+  const miss = ['name', 'street', 'zip', 'city', 'person', 'phone', 'email', 'iban'].filter(k => !String(me[k] || '').trim());
+  const out = miss.map(k => M('need') + ': ' + T({ name: 'cName', street: 'street', zip: 'zip', city: 'city', person: 'cPerson', phone: 'phone', email: 'email', iban: 'IBAN' }[k]));
+  if (me.email && !mailOk(me.email)) out.push(M('badMail'));
+  if (me.iban && !ibanOk(me.iban)) out.push(M('badIban'));
+  if (!String(me.vat || '').trim() && !String(me.taxno || '').trim()) out.push(M('vatOrTax'));
+  return out;
+}
+$('saveSet').onclick = () => {
+  SF.forEach(k => { DB.me[k] = $('s_' + k).value.trim(); }); DB.me.klein = $('s_klein').checked; DB.me.next = Math.max(1, parseInt($('s_next').value, 10) || 1);
+  DB.me.iban = DB.me.iban.replace(/\s+/g, '').toUpperCase(); save();
+  const miss = setMissing(DB.me);
+  $('setMsg').innerHTML = miss.length ? `<span class="msg bad">${esc(miss.join(' · '))}</span>` : `<span class="msg ok">${M('saved')}</span>`;
+  checkSet(); fillNo(); renderLines();
+};
+function checkSet() { $('needset').classList.toggle('hide', setMissing(DB.me).length === 0); }
+
+// ---------- customers ----------
+function fillCustPick() {
+  $('custPick').innerHTML = '<option value="">—</option>' + DB.customers.map((c, i) => `<option value="${i}">${esc(c.name)} · ${esc(c.city)}</option>`).join('');
+}
+$('custPick').onchange = e => { const c = DB.customers[e.target.value]; if (!c) return; ['name', 'street', 'zip', 'city', 'country', 'email', 'vat'].forEach(k => { $('b_' + k).value = c[k] || ''; }); $('b_save').checked = false; };
+
+// ---------- lines ----------
+let LINES = [];
+const UNITS = [['C62', { de: 'Stück', en: 'Piece' }], ['HUR', { de: 'Stunde', en: 'Hour' }], ['DAY', { de: 'Tag', en: 'Day' }], ['MON', { de: 'Monat', en: 'Month' }], ['LS', { de: 'Pauschal', en: 'Lump sum' }], ['KGM', { de: 'kg', en: 'kg' }], ['KMT', { de: 'km', en: 'km' }]];
+const newLine = () => ({ desc: '', qty: 1, unit: 'C62', price: '', vat: 19 });
+function renderLines() {
+  if (!LINES.length) LINES.push(newLine());
+  const klein = !!DB.me.klein;
+  $('lines').innerHTML = LINES.map((l, i) => `<tr>
+    <td><input data-i="${i}" data-k="desc" value="${esc(l.desc)}"></td>
+    <td><input data-i="${i}" data-k="qty" type="number" step="any" min="0" value="${esc(l.qty)}" style="width:80px"></td>
+    <td><select data-i="${i}" data-k="unit">${UNITS.map(([c, n]) => `<option value="${c}"${c === l.unit ? ' selected' : ''}>${n[LANG]}</option>`).join('')}</select></td>
+    <td><input data-i="${i}" data-k="price" type="number" step="0.01" value="${esc(l.price)}" style="width:110px"></td>
+    <td><select data-i="${i}" data-k="vat"${klein ? ' disabled' : ''}>${(klein ? [0] : [19, 7]).map(v => `<option value="${v}"${+l.vat === v ? ' selected' : ''}>${v}</option>`).join('')}</select></td>
+    <td class="num">${f2(lineNet(l))}</td>
+    <td>${LINES.length > 1 ? `<button class="btn r s" data-del="${i}">✕</button>` : ''}</td></tr>`).join('');
+  renderTotals();
+}
+const lineNet = l => r2((parseFloat(l.qty) || 0) * (parseFloat(l.price) || 0));
+$('lines').addEventListener('input', e => { const t = e.target; if (t.dataset.i == null) return; LINES[t.dataset.i][t.dataset.k] = t.value; const td = t.closest('tr').querySelector('td.num'); td.textContent = f2(lineNet(LINES[t.dataset.i])); renderTotals(); });
+$('lines').addEventListener('change', e => { const t = e.target; if (t.dataset.i != null) { LINES[t.dataset.i][t.dataset.k] = t.value; renderTotals(); } });
+$('lines').addEventListener('click', e => { const d = e.target.dataset.del; if (d != null) { LINES.splice(+d, 1); renderLines(); } });
+$('addLine').onclick = () => { LINES.push(newLine()); renderLines(); };
+
+// ---------- calc ----------
+function calc(lines, klein) {
+  const ls = lines.map(l => ({ ...l, qty: parseFloat(l.qty) || 0, price: r2(parseFloat(l.price) || 0), vat: klein ? 0 : +l.vat, cat: klein ? 'E' : (+l.vat === 0 ? 'Z' : 'S') }));
+  ls.forEach(l => { l.net = r2(l.qty * l.price); });
+  const groups = {};
+  ls.forEach(l => { const k = l.cat + '|' + l.vat; (groups[k] = groups[k] || { cat: l.cat, rate: l.vat, base: 0 }).base = r2(groups[k].base + l.net); });
+  const g = Object.values(groups); g.forEach(x => { x.tax = r2(x.base * x.rate / 100); });
+  const net = r2(ls.reduce((a, l) => a + l.net, 0)), tax = r2(g.reduce((a, x) => a + x.tax, 0));
+  return { lines: ls, groups: g, net, tax, gross: r2(net + tax) };
+}
+function renderTotals() {
+  const c = calc(LINES.filter(l => l.desc || l.price), !!DB.me.klein);
+  $('totals').innerHTML = `<div><span>${M('net')}</span><span>${eur(c.net)}</span></div>` +
+    (DB.me.klein ? `<div class="mut">${M('klein')}</div>` : c.groups.filter(x => x.rate > 0).map(x => `<div><span>${M('tax')} ${x.rate} %</span><span>${eur(x.tax)}</span></div>`).join('')) +
+    `<div class="big"><span>${M('total')}</span><span>${eur(c.gross)}</span></div>`;
+}
+
+// ---------- invoice form ----------
+const today = () => new Date().toISOString().slice(0, 10);
+const addDays = (d, n) => { const x = new Date(d + 'T12:00:00'); x.setDate(x.getDate() + n); return x.toISOString().slice(0, 10); };
+function fillNo() { $('i_no').value = (DB.me.prefix || '') + String(DB.me.next || 1).padStart(4, '0'); }
+function resetInv() {
+  ['name', 'street', 'zip', 'city', 'email', 'vat'].forEach(k => { $('b_' + k).value = ''; }); $('b_country').value = 'DE'; $('b_save').checked = true; $('custPick').value = '';
+  $('i_date').value = today(); $('i_deliv').value = today(); $('i_days').value = 14; $('i_ref').value = ''; $('i_note').value = '';
+  LINES = [newLine()]; fillNo(); renderLines(); $('errs').innerHTML = '';
+}
+$('resetInv').onclick = resetInv;
+function readInv() {
+  const b = {}; ['name', 'street', 'zip', 'city', 'country', 'email', 'vat'].forEach(k => { b[k] = $('b_' + k).value.trim(); });
+  const inv = { no: $('i_no').value.trim(), date: $('i_date').value, deliv: $('i_deliv').value, days: Math.max(0, parseInt($('i_days').value, 10) || 0), ref: $('i_ref').value.trim(), note: $('i_note').value.trim(),
+    buyer: b, seller: { ...DB.me }, lines: LINES.filter(l => String(l.desc).trim() || l.price !== '').map(l => ({ ...l, desc: String(l.desc).trim() })) };
+  inv.due = addDays(inv.date || today(), inv.days);
+  const e = setMissing(DB.me).slice();
+  const need = { no: 'invNo', date: 'invDate', deliv: 'delDate', ref: 'buyerRef' };
+  Object.entries(need).forEach(([k, t]) => { if (!inv[k]) e.push(M('need') + ': ' + T(t)); });
+  [['name', 'cName'], ['street', 'street'], ['zip', 'zip'], ['city', 'city'], ['email', 'email']].forEach(([k, t]) => { if (!b[k]) e.push(M('need') + ' (' + T('cust') + '): ' + T(t)); });
+  if (b.email && !mailOk(b.email)) e.push(M('badMail') + ' (' + T('cust') + ')');
+  if (!inv.lines.length || inv.lines.some(l => !l.desc || !(parseFloat(l.qty) > 0) || l.price === '' || isNaN(parseFloat(l.price)))) e.push(M('noLines'));
+  return { inv, errs: e };
+}
+
+// ---------- XRechnung (UBL 2.1, XRechnung 3.0) ----------
+const x = (tag, val, attrs = '') => val === '' || val == null ? '' : `<${tag}${attrs}>${esc(val)}</${tag}>`;
+function address(p) { return `<cac:PostalAddress>${x('cbc:StreetName', p.street)}${x('cbc:CityName', p.city)}${x('cbc:PostalZone', p.zip)}<cac:Country>${x('cbc:IdentificationCode', p.country || 'DE')}</cac:Country></cac:PostalAddress>`; }
+function buildXml(inv) {
+  const s = inv.seller, b = inv.buyer, klein = !!s.klein, c = calc(inv.lines, klein);
+  const KL = 'Kein Ausweis von Umsatzsteuer, da Kleinunternehmer gemäß § 19 UStG';
+  const taxCat = (cat, rate) => `<cbc:ID>${cat}</cbc:ID><cbc:Percent>${f2(rate)}</cbc:Percent>`;
+  const sellerTax = (s.vat ? `<cac:PartyTaxScheme>${x('cbc:CompanyID', s.vat.replace(/\s+/g, ''))}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:PartyTaxScheme>` : '') +
+    (s.taxno ? `<cac:PartyTaxScheme>${x('cbc:CompanyID', s.taxno)}<cac:TaxScheme><cbc:ID>FC</cbc:ID></cac:TaxScheme></cac:PartyTaxScheme>` : '');
+  const note = [inv.note, klein ? KL : ''].filter(Boolean);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<ubl:Invoice xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</cbc:CustomizationID>
+<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+${x('cbc:ID', inv.no)}
+${x('cbc:IssueDate', inv.date)}
+${x('cbc:DueDate', inv.due)}
+<cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+${note.map(n => x('cbc:Note', n)).join('\n')}
+<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+${x('cbc:BuyerReference', inv.ref)}
+<cac:AccountingSupplierParty><cac:Party>
+<cbc:EndpointID schemeID="EM">${esc(s.email)}</cbc:EndpointID>
+<cac:PartyName>${x('cbc:Name', s.name)}</cac:PartyName>
+${address(s)}
+${sellerTax}
+<cac:PartyLegalEntity>${x('cbc:RegistrationName', s.name)}</cac:PartyLegalEntity>
+<cac:Contact>${x('cbc:Name', s.person)}${x('cbc:Telephone', s.phone)}${x('cbc:ElectronicMail', s.email)}</cac:Contact>
+</cac:Party></cac:AccountingSupplierParty>
+<cac:AccountingCustomerParty><cac:Party>
+<cbc:EndpointID schemeID="EM">${esc(b.email)}</cbc:EndpointID>
+<cac:PartyName>${x('cbc:Name', b.name)}</cac:PartyName>
+${address(b)}
+${b.vat ? `<cac:PartyTaxScheme>${x('cbc:CompanyID', b.vat.replace(/\s+/g, ''))}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:PartyTaxScheme>` : ''}
+<cac:PartyLegalEntity>${x('cbc:RegistrationName', b.name)}</cac:PartyLegalEntity>
+</cac:Party></cac:AccountingCustomerParty>
+<cac:Delivery>${x('cbc:ActualDeliveryDate', inv.deliv)}</cac:Delivery>
+<cac:PaymentMeans><cbc:PaymentMeansCode>58</cbc:PaymentMeansCode>${x('cbc:PaymentID', inv.no)}<cac:PayeeFinancialAccount>${x('cbc:ID', s.iban)}${x('cbc:Name', s.accname || s.name)}${s.bic ? `<cac:FinancialInstitutionBranch>${x('cbc:ID', s.bic.replace(/\s+/g, '').toUpperCase())}</cac:FinancialInstitutionBranch>` : ''}</cac:PayeeFinancialAccount></cac:PaymentMeans>
+<cac:PaymentTerms>${x('cbc:Note', `Zahlbar bis ${inv.due} ohne Abzug.`)}</cac:PaymentTerms>
+<cac:TaxTotal><cbc:TaxAmount currencyID="EUR">${f2(c.tax)}</cbc:TaxAmount>
+${c.groups.map(g => `<cac:TaxSubtotal><cbc:TaxableAmount currencyID="EUR">${f2(g.base)}</cbc:TaxableAmount><cbc:TaxAmount currencyID="EUR">${f2(g.tax)}</cbc:TaxAmount><cac:TaxCategory>${taxCat(g.cat, g.rate)}${g.cat === 'E' ? x('cbc:TaxExemptionReason', KL) : ''}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:TaxCategory></cac:TaxSubtotal>`).join('\n')}
+</cac:TaxTotal>
+<cac:LegalMonetaryTotal>
+<cbc:LineExtensionAmount currencyID="EUR">${f2(c.net)}</cbc:LineExtensionAmount>
+<cbc:TaxExclusiveAmount currencyID="EUR">${f2(c.net)}</cbc:TaxExclusiveAmount>
+<cbc:TaxInclusiveAmount currencyID="EUR">${f2(c.gross)}</cbc:TaxInclusiveAmount>
+<cbc:PayableAmount currencyID="EUR">${f2(c.gross)}</cbc:PayableAmount>
+</cac:LegalMonetaryTotal>
+${c.lines.map((l, i) => `<cac:InvoiceLine>
+<cbc:ID>${i + 1}</cbc:ID>
+<cbc:InvoicedQuantity unitCode="${esc(l.unit)}">${+l.qty}</cbc:InvoicedQuantity>
+<cbc:LineExtensionAmount currencyID="EUR">${f2(l.net)}</cbc:LineExtensionAmount>
+<cac:Item>${x('cbc:Name', l.desc)}<cac:ClassifiedTaxCategory>${taxCat(l.cat, l.vat)}<cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme></cac:ClassifiedTaxCategory></cac:Item>
+<cac:Price><cbc:PriceAmount currencyID="EUR">${f2(l.price)}</cbc:PriceAmount></cac:Price>
+</cac:InvoiceLine>`).join('\n')}
+</ubl:Invoice>
+`.replace(/\n{2,}/g, '\n');
+}
+function download(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+const fname = no => (no || 'rechnung').replace(/[^\w.-]+/g, '_');
+
+function storeInv(inv) {
+  const i = DB.invoices.findIndex(v => v.no === inv.no);
+  const c = calc(inv.lines, !!inv.seller.klein); inv.gross = c.gross;
+  if (i >= 0) DB.invoices[i] = inv; else { DB.invoices.unshift(inv); DB.me.next = (DB.me.next || 1) + 1; }
+  if ($('b_save').checked && !DB.customers.some(x => x.name === inv.buyer.name && x.zip === inv.buyer.zip)) DB.customers.push({ ...inv.buyer });
+  save(); fillCustPick();
+}
+function showErrs(e) { $('errs').innerHTML = e.length ? `<div class="msg bad">${e.map(esc).join('<br>')}</div>` : ''; return !e.length; }
+$('dlXml').onclick = () => {
+  const { inv, errs } = readInv(); if (!showErrs(errs)) return;
+  storeInv(inv); download(fname(inv.no) + '.xml', buildXml(inv), 'application/xml');
+  $('errs').innerHTML = `<div class="msg ok">${M('created')}</div>`;
+};
+$('preview').onclick = () => { const { inv, errs } = readInv(); if (!showErrs(errs)) return; storeInv(inv); printInv(inv); };
+
+// ---------- human view / print ----------
+const fd = d => d ? new Date(d + 'T12:00:00').toLocaleDateString(LANG === 'de' ? 'de-DE' : 'en-GB') : '';
+function invHtml(v) {
+  // v: {no,date,due,deliv,ref,note,seller:{name,street,zip,city,country,vat,taxno,email,phone,iban,bic},buyer:{...},lines:[{desc,qty,unit,price,vat,net}],net,tax,gross,groups,klein}
+  const u = c => (UNITS.find(x => x[0] === c) || [c, { de: c, en: c }])[1][LANG];
+  const s = v.seller, b = v.buyer;
+  return `<div class="inv">
+  <div class="hd"><div><h3>${esc(s.name)}</h3><div class="mut">${esc(s.street)}<br>${esc(s.zip)} ${esc(s.city)} ${esc(s.country || '')}<br>${esc(s.email || '')} ${esc(s.phone || '')}${s.vat ? '<br>USt-IdNr. ' + esc(s.vat) : ''}${s.taxno ? '<br>St.-Nr. ' + esc(s.taxno) : ''}</div></div>
+  <div style="text-align:right"><h3>${M('invoice')} ${esc(v.no)}</h3><div class="mut">${T('invDate')}: ${fd(v.date)}${v.deliv ? '<br>' + M('deliv') + ': ' + fd(v.deliv) : ''}${v.due ? '<br>' + M('due') + ': ' + fd(v.due) : ''}${v.ref ? '<br>' + M('ref') + ': ' + esc(v.ref) : ''}</div></div></div>
+  <div style="margin-bottom:22px"><b>${esc(b.name)}</b><br>${esc(b.street)}<br>${esc(b.zip)} ${esc(b.city)} ${esc(b.country || '')}${b.vat ? '<br>USt-IdNr. ' + esc(b.vat) : ''}</div>
+  <table><thead><tr><th>#</th><th>${T('desc')}</th><th class="num">${T('qty')}</th><th>${T('unit')}</th><th class="num">${T('price')}</th><th class="num">${T('vat')}</th><th class="num">${T('net')}</th></tr></thead><tbody>
+  ${v.lines.map((l, i) => `<tr><td>${i + 1}</td><td>${esc(l.desc)}</td><td class="num">${esc(l.qty)}</td><td>${esc(u(l.unit))}</td><td class="num">${f2(l.price)}</td><td class="num">${esc(l.vat)}</td><td class="num">${f2(l.net)}</td></tr>`).join('')}</tbody></table>
+  <div class="tot" style="margin-top:14px"><div><span>${M('net')}</span><span>${eur(v.net)}</span></div>${v.klein ? '' : v.groups.filter(g => g.rate > 0).map(g => `<div><span>${M('tax')} ${g.rate} %</span><span>${eur(g.tax)}</span></div>`).join('')}<div class="big"><span>${M('total')}</span><span>${eur(v.gross)}</span></div></div>
+  ${v.klein ? `<p>${M('klein')}</p>` : ''}${v.note ? `<p>${esc(v.note)}</p>` : ''}
+  ${s.iban ? `<p class="mut">${M('pay')}: IBAN ${esc(s.iban)}${s.bic ? ' · BIC ' + esc(s.bic) : ''}${v.no ? ' · ' + esc(v.no) : ''}</p>` : ''}</div>`;
+}
+function fromInv(inv) { const c = calc(inv.lines, !!inv.seller.klein); return { ...inv, lines: c.lines, groups: c.groups, net: c.net, tax: c.tax, gross: c.gross, klein: !!inv.seller.klein }; }
+function printInv(inv) {
+  const pa = $('printArea'); pa.innerHTML = `<div class="row noprint" style="margin-bottom:14px"><button class="btn" onclick="window.print()">🖨 ${T('preview')}</button><button class="btn g" id="closePrint">✕</button></div>` + invHtml(fromInv(inv));
+  document.querySelectorAll('main > section').forEach(s => s.classList.add('hide')); pa.classList.remove('hide'); window.scrollTo(0, 0);
+  $('closePrint').onclick = () => { pa.classList.add('hide'); document.querySelector('nav button.on').click(); };
+}
+
+// ---------- lists ----------
+function renderLists() {
+  $('invList').innerHTML = DB.invoices.length ? DB.invoices.map((v, i) => `<tr><td>${esc(v.no)}</td><td>${fd(v.date)}</td><td>${esc(v.buyer.name)}</td><td class="num">${f2(v.gross || 0)}</td><td class="row" style="justify-content:flex-end"><button class="btn g s" data-x="${i}">${M('xml')}</button><button class="btn g s" data-p="${i}">${M('pdf')}</button><button class="btn r s" data-d="${i}">${M('del')}</button></td></tr>`).join('') : `<tr><td colspan="5" class="mut">${M('none')}</td></tr>`;
+  $('custList').innerHTML = DB.customers.length ? DB.customers.map((c, i) => `<tr><td>${esc(c.name)}</td><td>${esc(c.city)}</td><td>${esc(c.email)}</td><td style="text-align:right"><button class="btn r s" data-dc="${i}">${M('del')}</button></td></tr>`).join('') : `<tr><td colspan="4" class="mut">${M('none')}</td></tr>`;
+}
+$('invList').onclick = e => { const d = e.target.dataset; if (d.x != null) { const v = DB.invoices[d.x]; download(fname(v.no) + '.xml', buildXml(v), 'application/xml'); } if (d.p != null) printInv(DB.invoices[d.p]); if (d.d != null && confirm(M('delQ'))) { DB.invoices.splice(+d.d, 1); save(); renderLists(); } };
+$('custList').onclick = e => { const d = e.target.dataset.dc; if (d != null && confirm(M('delQ'))) { DB.customers.splice(+d, 1); save(); renderLists(); fillCustPick(); } };
+
+// ---------- viewer: UBL and CII ----------
+function kids(el, name) { return el ? [...el.children].filter(c => c.localName === name) : []; }
+function kid(el, ...path) { for (const p of path) { el = kids(el, p)[0]; if (!el) return null; } return el; }
+function tx(el, ...path) { const e = kid(el, ...path); return e ? e.textContent.trim() : ''; }
+const ciiDate = s => /^\d{8}$/.test(s) ? `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}` : s;
+function parseInvoice(xml) {
+  const d = new DOMParser().parseFromString(xml, 'application/xml'); if (d.querySelector('parsererror')) return null;
+  const r = d.documentElement;
+  if (r.localName === 'Invoice' || r.localName === 'CreditNote') {
+    const party = p => { const P = kid(r, p, 'Party'); return { name: tx(P, 'PartyLegalEntity', 'RegistrationName') || tx(P, 'PartyName', 'Name'), street: tx(P, 'PostalAddress', 'StreetName'), zip: tx(P, 'PostalAddress', 'PostalZone'), city: tx(P, 'PostalAddress', 'CityName'), country: tx(P, 'PostalAddress', 'Country', 'IdentificationCode'), vat: kids(P, 'PartyTaxScheme').map(t => tx(t, 'CompanyID')).filter(Boolean).join(' / '), email: tx(P, 'Contact', 'ElectronicMail'), phone: tx(P, 'Contact', 'Telephone') }; };
+    const LM = kid(r, 'LegalMonetaryTotal'); const tt = kids(r, 'TaxTotal')[0];
+    const lineTag = r.localName === 'Invoice' ? 'InvoiceLine' : 'CreditNoteLine', qTag = r.localName === 'Invoice' ? 'InvoicedQuantity' : 'CreditedQuantity';
+    return { fmt: 'XRechnung / UBL', no: tx(r, 'ID'), date: tx(r, 'IssueDate'), due: tx(r, 'DueDate') || tx(r, 'PaymentMeans', 'PaymentDueDate'), deliv: tx(r, 'Delivery', 'ActualDeliveryDate'), ref: tx(r, 'BuyerReference'), note: kids(r, 'Note').map(n => n.textContent.trim()).join(' '),
+      seller: { ...party('AccountingSupplierParty'), iban: tx(r, 'PaymentMeans', 'PayeeFinancialAccount', 'ID'), bic: tx(r, 'PaymentMeans', 'PayeeFinancialAccount', 'FinancialInstitutionBranch', 'ID') }, buyer: party('AccountingCustomerParty'),
+      lines: kids(r, lineTag).map(l => { const q = kid(l, qTag); return { desc: tx(l, 'Item', 'Name'), qty: q ? q.textContent.trim() : '', unit: q ? q.getAttribute('unitCode') : '', price: +tx(l, 'Price', 'PriceAmount') || 0, vat: tx(l, 'Item', 'ClassifiedTaxCategory', 'Percent'), net: +tx(l, 'LineExtensionAmount') || 0 }; }),
+      groups: kids(tt, 'TaxSubtotal').map(s => ({ rate: +tx(s, 'TaxCategory', 'Percent') || 0, tax: +tx(s, 'TaxAmount') || 0 })), net: +tx(LM, 'TaxExclusiveAmount') || 0, tax: +tx(tt, 'TaxAmount') || 0, gross: +tx(LM, 'PayableAmount') || +tx(LM, 'TaxInclusiveAmount') || 0 };
+  }
+  if (r.localName === 'CrossIndustryInvoice') {
+    const T0 = kid(r, 'SupplyChainTradeTransaction'), A = kid(T0, 'ApplicableHeaderTradeAgreement'), S = kid(T0, 'ApplicableHeaderTradeSettlement'), D = kid(r, 'ExchangedDocument');
+    const party = P => ({ name: tx(P, 'Name'), street: tx(P, 'PostalTradeAddress', 'LineOne'), zip: tx(P, 'PostalTradeAddress', 'PostcodeCode'), city: tx(P, 'PostalTradeAddress', 'CityName'), country: tx(P, 'PostalTradeAddress', 'CountryID'), vat: kids(P, 'SpecifiedTaxRegistration').map(t => tx(t, 'ID')).filter(Boolean).join(' / '), email: tx(P, 'DefinedTradeContact', 'EmailURIUniversalCommunication', 'URIID'), phone: tx(P, 'DefinedTradeContact', 'TelephoneUniversalCommunication', 'CompleteNumber') });
+    const MS = kid(S, 'SpecifiedTradeSettlementHeaderMonetarySummation');
+    return { fmt: 'ZUGFeRD / Factur-X (CII)', no: tx(D, 'ID'), date: ciiDate(tx(D, 'IssueDateTime', 'DateTimeString')), due: ciiDate(tx(S, 'SpecifiedTradePaymentTerms', 'DueDateDateTime', 'DateTimeString')), deliv: ciiDate(tx(T0, 'ApplicableHeaderTradeDelivery', 'ActualDeliverySupplyChainEvent', 'OccurrenceDateTime', 'DateTimeString')), ref: tx(A, 'BuyerReference'), note: kids(D, 'IncludedNote').map(n => tx(n, 'Content')).join(' '),
+      seller: { ...party(kid(A, 'SellerTradeParty')), iban: tx(S, 'SpecifiedTradeSettlementPaymentMeans', 'PayeePartyCreditorFinancialAccount', 'IBANID'), bic: tx(S, 'SpecifiedTradeSettlementPaymentMeans', 'PayeeSpecifiedCreditorFinancialInstitution', 'BICID') }, buyer: party(kid(A, 'BuyerTradeParty')),
+      lines: kids(T0, 'IncludedSupplyChainTradeLineItem').map(l => { const q = kid(l, 'SpecifiedLineTradeDelivery', 'BilledQuantity'); return { desc: tx(l, 'SpecifiedTradeProduct', 'Name'), qty: q ? q.textContent.trim() : '', unit: q ? q.getAttribute('unitCode') : '', price: +tx(l, 'SpecifiedLineTradeAgreement', 'NetPriceProductTradePrice', 'ChargeAmount') || 0, vat: tx(l, 'SpecifiedLineTradeSettlement', 'ApplicableTradeTax', 'RateApplicablePercent'), net: +tx(l, 'SpecifiedLineTradeSettlement', 'SpecifiedTradeSettlementLineMonetarySummation', 'LineTotalAmount') || 0 }; }),
+      groups: kids(S, 'ApplicableTradeTax').map(t => ({ rate: +tx(t, 'RateApplicablePercent') || 0, tax: +tx(t, 'CalculatedAmount') || 0 })), net: +tx(MS, 'TaxBasisTotalAmount') || 0, tax: +tx(MS, 'TaxTotalAmount') || 0, gross: +tx(MS, 'DuePayableAmount') || +tx(MS, 'GrandTotalAmount') || 0 };
+  }
+  return null;
+}
+function viewFile(f) {
+  if (!f) return; const rd = new FileReader();
+  rd.onload = () => { const v = parseInvoice(String(rd.result)); $('viewOut').innerHTML = v ? `<div class="row noprint" style="margin-bottom:12px"><span class="mut">${M('format')}: ${esc(v.fmt)}</span><button class="btn g s" onclick="window.print()">🖨 ${T('preview')}</button></div>` + invHtml(v) : `<div class="msg bad">${M('notInv')}</div>`; };
+  rd.readAsText(f);
+}
+const drop = $('drop');
+drop.onclick = () => $('file').click(); $('file').onchange = e => viewFile(e.target.files[0]);
+drop.ondragover = e => { e.preventDefault(); drop.classList.add('on'); }; drop.ondragleave = () => drop.classList.remove('on');
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove('on'); viewFile(e.dataTransfer.files[0]); };
+
+// ---------- backup ----------
+$('exp').onclick = () => download('halewood-e-rechnung-sicherung-' + today() + '.json', JSON.stringify(DB, null, 1), 'application/json');
+$('imp').onchange = e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { const d = JSON.parse(rd.result); if (!d.me) throw 0; DB = d; DB.customers = DB.customers || []; DB.invoices = DB.invoices || []; save(); loadSet(); fillCustPick(); resetInv(); $('setMsg').innerHTML = `<span class="msg ok">${M('imported')}</span>`; } catch (x) { alert('?'); } }; rd.readAsText(f); };
+
+// ---------- start ----------
+loadSet(); fillCustPick(); resetInv(); applyLang(); checkSet();
+window.__erech = { buildXml, calc, parseInvoice, DB: () => DB };
+})();
+</script>
+</body>
+</html>

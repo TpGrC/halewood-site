@@ -51,7 +51,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=14">
+<link rel="stylesheet" href="/assets/site.css?v=15">
 {ldjson(path)}
 </head>
 <body>
@@ -60,7 +60,7 @@ def page(path,title,desc,body):
 {body}
 </main>
 <footer id="foot"></footer>
-<script src="/assets/site.js?v=7"></script>
+<script src="/assets/site.js?v=8"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "a11dfd5ee7a843d0b247e834f27c971c"}}'></script>
 </body>
 </html>
@@ -181,47 +181,19 @@ def enhance(path,body):
 
 # ---------- home ----------
 page('index.html','Halewood Systems — PC software, games and weather','Halewood Systems makes Kyrofix PC tools for Windows, free games for phone and browser, and the Windrova weather map. Every product has a free version.',f'''
-<section class="hero"><div class="wrap hhero">
-  <div>
-    <h1>Tools for your PC, games for your phone, weather for everywhere.</h1>
-    <p class="lead">Halewood Systems is a small software studio in the EU. Everything we make has a free version that does the job, with nothing extra installed.</p>
-    <div class="cta"><a class="btn p" href="/software/">Browse PC software</a><a class="btn g" href="/games/">Play a game</a></div>
-    <div class="facts"><div><b>Free versions</b>for every product</div><div><b>No bundled extras</b>no toolbars or add-ons</div><div><b>EU company</b>GDPR privacy</div><div><b>14-day refund</b>on Pro</div></div>
-  </div>
-  <div class="stage" aria-hidden="true">
-    <div class="win"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div>
-    <div class="wx"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"><span>Windrova · live wind</span></div>
-    <div class="phone"><img src="/img/potion-sort/s1.jpg" alt="" width="390" height="844"></div>
-  </div>
+<section class="hero center hmin"><div class="wrap">
+  <h1>Tools for your PC, games for your phone, weather for everywhere.</h1>
+  <p class="lead">Halewood Systems is a small software studio in the EU. Everything we make has a free version that does the job, with nothing extra installed.</p>
 </div></section>
-<section class="strip"><div class="wrap"><div><b>12</b> products</div><div><b>6</b> Windows tools</div><div><b>5</b> free games</div><div><b>9</b> languages</div><div><b>0</b> bundled extras</div></div></section>
 <section class="shows"><div class="wrap">
-  <a class="show kf" href="/software/"><div class="st"><h2>Kyrofix PC tools</h2><p>Six Windows programs to fix, clean, free up space and protect your files. Free to download.</p><span class="btn w s">See the tools</span></div>
-    <div class="sa kfa"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="" width="1100" height="740"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div></a>
+  <a class="show wr big" href="/products/windrova/"><div class="st"><h2>Windrova</h2><p>Live weather for every place on Earth.</p><span class="btn w s">Open the map</span></div>
+    <div class="sa wra"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"></div></a>
   <div class="pair">
   <a class="show gm" href="/games/"><div class="st"><h2>Games</h2><p>Five free puzzle and arcade games for phone and computer.</p><span class="btn w s">Play now</span></div>
     <div class="sa gma"><img src="/img/starfuse/play.jpg" alt="" width="390" height="844"><img src="/img/potion-sort/s1.jpg" alt="" width="390" height="844"><img src="/img/triple-bloom/s1.jpg" alt="" width="390" height="844"></div></a>
-  <a class="show wr" href="/products/windrova/"><div class="st"><h2>Windrova</h2><p>Live weather for every place on Earth.</p><span class="btn w s">Open the map</span></div>
-    <div class="sa wra"><img src="/img/windrova/hero.jpg" alt="" width="1440" height="810"></div></a>
+  <a class="show kf" href="/software/"><div class="st"><h2>Kyrofix PC tools</h2><p>Six Windows programs to fix, clean, free up space and protect your files. Free to download.</p><span class="btn w s">See the tools</span></div>
+    <div class="sa kfa"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="" width="1100" height="740"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div></a>
   </div>
-</div></section>
-<section class="playnow"><div class="wrap pn">
-  <div>
-    <h2>Play right here.</h2>
-    <p class="lead">This is Potion Sort, one of our free games. Tap a bottle, tap another, and pour until every bottle holds one colour.</p>
-    <ul class="ticks"><li>Endless levels, every one can be solved</li><li>Works on phone and computer, no download</li><li>Four more games to try</li></ul>
-    <div class="cta"><a class="btn p" href="/games/">All games</a><a class="btn g" href="/games/potion-sort/">Play full screen</a></div>
-  </div>
-  <div class="pnphone"><button class="pnstart" type="button" onclick="this.outerHTML='<iframe src=&quot;/games/potion-sort/&quot; title=&quot;Potion Sort&quot; loading=&quot;lazy&quot; allow=&quot;autoplay&quot;></iframe>'"><video src="/img/potion-sort/play.mp4" poster="/img/potion-sort/poster.jpg" autoplay muted loop playsinline></video><span>▶ Tap to play</span></button></div>
-</div></section>
-<section class="alt"><div class="wrap feat">
-  <div>
-    <h2>Windrova: the whole world's weather, live.</h2>
-    <p class="lead">A live weather map for every place on Earth. Open it in any browser, no account needed.</p>
-    <ul class="ticks"><li>Live wind, rain, temperature, clouds and sea waves</li><li>ECMWF, GFS and GEM forecast models in one click</li><li>Hurricanes, lightning, earthquakes, fires and live satellite</li><li>Best hours for the beach, sailing, kitesurf and hiking</li></ul>
-    <div class="cta"><a class="btn p" href="https://windrova.com" target="_blank" rel="noopener">Open Windrova</a><a class="btn g" href="/products/windrova/">Learn more</a></div>
-  </div>
-  <div class="shot"><img src="/img/windrova/hero.jpg" alt="Windrova live wind map over Europe" width="1440" height="810"></div>
 </div></section>
 <div class="band"><h2>Questions about a product or a purchase?</h2><p class="lead">We answer every email, usually within a day.</p><div class="cta"><a class="btn p" href="/support/">Contact support</a><a class="btn g" href="{DON}" target="_blank" rel="noopener">Support the studio</a></div></div>
 ''')

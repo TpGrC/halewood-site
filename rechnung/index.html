@@ -319,6 +319,7 @@ ${note.map(n => x('cbc:Note', n)).join('\n')}
 ${x('cbc:BuyerReference', inv.ref)}
 <cac:AccountingSupplierParty><cac:Party>
 <cbc:EndpointID schemeID="EM">${esc(s.email)}</cbc:EndpointID>
+${!s.vat && s.taxno ? `<cac:PartyIdentification>${x('cbc:ID', s.taxno)}</cac:PartyIdentification>` : ''}
 <cac:PartyName>${x('cbc:Name', s.name)}</cac:PartyName>
 ${address(s)}
 ${sellerTax}

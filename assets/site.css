@@ -251,3 +251,9 @@ a.card,.card{transition:border-color .2s,box-shadow .2s,transform .2s}a.card:hov
 .show.wr.big .wra img{inset:0 -4% auto 0;width:104%;border-radius:12px 0 0 0}
 @media(max-width:900px){.show.wr.big .wra{height:220px;margin:24px 0 0 26px}}
 .hero.hmin+.shows{padding-bottom:64px}
+/* menu dropdowns */
+.menu li{position:relative}.menu i{font-style:normal;font-size:11px;opacity:.6}
+.menu .sub{display:none;position:absolute;top:100%;left:0;min-width:230px;list-style:none;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -14px rgba(15,27,45,.25);padding:8px;z-index:50}
+.menu .dd:hover>.sub,.menu .dd:focus-within>.sub{display:block}
+.menu .sub a{padding:9px 12px;font-size:14.5px;white-space:nowrap}.menu .sub small{color:var(--mut);font-size:12px}
+@media(max-width:900px){.menu .sub{display:block;position:static;border:0;box-shadow:none;padding:0 0 4px 14px;min-width:0}.menu .sub a{padding:8px 8px;font-size:15px}.menu i{display:none}}

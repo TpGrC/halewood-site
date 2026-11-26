@@ -2,7 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://halewoodsystems.com/about/</loc></url>
 <url><loc>https://halewoodsystems.com/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/download/</loc></url>
 <url><loc>https://halewoodsystems.com/games/</loc></url>
 <url><loc>https://halewoodsystems.com/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/games/skystack/</loc></url>
@@ -26,8 +25,6 @@
 <url><loc>https://halewoodsystems.com/news/</loc></url>
 <url><loc>https://halewoodsystems.com/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/products/</loc></url>
 <url><loc>https://halewoodsystems.com/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/products/kyrofix-photo-cleaner/</loc></url>
@@ -44,7 +41,6 @@
 <url><loc>https://halewoodsystems.com/support/</loc></url>
 <url><loc>https://halewoodsystems.com/el/about/</loc></url>
 <url><loc>https://halewoodsystems.com/el/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/el/download/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/el/games/skystack/</loc></url>
@@ -68,8 +64,6 @@
 <url><loc>https://halewoodsystems.com/el/news/</loc></url>
 <url><loc>https://halewoodsystems.com/el/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/el/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/el/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/el/products/</loc></url>
 <url><loc>https://halewoodsystems.com/el/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/el/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/el/products/kyrofix-photo-cleaner/</loc></url>
@@ -86,7 +80,6 @@
 <url><loc>https://halewoodsystems.com/el/support/</loc></url>
 <url><loc>https://halewoodsystems.com/de/about/</loc></url>
 <url><loc>https://halewoodsystems.com/de/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/de/download/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/de/games/skystack/</loc></url>
@@ -110,8 +103,6 @@
 <url><loc>https://halewoodsystems.com/de/news/</loc></url>
 <url><loc>https://halewoodsystems.com/de/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/de/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/de/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/de/products/</loc></url>
 <url><loc>https://halewoodsystems.com/de/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/de/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/de/products/kyrofix-photo-cleaner/</loc></url>
@@ -128,7 +119,6 @@
 <url><loc>https://halewoodsystems.com/de/support/</loc></url>
 <url><loc>https://halewoodsystems.com/es/about/</loc></url>
 <url><loc>https://halewoodsystems.com/es/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/es/download/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/es/games/skystack/</loc></url>
@@ -152,8 +142,6 @@
 <url><loc>https://halewoodsystems.com/es/news/</loc></url>
 <url><loc>https://halewoodsystems.com/es/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/es/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/es/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/es/products/</loc></url>
 <url><loc>https://halewoodsystems.com/es/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/es/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/es/products/kyrofix-photo-cleaner/</loc></url>
@@ -170,7 +158,6 @@
 <url><loc>https://halewoodsystems.com/es/support/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/about/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/fr/download/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/games/skystack/</loc></url>
@@ -194,8 +181,6 @@
 <url><loc>https://halewoodsystems.com/fr/news/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/fr/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/fr/products/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/fr/products/kyrofix-photo-cleaner/</loc></url>
@@ -212,7 +197,6 @@
 <url><loc>https://halewoodsystems.com/fr/support/</loc></url>
 <url><loc>https://halewoodsystems.com/it/about/</loc></url>
 <url><loc>https://halewoodsystems.com/it/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/it/download/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/it/games/skystack/</loc></url>
@@ -236,8 +220,6 @@
 <url><loc>https://halewoodsystems.com/it/news/</loc></url>
 <url><loc>https://halewoodsystems.com/it/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/it/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/it/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/it/products/</loc></url>
 <url><loc>https://halewoodsystems.com/it/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/it/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/it/products/kyrofix-photo-cleaner/</loc></url>
@@ -254,7 +236,6 @@
 <url><loc>https://halewoodsystems.com/it/support/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/about/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/pl/download/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/games/skystack/</loc></url>
@@ -278,8 +259,6 @@
 <url><loc>https://halewoodsystems.com/pl/news/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/pl/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/pl/products/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/pl/products/kyrofix-photo-cleaner/</loc></url>
@@ -296,7 +275,6 @@
 <url><loc>https://halewoodsystems.com/pl/support/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/about/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/pt/download/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/games/skystack/</loc></url>
@@ -320,8 +298,6 @@
 <url><loc>https://halewoodsystems.com/pt/news/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/pt/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/pt/products/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/pt/products/kyrofix-photo-cleaner/</loc></url>
@@ -338,7 +314,6 @@
 <url><loc>https://halewoodsystems.com/pt/support/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/about/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/activate/</loc></url>
-<url><loc>https://halewoodsystems.com/ru/download/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/potion-sort/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/games/skystack/</loc></url>
@@ -362,8 +337,6 @@
 <url><loc>https://halewoodsystems.com/ru/news/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/news/six-kyrofix-apps/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/news/windrova-launch/</loc></url>
-<url><loc>https://halewoodsystems.com/ru/pricing/</loc></url>
-<url><loc>https://halewoodsystems.com/ru/products/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/products/kyrofix-backup/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/products/kyrofix-cleaner/</loc></url>
 <url><loc>https://halewoodsystems.com/ru/products/kyrofix-photo-cleaner/</loc></url>

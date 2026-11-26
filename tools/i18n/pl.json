@@ -900,5 +900,11 @@
 "1030": "Ostatnia aktualizacja: 21 listopada 2026",
 "1031": "Nasze gry przeglądarkowe zapisują postępy, monety i ustawienia tylko na twoim urządzeniu. Nie wymagają konta.",
 "1032": "Reklamy w naszych aplikacjach na Androida",
-"1033": "Nasze gry na Androida wyświetlają reklamy Google AdMob. Aby dobierać i mierzyć reklamy, Google może używać identyfikatora reklamowego urządzenia, przybliżonej lokalizacji na podstawie adresu IP oraz informacji o korzystaniu z aplikacji. W UE, Wielkiej Brytanii i Szwajcarii aplikacja najpierw prosi o zgodę, a wybór możesz później zmienić. Google przetwarza te dane zgodnie z własną <a href=\"https://policies.google.com/technologies/ads\" rel=\"noopener\" target=\"_blank\">polityką reklamową</a>. Identyfikator reklamowy możesz zresetować lub usunąć w ustawieniach telefonu."
+"1033": "Nasze gry na Androida wyświetlają reklamy Google AdMob. Aby dobierać i mierzyć reklamy, Google może używać identyfikatora reklamowego urządzenia, przybliżonej lokalizacji na podstawie adresu IP oraz informacji o korzystaniu z aplikacji. W UE, Wielkiej Brytanii i Szwajcarii aplikacja najpierw prosi o zgodę, a wybór możesz później zmienić. Google przetwarza te dane zgodnie z własną <a href=\"https://policies.google.com/technologies/ads\" rel=\"noopener\" target=\"_blank\">polityką reklamową</a>. Identyfikator reklamowy możesz zresetować lub usunąć w ustawieniach telefonu.",
+"1040": "<a href=\"/games/\">Gry</a> / Potion Sort",
+"1041": "<a href=\"/games/\">Gry</a> / Skystack",
+"1042": "<a href=\"/games/\">Gry</a> / Slipgate",
+"1043": "<a href=\"/games/\">Gry</a> / Starfuse",
+"1044": "<a href=\"/games/\">Gry</a> / Triple Bloom",
+"1046": "Tak. Każda aplikacja Kyrofix ma darmową wersję bez limitu czasu. Pro dodaje automatyzację i narzędzia. Zobacz <a href=\"/software/#pro\" style=\"color:#7fb0ff\">Free vs Pro</a>."
 }

@@ -900,5 +900,11 @@
 "1030": "Dernière mise à jour : 21 novembre 2026",
 "1031": "Nos jeux par navigateur enregistrent votre progression, vos pièces et vos réglages uniquement sur votre appareil. Ils ne demandent aucun compte.",
 "1032": "Publicités dans nos applis Android",
-"1033": "Nos jeux Android affichent des publicités de Google AdMob. Pour choisir et mesurer les publicités, Google peut utiliser l’identifiant publicitaire de votre appareil, votre position approximative d’après votre adresse IP et des informations sur votre utilisation de l’appli. Dans l’UE, au Royaume-Uni et en Suisse, l’appli demande d’abord votre consentement, et vous pouvez modifier votre choix plus tard. Google traite ces données selon sa propre <a href=\"https://policies.google.com/technologies/ads\" rel=\"noopener\" target=\"_blank\">politique publicitaire</a>. Vous pouvez réinitialiser ou supprimer votre identifiant publicitaire dans les réglages de votre téléphone."
+"1033": "Nos jeux Android affichent des publicités de Google AdMob. Pour choisir et mesurer les publicités, Google peut utiliser l’identifiant publicitaire de votre appareil, votre position approximative d’après votre adresse IP et des informations sur votre utilisation de l’appli. Dans l’UE, au Royaume-Uni et en Suisse, l’appli demande d’abord votre consentement, et vous pouvez modifier votre choix plus tard. Google traite ces données selon sa propre <a href=\"https://policies.google.com/technologies/ads\" rel=\"noopener\" target=\"_blank\">politique publicitaire</a>. Vous pouvez réinitialiser ou supprimer votre identifiant publicitaire dans les réglages de votre téléphone.",
+"1040": "<a href=\"/games/\">Jeux</a> / Potion Sort",
+"1041": "<a href=\"/games/\">Jeux</a> / Skystack",
+"1042": "<a href=\"/games/\">Jeux</a> / Slipgate",
+"1043": "<a href=\"/games/\">Jeux</a> / Starfuse",
+"1044": "<a href=\"/games/\">Jeux</a> / Triple Bloom",
+"1046": "Oui. Chaque appli Kyrofix a une version gratuite sans limite de temps. Pro ajoute l’automatisation et des outils en plus. Voir <a href=\"/software/#pro\" style=\"color:#7fb0ff\">Free vs Pro</a>."
 }

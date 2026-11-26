@@ -37,7 +37,8 @@ def page(path,title,desc,body):
     body=enhance(path,body) if 'enhance' in globals() else body
     if path.startswith('products/kyrofix'):  # one download place per page: the top of the page
         body=re.sub(r'<a class="btn g" href="/downloads/[^"]+\.exe" download>[^<]*</a>','',body)
-        body=re.sub(r'(<div class="band">.*?)<a class="btn p" href="/downloads/[^"]+\.exe" download>[^<]*</a>',r'\1<a class="btn p" href="/pricing/#free-vs-pro">Compare Free and Pro</a>',body,flags=re.S)
+        body=re.sub(r'(<div class="band">.*?)<a class="btn p" href="/downloads/[^"]+\.exe" download>[^<]*</a>',r'\1<a class="btn p" href="#plans">Compare Free and Pro</a>',body,flags=re.S)
+    body=re.sub(r'<section class="alt">(<div class="wrap">(?:(?!</section>).)*?<div class="plans">)',r'<section class="alt" id="plans">\1',body,count=1,flags=re.S)
     html=f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +52,7 @@ def page(path,title,desc,body):
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07090d">
 <link rel="icon" href="/favicon-48.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css?v=15">
+<link rel="stylesheet" href="/assets/site.css?v=16">
 {ldjson(path)}
 </head>
 <body>
@@ -60,7 +61,7 @@ def page(path,title,desc,body):
 {body}
 </main>
 <footer id="foot"></footer>
-<script src="/assets/site.js?v=8"></script>
+<script src="/assets/site.js?v=9"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "a11dfd5ee7a843d0b247e834f27c971c"}}'></script>
 </body>
 </html>
@@ -177,7 +178,7 @@ def enhance(path,body):
     pool=KY_ALL if kf else GM_ALL;i=pool.index(key);others=[pool[(i+j)%len(pool)] for j in range(1,4)]
     rel='<section class="alt"><div class="wrap">'+fam('kf' if kf else 'gm','More from Kyrofix' if kf else 'More games','',others,('/software/','All PC software') if kf else ('/games/','All games'))+'</div></section>'
     bi=body.rfind('<div class="band">')
-    return body[:bi]+qa+rel+body[bi:] if bi>0 else body+qa+rel
+    return body[:bi]+qa+body[bi:] if bi>0 else body+qa
 
 # ---------- home ----------
 page('index.html','Halewood Systems — PC software, games and weather','Halewood Systems makes Kyrofix PC tools for Windows, free games for phone and browser, and the Windrova weather map. Every product has a free version.',f'''
@@ -199,10 +200,7 @@ page('index.html','Halewood Systems — PC software, games and weather','Halewoo
 ''')
 
 # ---------- products ----------
-page('products/index.html','All products — Halewood Systems','Every Halewood Systems product: Kyrofix PC software for Windows, free games and the Windrova weather map.',f'''
-<section class="hero"><div class="wrap"><h1>All products</h1><p class="lead">Every product has a free version. Kyrofix Pro adds extra features and works on up to 3 PCs.</p></div></section>
-<section><div class="wrap">'''+fam('kf','PC software','Kyrofix tools for Windows 10 and 11.',KY_ALL,('/software/','More about Kyrofix'))+fam('gm','Games','Free to play on phone and computer.',GM_ALL,('/games/','All games'))+fam('wr','Weather','',['windrova'])+'''</div></section>''')
-
+# (removed: products/index.html — redirects to the product pages)
 page('software/index.html','Kyrofix PC software for Windows — Halewood Systems','Kyrofix: free Windows tools to update drivers, clean junk, free up space, back up and shred files. Pro from €9.99 a year.',f'''
 <section class="hero"><div class="wrap hhero">
   <div><h1>Kyrofix PC tools</h1>
@@ -211,7 +209,7 @@ page('software/index.html','Kyrofix PC software for Windows — Halewood Systems
   <div class="shot"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="Kyrofix Photo Cleaner showing duplicate photos" width="1100" height="740"></div>
 </div></section>
 <section><div class="wrap">'''+fam('kf','Fix and speed up','Keep Windows quick and drivers up to date.',['driver','cleaner'])+fam('kf','Free up space','Find what fills your disk and clear it.',['space','photo'])+fam('kf','Protect your files','Keep copies safe, and make deleted files really gone.',['backup','shredder'])+f'''</div></section>
-<section class="alt"><div class="wrap"><h2>How Pro works</h2><div class="grid">
+<section class="alt" id="pro"><div class="wrap"><h2>How Pro works</h2><div class="grid">
   <div class="card"><h3>One payment</h3><p>Pay once for a year, or once for good. Nothing renews by itself.</p></div>
   <div class="card"><h3>Your key</h3><p>After buying, you get the key for that program at <a href="/activate/" style="color:var(--acc)">halewoodsystems.com/activate</a>.</p></div>
   <div class="card"><h3>Up to 3 PCs</h3><p>Use the same key on three of your own PCs. Refund within 14 days if it is not for you.</p></div>
@@ -225,7 +223,7 @@ page('games/index.html','Free games — Halewood Systems','Free puzzle and arcad
 page('products/windrova/index.html','Windrova — Live weather map for the whole world','Windrova: free live weather map with wind, rain, waves, satellite, hurricanes and ECMWF, GFS and GEM models. 13 languages.',f'''
 <section class="hero"><div class="wrap feat">
   <div>
-    <p class="crumb"><a href="/products/">Products</a> / Windrova</p>
+    <p class="crumb"><a href="/">Halewood Systems</a> / Windrova</p>
     <span class="badge live">● Live · Free</span>
     <h1 style="font-size:clamp(38px,5vw,60px);margin-top:16px">Windrova</h1>
     <p class="lead">The whole world's weather, live. Wind, rain, waves and storms for any place on Earth, right in your browser.</p>
@@ -260,7 +258,7 @@ page('products/windrova/index.html','Windrova — Live weather map for the whole
 # Kyrofix
 page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updater for Windows','Kyrofix Driver Updater for Windows 10 and 11: official drivers from Windows Update, NVIDIA, AMD and Intel, a restore point before every install, and a private AI that explains fixes. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Driver Updater</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Driver Updater</p>
   <div class="ico kf" style="width:72px;height:72px">{KF_ICO}</div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Driver Updater</h1>
@@ -306,7 +304,7 @@ page('products/kyrofix/index.html','Kyrofix Driver Updater — Free driver updat
 # Kyrofix Cleaner
 page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner for Windows','Kyrofix Cleaner for Windows 10 and 11: remove junk files, browser cache and Windows Update leftovers, turn off slow startup apps and find big files. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Cleaner</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Cleaner</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-cleaner/icon.png" alt="" width="56" height="56"></div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Cleaner</h1>
@@ -354,7 +352,7 @@ page('products/kyrofix-cleaner/index.html','Kyrofix Cleaner — Free PC cleaner 
 # Kyrofix Backup
 page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup for Windows','Kyrofix Backup for Windows 10 and 11: back up your documents, desktop and photos to a USB drive, external disk or OneDrive folder. Restore in one click. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Backup</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Backup</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-backup/icon.png" alt="" width="56" height="56"></div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Backup</h1>
@@ -398,7 +396,7 @@ page('products/kyrofix-backup/index.html','Kyrofix Backup — Free file backup f
 # Kyrofix utilities
 page('products/kyrofix-space/index.html','Kyrofix Space — Free for Windows','Kyrofix Space for Windows 10 and 11: What is filling your disk? See the biggest folders and files in seconds and free up space. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Space</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Space</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-space/icon.png" alt="" width="56" height="56"></div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Space</h1>
@@ -420,7 +418,7 @@ page('products/kyrofix-space/index.html','Kyrofix Space — Free for Windows','K
 
 page('products/kyrofix-shredder/index.html','Kyrofix Shredder — Free for Windows','Kyrofix Shredder for Windows 10 and 11: Delete files for good. Shredded files cannot be recovered. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Shredder</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Shredder</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-shredder/icon.png" alt="" width="56" height="56"></div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Shredder</h1>
@@ -442,7 +440,7 @@ page('products/kyrofix-shredder/index.html','Kyrofix Shredder — Free for Windo
 
 page('products/kyrofix-photo-cleaner/index.html','Kyrofix Photo Cleaner — Free for Windows','Kyrofix Photo Cleaner for Windows 10 and 11: Find duplicate, similar and blurry photos and free up space. Free download.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Kyrofix Photo Cleaner</p>
+  <p class="crumb"><a href="/software/">Kyrofix</a> / Kyrofix Photo Cleaner</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/kyrofix-photo-cleaner/icon.png" alt="" width="56" height="56"></div>
   <span class="badge free">Free download · Windows 10 / 11</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px;max-width:820px">Kyrofix Photo Cleaner</h1>
@@ -497,7 +495,7 @@ $('#cp').onclick=()=>{{navigator.clipboard.writeText($('#key').textContent);$('#
 # New games
 page('products/potion-sort/index.html','Potion Sort — Free game for phones','Potion Sort: Pour the potions until every bottle holds one colour. Endless relaxing levels. Free to play on any phone or computer, no download needed.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Potion Sort</p>
+  <p class="crumb"><a href="/games/">Games</a> / Potion Sort</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/potion-sort/icon.png" alt="" width="64" height="64"></div>
   <span class="badge live">Free to play · Phone &amp; browser</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Potion Sort</h1>
@@ -514,7 +512,7 @@ page('products/potion-sort/index.html','Potion Sort — Free game for phones','P
 
 page('products/triple-bloom/index.html','Triple Bloom — Free game for phones','Triple Bloom: Tap tiles and match three of a kind to clear the garden. Free to play on any phone or computer, no download needed.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Triple Bloom</p>
+  <p class="crumb"><a href="/games/">Games</a> / Triple Bloom</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/triple-bloom/icon.png" alt="" width="64" height="64"></div>
   <span class="badge live">Free to play · Phone &amp; browser</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Triple Bloom</h1>
@@ -531,7 +529,7 @@ page('products/triple-bloom/index.html','Triple Bloom — Free game for phones',
 
 page('products/skystack/index.html','Skystack — Free game for phones','Skystack: Tap to drop the block. Stack as high as you can. Free to play on any phone or computer, no download needed.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Skystack</p>
+  <p class="crumb"><a href="/games/">Games</a> / Skystack</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/skystack/icon.png" alt="" width="64" height="64"></div>
   <span class="badge live">Free to play · Phone &amp; browser</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Skystack</h1>
@@ -549,7 +547,7 @@ page('products/skystack/index.html','Skystack — Free game for phones','Skystac
 # Starfuse
 page('products/starfuse/index.html','Starfuse — Free space merge game for phones','Starfuse: drop planets, merge matching ones and grow them into stars and black holes. Free to play on any phone or computer, no download needed.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Starfuse</p>
+  <p class="crumb"><a href="/games/">Games</a> / Starfuse</p>
   <div class="ico kc" style="width:72px;height:72px"><img src="/img/starfuse/icon.png" alt="" width="64" height="64"></div>
   <span class="badge live">Free to play · Phone &amp; browser</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Starfuse</h1>
@@ -576,7 +574,7 @@ page('products/starfuse/index.html','Starfuse — Free space merge game for phon
 # Slipgate
 page('products/slipgate/index.html','Slipgate — Free puzzle game | Halewood Systems','Slipgate: a free puzzle game that starts easy and gets hard fast. Play in your browser.',f'''
 <section class="hero"><div class="wrap">
-  <p class="crumb"><a href="/products/">Products</a> / Slipgate</p>
+  <p class="crumb"><a href="/games/">Games</a> / Slipgate</p>
   <div class="ico sg" style="width:72px;height:72px">{SG_ICO}</div>
   <span class="badge free">Free to play · Browser</span>
   <h1 style="font-size:clamp(36px,5vw,60px);margin-top:16px">Slipgate</h1>
@@ -599,30 +597,7 @@ def cmptable(k,n,h,fr,pr,y,l):
     return f'<div class="cmp" id="cmp-{k}"><div class="cmphead"><h3><a href="{h}">{n}</a></h3><a class="btn g s" href="{h}#plans">Details</a></div><div class="tablewrap"><table class="cmpt"><thead><tr><th></th><th>Free<small>€0, no time limit</small></th><th>Pro<small>{y} / year · {l} forever</small></th></tr></thead><tbody>{rows}</tbody></table></div></div>'
 CMPALL='<section id="free-vs-pro" class="alt"><div class="wrap"><h2>Free vs Pro: what you get</h2><p class="lead">Free is the full app with no time limit and no ads. Pro adds automation and extra tools. One key works on up to 3 PCs.</p>'+''.join(cmptable(*c) for c in CMP)+'</div></section>'
 
-page('pricing/index.html','Pricing — Halewood Systems','Prices for Windrova and Kyrofix. Every product has a free version. Prices include VAT where applicable.',f'''
-<section class="hero"><div class="wrap"><h1>Pricing</h1><p class="lead">Every product has a free version. Pro is a small yearly or one-time payment.</p><div class="cta"><a class="btn p" href="#free-vs-pro">Compare Free and Pro</a></div></div></section>
-<section style="padding-top:0"><div class="wrap">
-  <div class="tablewrap" style="margin-top:0"><table>
-    <thead><tr><th>Product</th><th>Free</th><th>Paid</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td><b>Windrova</b><br><small style="color:var(--mut)">Weather map</small></td><td class="y">€0</td><td>Premium: €2.49 / month or €19.99 / year</td><td><span class="badge soon">Paid plan soon</span></td></tr>
-      <tr><td><b>Kyrofix Driver Updater</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €19.99 / year or €49.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['driver'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Kyrofix Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['cleaner'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Kyrofix Backup</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €14.99 / year or €39.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['backup'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Kyrofix Space</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['space'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Kyrofix Shredder</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['shredder'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Kyrofix Photo Cleaner</b><br><small style="color:var(--mut)">Windows</small></td><td class="y">€0</td><td>Pro: €9.99 / year or €24.99 forever</td><td>{'<span class="badge live">On sale</span>' if BUY['photo'] else '<span class="badge free">Free available</span>'}</td></tr>
-      <tr><td><b>Slipgate</b><br><small style="color:var(--mut)">Game</small></td><td class="y">€0</td><td class="n">—</td><td><span class="badge live">Free</span></td></tr>
-    </tbody></table></div>
-</div></section>'''+CMPALL+f'''<section><div class="wrap">
-  <h2 style="margin-top:64px;font-size:28px">Questions</h2>
-  <details><summary>What do I lose if I stay on Free?</summary><p>Nothing you already use. Free never expires and has no ads. Pro only adds the extra tools marked in the tables above.</p></details><details><summary>Yearly or forever?</summary><p>Yearly is cheaper to start. Forever is a one-time payment and never runs out. Both work on up to 3 PCs.</p></details>
-  <details><summary>Do prices include VAT?</summary><p>Yes. For customers in the EU, prices shown include VAT where it applies.</p></details>
-  <details><summary>Can I get a refund?</summary><p>Yes, under EU consumer law. See <a href="/legal/refunds/" style="color:#7fb0ff">Refunds &amp; withdrawal</a>.</p></details>
-  <details><summary>Can I cancel a subscription?</summary><p>Yes, at any time. You keep access until the end of the period you paid for.</p></details>
-</div></section>''')
-
-# Support
+# (removed: pricing/index.html — redirects to the product pages)
 page('support/index.html','Support & contact — Halewood Systems','Get help with Halewood Systems products, or contact us.',f'''
 <section class="hero"><div class="wrap"><h1>Support</h1><p class="lead">Questions, bugs or ideas? We read every message.</p>
   <div class="cta"><a class="btn p" href="mailto:{MAIL}">Email us</a><a class="btn g" href="{YT}" target="_blank" rel="noopener">YouTube</a></div>
@@ -632,7 +607,7 @@ page('support/index.html','Support & contact — Halewood Systems','Get help wit
   <h2 style="font-size:28px">Frequently asked</h2>
   <details><summary>Is Windrova really free?</summary><p>Yes. All weather maps, models and the 10-day forecast are free, with no account and no ads.</p></details>
   <details><summary>When is the Windrova mobile app coming?</summary><p>Soon. Until then, open windrova.com on your phone and use "Add to home screen". It works like an app.</p></details>
-  <details><summary>Is Kyrofix free?</summary><p>Yes. Every Kyrofix app has a free version with no time limit. Pro adds automation and extra tools. See <a href="/pricing/#free-vs-pro" style="color:#7fb0ff">Free vs Pro</a>.</p></details>
+  <details><summary>Is Kyrofix free?</summary><p>Yes. Every Kyrofix app has a free version with no time limit. Pro adds automation and extra tools. See <a href="/software/#pro" style="color:#7fb0ff">Free vs Pro</a>.</p></details>
   <details><summary>Something isn't working. What do I send?</summary><p>Tell us which product, what you did, and what happened. A screenshot helps a lot.</p></details>
   <details><summary>How do I delete my data?</summary><p>We keep almost no data. If you emailed us, ask and we'll delete your messages. See our <a href="/legal/privacy/" style="color:#7fb0ff">Privacy policy</a>.</p></details>
 </div></section>''')
@@ -764,12 +739,13 @@ def drow(key):
     kf=key in KY_ALL
     right=f'<span class="dsize">{_size(url)}</span><a class="btn p s" href="{url}">Download</a>' if kf else f'<span class="gpsmall">Google Play soon</span><a class="btn p s" href="{url}"{" target=_blank rel=noopener" if url.startswith("http") else ""}>Play free</a>'
     return f'<div class="drow"><a href="{h}" class="dico">{ic}</a><div class="dtxt"><a href="{h}"><b>{n}</b></a><span>{d}</span></div><div class="dact">{right}</div></div>'
-page('download/index.html','Downloads — Halewood Systems','Download every Halewood Systems app in one place: Kyrofix for Windows, free games and Windrova.',f'''
-<section class="hero"><div class="wrap"><h1>Downloads</h1><p class="lead">Every app in one place. All free to start.</p></div></section>
-<section><div class="wrap"><h2>Kyrofix for Windows</h2><p class="updated">Windows 10 and 11, 64-bit. No admin password needed. <a href="/help/install-kyrofix/">How to install</a></p><div class="dlist">{''.join(drow(k) for k in KY_ALL)}</div>
-<h2 style="margin-top:56px">Games</h2><p class="updated">Play in your browser now. Android apps are coming to Google Play. <a href="/help/games-home-screen/">Play offline</a></p><div class="dlist">{''.join(drow(k) for k in GM_ALL)}</div>
-<h2 style="margin-top:56px">Weather</h2><div class="dlist"><div class="drow"><a href="/products/windrova/" class="dico"><img src="/img/windrova-icon.png" alt="" width="56" height="56"></a><div class="dtxt"><a href="/products/windrova/"><b>Windrova</b></a><span>Live weather map for the whole world.</span></div><div class="dact"><span class="gpsmall">Google Play soon</span><a class="btn p s" href="https://windrova.com" target="_blank" rel="noopener">Open</a></div></div></div>
-</div></section>''')
-
-page('404.html','Page not found — Halewood Systems','Page not found.','<section class="hero center"><div class="wrap"><h1>Page not found</h1><p class="lead">The page you were looking for doesn\'t exist.</p><div class="cta"><a class="btn p" href="/">Go home</a><a class="btn g" href="/products/">See products</a></div></div></section>')
+# (removed: download/index.html — redirects to the product pages)
+page('404.html','Page not found — Halewood Systems','Page not found.','<section class="hero center"><div class="wrap"><h1>Page not found</h1><p class="lead">The page you were looking for doesn\'t exist.</p><div class="cta"><a class="btn p" href="/">Go home</a></div></div></section>')
 print('ok')
+
+# old overview pages: send visitors to the right place
+REDIR={'products/index.html':'/','pricing/index.html':'/software/','download/index.html':'/software/'}
+for f,to in REDIR.items():
+    for pre in ['']+['/'+l for l in ['el','de','es','fr','it','pl','pt','ru']]:
+        fp=os.path.join(R,pre.lstrip('/'),f); os.makedirs(os.path.dirname(fp),exist_ok=True)
+        open(fp,'w').write(f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={pre}{to}"><link rel="canonical" href="https://halewoodsystems.com{pre}{to}"><title>Halewood Systems</title></head><body><a href="{pre}{to}">Halewood Systems</a></body></html>')

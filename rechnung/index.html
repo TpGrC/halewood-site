@@ -46,6 +46,7 @@ td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,t
     <button data-tab="cust" data-t="tCust">Kunden</button>
     <button data-tab="view" data-t="tView">E-Rechnung ansehen</button>
     <button data-tab="set" data-t="tSet">Mein Unternehmen</button>
+    <button data-tab="lic" data-t="tLic">Lizenz</button>
   </nav>
   <select class="lang" id="lang" aria-label="Sprache"><option value="de">DE</option><option value="en">EN</option><option value="el">ΕΛ</option></select>
 </div></header>
@@ -113,6 +114,18 @@ td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,t
   <div id="viewOut" style="margin-top:18px"></div>
 </section>
 
+<!-- LICENSE -->
+<section id="lic" class="hide">
+  <h1 data-t="tLic">Lizenz</h1>
+  <p class="lead" data-t="lLic">Rechnungen ansehen ist kostenlos. Zum Erstellen und Herunterladen von E-Rechnungen brauchen Sie ein Abo: erster Monat kostenlos, danach 7 € pro Monat oder 70 € pro Jahr, jederzeit kündbar.</p>
+  <div class="card">
+    <div id="licState"></div>
+    <label><span data-t="licKey">Lizenzschlüssel</span><input id="licKey" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" autocomplete="off"></label>
+    <div class="row"><button class="btn" id="licCheck" data-t="licCheck">Schlüssel prüfen</button><a class="btn g" href="https://thomasknot.gumroad.com/l/e-rechnung" target="_blank" rel="noopener" data-t="licBuy">Jetzt 1 Monat kostenlos testen</a></div>
+    <p class="mut" data-t="licHow">Nach der Anmeldung bekommen Sie den Schlüssel per E-Mail. Zahlung und Rechnung über Gumroad.</p>
+  </div>
+</section>
+
 <!-- SETTINGS -->
 <section id="set" class="hide">
   <h1 data-t="tSet">Mein Unternehmen</h1>
@@ -174,7 +187,7 @@ const EN = { tNew: 'New invoice', tList: 'Invoices', tCust: 'Customers', tView: 
   lView: 'Got an XRechnung or ZUGFeRD invoice (XML) you cannot read? Drop the file here. It is not uploaded anywhere.', dropT: 'Drop the XML file here', dropS: 'or click to choose a file',
   lSet: 'These details appear on every invoice. Required fields are marked *.', company: 'Company', vatId: 'VAT ID', taxNo: 'Tax number (if no VAT ID)',
   klein: 'Small business under § 19 UStG (no VAT)', contact: 'Contact and bank', cPerson: 'Contact person', phone: 'Phone', accName: 'Account holder', nextNo: 'Next invoice number',
-  prefix: 'Prefix', save: 'Save', backup: 'Backup', backupT: 'Your data is stored only in this browser. Download a backup regularly.', exp: 'Download backup', imp: 'Load backup' };
+  prefix: 'Prefix', tLic: 'License', lLic: 'Viewing invoices is free. To create and download e-invoices you need a subscription: first month free, then €7 per month or €70 per year, cancel any time.', licKey: 'License key', licCheck: 'Check key', licBuy: 'Try free for 1 month', licHow: 'After signing up you get the key by email. Payment and receipt through Gumroad.', save: 'Save', backup: 'Backup', backupT: 'Your data is stored only in this browser. Download a backup regularly.', exp: 'Download backup', imp: 'Load backup' };
 const EL = { tNew: 'Νέο τιμολόγιο', tList: 'Τιμολόγια', tCust: 'Πελάτες', tView: 'Άνοιγμα e-invoice', tSet: 'Η επιχείρησή μου', hNew: 'Νέο τιμολόγιο',
   lNew: 'Συμπλήρωσε το τιμολόγιο και κατέβασέ το ως XRechnung (XML). Τα δεδομένα σου μένουν σε αυτόν τον browser.', needSet: 'Συμπλήρωσε πρώτα τα στοιχεία της επιχείρησής σου στο «Η επιχείρησή μου».',
   cust: 'Πελάτης', pickCust: 'Επίλεξε αποθηκευμένο πελάτη', cName: 'Επωνυμία', street: 'Οδός και αριθμός', zip: 'ΤΚ', city: 'Πόλη', country: 'Χώρα', email: 'Email',
@@ -186,25 +199,25 @@ const EL = { tNew: 'Νέο τιμολόγιο', tList: 'Τιμολόγια', tCu
   lView: 'Πήρες XRechnung ή ZUGFeRD (XML) και δεν μπορείς να το διαβάσεις; Σύρε το αρχείο εδώ. Δεν ανεβαίνει πουθενά.', dropT: 'Άφησε το αρχείο XML εδώ', dropS: 'ή πάτα για να διαλέξεις αρχείο',
   lSet: 'Αυτά τα στοιχεία μπαίνουν σε κάθε τιμολόγιο. Τα υποχρεωτικά έχουν *.', company: 'Επιχείρηση', vatId: 'ΑΦΜ ΦΠΑ (USt-IdNr.)', taxNo: 'Αριθμός φορολογικού μητρώου (αν δεν έχεις ΑΦΜ ΦΠΑ)',
   klein: 'Μικρή επιχείρηση § 19 UStG (χωρίς ΦΠΑ)', contact: 'Επικοινωνία και τράπεζα', cPerson: 'Υπεύθυνος επικοινωνίας', phone: 'Τηλέφωνο', accName: 'Δικαιούχος λογαριασμού', nextNo: 'Επόμενος αριθμός τιμολογίου',
-  prefix: 'Πρόθεμα', save: 'Αποθήκευση', backup: 'Αντίγραφο ασφαλείας', backupT: 'Τα δεδομένα σου υπάρχουν μόνο σε αυτόν τον browser. Κατέβαζε τακτικά αντίγραφο ασφαλείας.', exp: 'Λήψη αντιγράφου', imp: 'Φόρτωση αντιγράφου' };
+  prefix: 'Πρόθεμα', tLic: 'Άδεια', lLic: 'Η προβολή τιμολογίων είναι δωρεάν. Για να φτιάχνεις και να κατεβάζεις e-invoices χρειάζεσαι συνδρομή: πρώτος μήνας δωρεάν, μετά 7 € τον μήνα ή 70 € τον χρόνο, ακύρωση όποτε θες.', licKey: 'Κλειδί άδειας', licCheck: 'Έλεγχος κλειδιού', licBuy: 'Δοκίμασε δωρεάν 1 μήνα', licHow: 'Μετά την εγγραφή παίρνεις το κλειδί με email. Πληρωμή και απόδειξη μέσω Gumroad.', save: 'Αποθήκευση', backup: 'Αντίγραφο ασφαλείας', backupT: 'Τα δεδομένα σου υπάρχουν μόνο σε αυτόν τον browser. Κατέβαζε τακτικά αντίγραφο ασφαλείας.', exp: 'Λήψη αντιγράφου', imp: 'Φόρτωση αντιγράφου' };
 const DE = {}; document.querySelectorAll('[data-t]').forEach(e => { DE[e.dataset.t] = DE[e.dataset.t] || e.textContent; });
 let LANG = 'de'; try { LANG = localStorage.getItem('hw-er-lang') || ((l => l.startsWith('de') ? 'de' : l.startsWith('el') ? 'el' : 'en')(navigator.language || 'de')); } catch (e) {}
 const T = k => (LANG === 'en' ? EN[k] : LANG === 'el' ? EL[k] : DE[k]) || DE[k] || k;
 const MSG = {
-  de: { saved: 'Gespeichert.', need: 'Bitte ausfüllen', noLines: 'Mindestens eine Position mit Beschreibung, Menge und Preis eintragen.', badMail: 'E-Mail-Adresse prüfen', badIban: 'IBAN prüfen', vatOrTax: 'USt-IdNr. oder Steuernummer eintragen',
+  de: { licOk: 'Lizenz aktiv.', licBad: 'Dieser Schlüssel ist ungültig oder das Abo ist beendet.', licNet: 'Keine Verbindung. Bitte später erneut versuchen.', licNeed: 'Für das Erstellen von E-Rechnungen brauchen Sie eine Lizenz. Erster Monat kostenlos.', licNone: 'Noch keine Lizenz eingegeben.', saved: 'Gespeichert.', need: 'Bitte ausfüllen', noLines: 'Mindestens eine Position mit Beschreibung, Menge und Preis eintragen.', badMail: 'E-Mail-Adresse prüfen', badIban: 'IBAN prüfen', vatOrTax: 'USt-IdNr. oder Steuernummer eintragen',
     net: 'Summe netto', tax: 'Umsatzsteuer', total: 'Gesamtbetrag', invoice: 'Rechnung', due: 'Fällig am', deliv: 'Leistungsdatum', ref: 'Ihre Referenz', pay: 'Bitte überweisen Sie den Betrag auf', klein: 'Kein Ausweis von Umsatzsteuer, da Kleinunternehmer gemäß § 19 UStG.',
     del: 'Löschen', xml: 'XML', pdf: 'PDF', none: 'Noch nichts gespeichert.', delQ: 'Wirklich löschen?', notInv: 'Diese Datei ist keine bekannte E-Rechnung (XRechnung UBL oder ZUGFeRD/CII).', seller: 'Verkäufer', buyer: 'Käufer', format: 'Format', created: 'XRechnung erstellt und gespeichert.', imported: 'Sicherung geladen.' },
-  el: { saved: 'Αποθηκεύτηκε.', need: 'Συμπλήρωσε', noLines: 'Βάλε τουλάχιστον μία γραμμή με περιγραφή, ποσότητα και τιμή.', badMail: 'Έλεγξε το email', badIban: 'Έλεγξε το IBAN', vatOrTax: 'Βάλε ΑΦΜ ΦΠΑ ή αριθμό φορολογικού μητρώου',
+  el: { licOk: 'Η άδεια είναι ενεργή.', licBad: 'Το κλειδί δεν είναι έγκυρο ή η συνδρομή έληξε.', licNet: 'Δεν υπάρχει σύνδεση. Δοκίμασε ξανά αργότερα.', licNeed: 'Για να φτιάχνεις e-invoices χρειάζεσαι άδεια. Ο πρώτος μήνας είναι δωρεάν.', licNone: 'Δεν έχει μπει κλειδί ακόμα.', saved: 'Αποθηκεύτηκε.', need: 'Συμπλήρωσε', noLines: 'Βάλε τουλάχιστον μία γραμμή με περιγραφή, ποσότητα και τιμή.', badMail: 'Έλεγξε το email', badIban: 'Έλεγξε το IBAN', vatOrTax: 'Βάλε ΑΦΜ ΦΠΑ ή αριθμό φορολογικού μητρώου',
     net: 'Σύνολο χωρίς ΦΠΑ', tax: 'ΦΠΑ', total: 'Σύνολο', invoice: 'Τιμολόγιο', due: 'Λήξη', deliv: 'Ημερομηνία παροχής', ref: 'Αναφορά', pay: 'Πληρωμή με μεταφορά σε', klein: 'Χωρίς ΦΠΑ: μικρή επιχείρηση § 19 UStG.',
     del: 'Διαγραφή', xml: 'XML', pdf: 'PDF', none: 'Δεν υπάρχει τίποτα ακόμα.', delQ: 'Σίγουρα διαγραφή;', notInv: 'Αυτό το αρχείο δεν είναι γνωστό e-invoice (XRechnung UBL ή ZUGFeRD/CII).', seller: 'Πωλητής', buyer: 'Αγοραστής', format: 'Μορφή', created: 'Το XRechnung φτιάχτηκε και αποθηκεύτηκε.', imported: 'Το αντίγραφο φορτώθηκε.' },
-  en: { saved: 'Saved.', need: 'Please fill in', noLines: 'Add at least one line with description, quantity and price.', badMail: 'Check the email address', badIban: 'Check the IBAN', vatOrTax: 'Enter a VAT ID or a tax number',
+  en: { licOk: 'License active.', licBad: 'This key is not valid or the subscription has ended.', licNet: 'No connection. Please try again later.', licNeed: 'You need a license to create e-invoices. First month free.', licNone: 'No license entered yet.', saved: 'Saved.', need: 'Please fill in', noLines: 'Add at least one line with description, quantity and price.', badMail: 'Check the email address', badIban: 'Check the IBAN', vatOrTax: 'Enter a VAT ID or a tax number',
     net: 'Total net', tax: 'VAT', total: 'Total', invoice: 'Invoice', due: 'Due', deliv: 'Delivery date', ref: 'Your reference', pay: 'Please transfer the amount to', klein: 'No VAT shown: small business under § 19 UStG.',
     del: 'Delete', xml: 'XML', pdf: 'PDF', none: 'Nothing saved yet.', delQ: 'Delete for sure?', notInv: 'This file is not a known e-invoice (XRechnung UBL or ZUGFeRD/CII).', seller: 'Seller', buyer: 'Buyer', format: 'Format', created: 'XRechnung created and saved.', imported: 'Backup loaded.' } };
 const M = k => MSG[LANG][k];
 function applyLang() {
   document.documentElement.lang = LANG; $('lang').value = LANG;
   document.querySelectorAll('[data-t]').forEach(e => { e.textContent = T(e.dataset.t); });
-  renderLines(); renderLists();
+  renderLines(); renderLists(); if (typeof renderLic === 'function') renderLic();
 }
 $('lang').onchange = e => { LANG = e.target.value; try { localStorage.setItem('hw-er-lang', LANG); } catch (x) {} applyLang(); };
 
@@ -382,11 +395,11 @@ function storeInv(inv) {
 }
 function showErrs(e) { $('errs').innerHTML = e.length ? `<div class="msg bad">${e.map(esc).join('<br>')}</div>` : ''; return !e.length; }
 $('dlXml').onclick = () => {
-  const { inv, errs } = readInv(); if (!showErrs(errs)) return;
+  const { inv, errs } = readInv(); if (!showErrs(errs)) return; if (needLic()) return;
   storeInv(inv); download(fname(inv.no) + '.xml', buildXml(inv), 'application/xml');
   $('errs').innerHTML = `<div class="msg ok">${M('created')}</div>`;
 };
-$('preview').onclick = () => { const { inv, errs } = readInv(); if (!showErrs(errs)) return; storeInv(inv); printInv(inv); };
+$('preview').onclick = () => { const { inv, errs } = readInv(); if (!showErrs(errs)) return; if (needLic()) return; storeInv(inv); printInv(inv); };
 
 // ---------- human view / print ----------
 const fd = d => d ? new Date(d + 'T12:00:00').toLocaleDateString(({ de: 'de-DE', en: 'en-GB', el: 'el-GR' }[LANG] || 'en-GB')) : '';
@@ -416,7 +429,7 @@ function renderLists() {
   $('invList').innerHTML = DB.invoices.length ? DB.invoices.map((v, i) => `<tr><td>${esc(v.no)}</td><td>${fd(v.date)}</td><td>${esc(v.buyer.name)}</td><td class="num">${f2(v.gross || 0)}</td><td class="row" style="justify-content:flex-end"><button class="btn g s" data-x="${i}">${M('xml')}</button><button class="btn g s" data-p="${i}">${M('pdf')}</button><button class="btn r s" data-d="${i}">${M('del')}</button></td></tr>`).join('') : `<tr><td colspan="5" class="mut">${M('none')}</td></tr>`;
   $('custList').innerHTML = DB.customers.length ? DB.customers.map((c, i) => `<tr><td>${esc(c.name)}</td><td>${esc(c.city)}</td><td>${esc(c.email)}</td><td style="text-align:right"><button class="btn r s" data-dc="${i}">${M('del')}</button></td></tr>`).join('') : `<tr><td colspan="4" class="mut">${M('none')}</td></tr>`;
 }
-$('invList').onclick = e => { const d = e.target.dataset; if (d.x != null) { const v = DB.invoices[d.x]; download(fname(v.no) + '.xml', buildXml(v), 'application/xml'); } if (d.p != null) printInv(DB.invoices[d.p]); if (d.d != null && confirm(M('delQ'))) { DB.invoices.splice(+d.d, 1); save(); renderLists(); } };
+$('invList').onclick = e => { const d = e.target.dataset; if ((d.x != null || d.p != null) && !licValid()) { document.querySelector('nav button[data-tab=lic]').click(); return; } if (d.x != null) { const v = DB.invoices[d.x]; download(fname(v.no) + '.xml', buildXml(v), 'application/xml'); } if (d.p != null) printInv(DB.invoices[d.p]); if (d.d != null && confirm(M('delQ'))) { DB.invoices.splice(+d.d, 1); save(); renderLists(); } };
 $('custList').onclick = e => { const d = e.target.dataset.dc; if (d != null && confirm(M('delQ'))) { DB.customers.splice(+d, 1); save(); renderLists(); fillCustPick(); } };
 
 // ---------- viewer: UBL and CII ----------
@@ -457,12 +470,42 @@ drop.onclick = () => $('file').click(); $('file').onchange = e => viewFile(e.tar
 drop.ondragover = e => { e.preventDefault(); drop.classList.add('on'); }; drop.ondragleave = () => drop.classList.remove('on');
 drop.ondrop = e => { e.preventDefault(); drop.classList.remove('on'); viewFile(e.dataTransfer.files[0]); };
 
+// ---------- license (Gumroad) ----------
+const GR_PRODUCT = 'n1s96i42825UL3CsF9Hgtw==';
+DB.lic = DB.lic || {};
+const DAY = 864e5;
+function licValid() { const l = DB.lic; return !!(l.key && l.ok && Date.now() - (l.okAt || 0) < 14 * DAY); }
+async function licVerify(key) {
+  const r = await fetch('https://api.gumroad.com/v2/licenses/verify', { method: 'POST', body: new URLSearchParams({ product_id: GR_PRODUCT, license_key: key, increment_uses_count: 'false' }) });
+  const j = await r.json().catch(() => ({}));
+  if (r.status >= 500) throw new Error('net');
+  const pu = j.purchase || {};
+  return !!(j.success && !pu.refunded && !pu.chargebacked && !pu.disputed && !pu.subscription_ended_at && !pu.subscription_failed_at);
+}
+async function licCheck(key, quiet) {
+  key = (key || '').trim(); if (!key) { renderLic(); return false; }
+  try { const ok = await licVerify(key); DB.lic = { key, ok, okAt: ok ? Date.now() : 0, at: Date.now() }; save(); renderLic(ok ? '' : 'licBad'); return ok; }
+  catch (e) { if (!quiet) renderLic('licNet'); return licValid(); }
+}
+function renderLic(err) {
+  $('licKey').value = DB.lic.key || '';
+  $('licState').innerHTML = err ? `<div class="msg bad">${M(err)}</div>` : licValid() ? `<div class="msg ok">${M('licOk')}</div>` : `<p class="mut">${M('licNone')}</p>`;
+}
+$('licCheck').onclick = () => licCheck($('licKey').value);
+function needLic() {
+  if (licValid()) return false;
+  $('errs').innerHTML = `<div class="msg bad">${M('licNeed')} <a href="#" id="goLic" style="color:inherit;font-weight:700">${T('tLic')} →</a></div>`;
+  const g = $('goLic'); if (g) g.onclick = ev => { ev.preventDefault(); document.querySelector('nav button[data-tab=lic]').click(); };
+  return true;
+}
+if (DB.lic.key && Date.now() - (DB.lic.at || 0) > 3 * DAY) licCheck(DB.lic.key, true);
+
 // ---------- backup ----------
 $('exp').onclick = () => download('halewood-e-rechnung-sicherung-' + today() + '.json', JSON.stringify(DB, null, 1), 'application/json');
 $('imp').onchange = e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { const d = JSON.parse(rd.result); if (!d.me) throw 0; DB = d; DB.customers = DB.customers || []; DB.invoices = DB.invoices || []; save(); loadSet(); fillCustPick(); resetInv(); $('setMsg').innerHTML = `<span class="msg ok">${M('imported')}</span>`; } catch (x) { alert('?'); } }; rd.readAsText(f); };
 
 // ---------- start ----------
-loadSet(); fillCustPick(); resetInv(); applyLang(); checkSet();
+loadSet(); fillCustPick(); resetInv(); applyLang(); checkSet(); renderLic();
 window.__erech = { buildXml, calc, parseInvoice, DB: () => DB };
 })();
 </script>

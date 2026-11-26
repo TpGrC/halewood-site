@@ -27,7 +27,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #c9d8ff;border-color:v
 .btn.g{background:#fff;color:var(--txt);border:1px solid var(--line)}.btn.s{padding:6px 10px;font-size:13px}.btn.r{background:#fff;color:var(--bad);border:1px solid #f0c9cc}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 table{width:100%;border-collapse:collapse}th{text-align:left;font-size:12px;color:var(--mut);font-weight:600;padding:6px 6px;border-bottom:1px solid var(--line)}
-td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,td select{margin:0}
+td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,td select{margin:0}td select[data-k=vat]{min-width:68px}
 .num{text-align:right}.tot{margin-left:auto;max-width:320px}.tot div{display:flex;justify-content:space-between;padding:4px 0}.tot .big{font-weight:700;font-size:17px;border-top:1px solid var(--line);padding-top:8px}
 .msg{padding:10px 14px;border-radius:9px;margin:12px 0;font-size:14px}.msg.bad{background:#fdecee;color:var(--bad)}.msg.ok{background:#e6f6ef;color:var(--ok)}
 .hide{display:none!important}.mut{color:var(--mut);font-size:13px}
@@ -47,7 +47,7 @@ td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}td input,t
     <button data-tab="view" data-t="tView">E-Rechnung ansehen</button>
     <button data-tab="set" data-t="tSet">Mein Unternehmen</button>
   </nav>
-  <select class="lang" id="lang" aria-label="Sprache"><option value="de">DE</option><option value="en">EN</option></select>
+  <select class="lang" id="lang" aria-label="Sprache"><option value="de">DE</option><option value="en">EN</option><option value="el">ΕΛ</option></select>
 </div></header>
 
 <main class="w">
@@ -160,7 +160,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
 const r2 = n => Math.round((n + Number.EPSILON) * 100) / 100;
 const f2 = n => r2(n).toFixed(2);
-const eur = n => r2(n).toLocaleString(LANG === 'de' ? 'de-DE' : 'en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+const eur = n => r2(n).toLocaleString(({ de: 'de-DE', en: 'en-GB', el: 'el-GR' }[LANG] || 'en-GB'), { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
 
 // ---------- texts ----------
 const EN = { tNew: 'New invoice', tList: 'Invoices', tCust: 'Customers', tView: 'View e-invoice', tSet: 'My company', hNew: 'New invoice',
@@ -175,13 +175,28 @@ const EN = { tNew: 'New invoice', tList: 'Invoices', tCust: 'Customers', tView: 
   lSet: 'These details appear on every invoice. Required fields are marked *.', company: 'Company', vatId: 'VAT ID', taxNo: 'Tax number (if no VAT ID)',
   klein: 'Small business under § 19 UStG (no VAT)', contact: 'Contact and bank', cPerson: 'Contact person', phone: 'Phone', accName: 'Account holder', nextNo: 'Next invoice number',
   prefix: 'Prefix', save: 'Save', backup: 'Backup', backupT: 'Your data is stored only in this browser. Download a backup regularly.', exp: 'Download backup', imp: 'Load backup' };
+const EL = { tNew: 'Νέο τιμολόγιο', tList: 'Τιμολόγια', tCust: 'Πελάτες', tView: 'Άνοιγμα e-invoice', tSet: 'Η επιχείρησή μου', hNew: 'Νέο τιμολόγιο',
+  lNew: 'Συμπλήρωσε το τιμολόγιο και κατέβασέ το ως XRechnung (XML). Τα δεδομένα σου μένουν σε αυτόν τον browser.', needSet: 'Συμπλήρωσε πρώτα τα στοιχεία της επιχείρησής σου στο «Η επιχείρησή μου».',
+  cust: 'Πελάτης', pickCust: 'Επίλεξε αποθηκευμένο πελάτη', cName: 'Επωνυμία', street: 'Οδός και αριθμός', zip: 'ΤΚ', city: 'Πόλη', country: 'Χώρα', email: 'Email',
+  vatOpt: 'ΑΦΜ ΦΠΑ πελάτη (προαιρετικό)', saveCust: 'Αποθήκευση πελάτη', invData: 'Στοιχεία τιμολογίου', invNo: 'Αριθμός τιμολογίου', invDate: 'Ημερομηνία τιμολογίου', delDate: 'Ημερομηνία παροχής',
+  payDays: 'Προθεσμία πληρωμής (μέρες)', buyerRef: 'Αναφορά αγοραστή / Leitweg-ID', buyerRefHint: 'Υποχρεωτικό στο XRechnung. Για δημόσιους φορείς το Leitweg-ID, αλλιώς π.χ. αριθμός πελάτη ή παραγγελίας.',
+  note: 'Σημείωση στο τιμολόγιο (προαιρετικό)', items: 'Γραμμές', desc: 'Περιγραφή', qty: 'Ποσότητα', unit: 'Μονάδα', price: 'Τιμή μονάδας χωρίς ΦΠΑ €', vat: 'ΦΠΑ %', net: 'Καθαρό €', addLine: '+ Γραμμή',
+  dlXml: 'Λήψη XRechnung (XML)', preview: 'Προβολή / εκτύπωση (PDF)', resetInv: 'Νέο κενό τιμολόγιο', pdfNote: 'Σημείωση: ένα απλό PDF δεν είναι e-invoice. Στείλε στον πελάτη το αρχείο XML (και το PDF αν θέλεις).',
+  lList: 'Όλα τα τιμολόγια που έφτιαξες εδώ.', gross: 'Σύνολο €', lCust: 'Αποθηκευμένοι πελάτες. Νέους πελάτες αποθηκεύεις όταν φτιάχνεις τιμολόγιο.',
+  lView: 'Πήρες XRechnung ή ZUGFeRD (XML) και δεν μπορείς να το διαβάσεις; Σύρε το αρχείο εδώ. Δεν ανεβαίνει πουθενά.', dropT: 'Άφησε το αρχείο XML εδώ', dropS: 'ή πάτα για να διαλέξεις αρχείο',
+  lSet: 'Αυτά τα στοιχεία μπαίνουν σε κάθε τιμολόγιο. Τα υποχρεωτικά έχουν *.', company: 'Επιχείρηση', vatId: 'ΑΦΜ ΦΠΑ (USt-IdNr.)', taxNo: 'Αριθμός φορολογικού μητρώου (αν δεν έχεις ΑΦΜ ΦΠΑ)',
+  klein: 'Μικρή επιχείρηση § 19 UStG (χωρίς ΦΠΑ)', contact: 'Επικοινωνία και τράπεζα', cPerson: 'Υπεύθυνος επικοινωνίας', phone: 'Τηλέφωνο', accName: 'Δικαιούχος λογαριασμού', nextNo: 'Επόμενος αριθμός τιμολογίου',
+  prefix: 'Πρόθεμα', save: 'Αποθήκευση', backup: 'Αντίγραφο ασφαλείας', backupT: 'Τα δεδομένα σου υπάρχουν μόνο σε αυτόν τον browser. Κατέβαζε τακτικά αντίγραφο ασφαλείας.', exp: 'Λήψη αντιγράφου', imp: 'Φόρτωση αντιγράφου' };
 const DE = {}; document.querySelectorAll('[data-t]').forEach(e => { DE[e.dataset.t] = DE[e.dataset.t] || e.textContent; });
-let LANG = 'de'; try { LANG = localStorage.getItem('hw-er-lang') || ((navigator.language || 'de').startsWith('de') ? 'de' : 'en'); } catch (e) {}
-const T = k => (LANG === 'en' ? EN[k] : DE[k]) || DE[k] || k;
+let LANG = 'de'; try { LANG = localStorage.getItem('hw-er-lang') || ((l => l.startsWith('de') ? 'de' : l.startsWith('el') ? 'el' : 'en')(navigator.language || 'de')); } catch (e) {}
+const T = k => (LANG === 'en' ? EN[k] : LANG === 'el' ? EL[k] : DE[k]) || DE[k] || k;
 const MSG = {
   de: { saved: 'Gespeichert.', need: 'Bitte ausfüllen', noLines: 'Mindestens eine Position mit Beschreibung, Menge und Preis eintragen.', badMail: 'E-Mail-Adresse prüfen', badIban: 'IBAN prüfen', vatOrTax: 'USt-IdNr. oder Steuernummer eintragen',
     net: 'Summe netto', tax: 'Umsatzsteuer', total: 'Gesamtbetrag', invoice: 'Rechnung', due: 'Fällig am', deliv: 'Leistungsdatum', ref: 'Ihre Referenz', pay: 'Bitte überweisen Sie den Betrag auf', klein: 'Kein Ausweis von Umsatzsteuer, da Kleinunternehmer gemäß § 19 UStG.',
     del: 'Löschen', xml: 'XML', pdf: 'PDF', none: 'Noch nichts gespeichert.', delQ: 'Wirklich löschen?', notInv: 'Diese Datei ist keine bekannte E-Rechnung (XRechnung UBL oder ZUGFeRD/CII).', seller: 'Verkäufer', buyer: 'Käufer', format: 'Format', created: 'XRechnung erstellt und gespeichert.', imported: 'Sicherung geladen.' },
+  el: { saved: 'Αποθηκεύτηκε.', need: 'Συμπλήρωσε', noLines: 'Βάλε τουλάχιστον μία γραμμή με περιγραφή, ποσότητα και τιμή.', badMail: 'Έλεγξε το email', badIban: 'Έλεγξε το IBAN', vatOrTax: 'Βάλε ΑΦΜ ΦΠΑ ή αριθμό φορολογικού μητρώου',
+    net: 'Σύνολο χωρίς ΦΠΑ', tax: 'ΦΠΑ', total: 'Σύνολο', invoice: 'Τιμολόγιο', due: 'Λήξη', deliv: 'Ημερομηνία παροχής', ref: 'Αναφορά', pay: 'Πληρωμή με μεταφορά σε', klein: 'Χωρίς ΦΠΑ: μικρή επιχείρηση § 19 UStG.',
+    del: 'Διαγραφή', xml: 'XML', pdf: 'PDF', none: 'Δεν υπάρχει τίποτα ακόμα.', delQ: 'Σίγουρα διαγραφή;', notInv: 'Αυτό το αρχείο δεν είναι γνωστό e-invoice (XRechnung UBL ή ZUGFeRD/CII).', seller: 'Πωλητής', buyer: 'Αγοραστής', format: 'Μορφή', created: 'Το XRechnung φτιάχτηκε και αποθηκεύτηκε.', imported: 'Το αντίγραφο φορτώθηκε.' },
   en: { saved: 'Saved.', need: 'Please fill in', noLines: 'Add at least one line with description, quantity and price.', badMail: 'Check the email address', badIban: 'Check the IBAN', vatOrTax: 'Enter a VAT ID or a tax number',
     net: 'Total net', tax: 'VAT', total: 'Total', invoice: 'Invoice', due: 'Due', deliv: 'Delivery date', ref: 'Your reference', pay: 'Please transfer the amount to', klein: 'No VAT shown: small business under § 19 UStG.',
     del: 'Delete', xml: 'XML', pdf: 'PDF', none: 'Nothing saved yet.', delQ: 'Delete for sure?', notInv: 'This file is not a known e-invoice (XRechnung UBL or ZUGFeRD/CII).', seller: 'Seller', buyer: 'Buyer', format: 'Format', created: 'XRechnung created and saved.', imported: 'Backup loaded.' } };
@@ -234,7 +249,7 @@ $('custPick').onchange = e => { const c = DB.customers[e.target.value]; if (!c) 
 
 // ---------- lines ----------
 let LINES = [];
-const UNITS = [['C62', { de: 'Stück', en: 'Piece' }], ['HUR', { de: 'Stunde', en: 'Hour' }], ['DAY', { de: 'Tag', en: 'Day' }], ['MON', { de: 'Monat', en: 'Month' }], ['LS', { de: 'Pauschal', en: 'Lump sum' }], ['KGM', { de: 'kg', en: 'kg' }], ['KMT', { de: 'km', en: 'km' }]];
+const UNITS = [['C62', { de: 'Stück', en: 'Piece', el: 'Τεμάχιο' }], ['HUR', { de: 'Stunde', en: 'Hour', el: 'Ώρα' }], ['DAY', { de: 'Tag', en: 'Day', el: 'Μέρα' }], ['MON', { de: 'Monat', en: 'Month', el: 'Μήνας' }], ['LS', { de: 'Pauschal', en: 'Lump sum', el: 'Κατ’ αποκοπή' }], ['KGM', { de: 'kg', en: 'kg', el: 'kg' }], ['KMT', { de: 'km', en: 'km', el: 'km' }]];
 const newLine = () => ({ desc: '', qty: 1, unit: 'C62', price: '', vat: 19 });
 function renderLines() {
   if (!LINES.length) LINES.push(newLine());
@@ -374,10 +389,10 @@ $('dlXml').onclick = () => {
 $('preview').onclick = () => { const { inv, errs } = readInv(); if (!showErrs(errs)) return; storeInv(inv); printInv(inv); };
 
 // ---------- human view / print ----------
-const fd = d => d ? new Date(d + 'T12:00:00').toLocaleDateString(LANG === 'de' ? 'de-DE' : 'en-GB') : '';
+const fd = d => d ? new Date(d + 'T12:00:00').toLocaleDateString(({ de: 'de-DE', en: 'en-GB', el: 'el-GR' }[LANG] || 'en-GB')) : '';
 function invHtml(v) {
   // v: {no,date,due,deliv,ref,note,seller:{name,street,zip,city,country,vat,taxno,email,phone,iban,bic},buyer:{...},lines:[{desc,qty,unit,price,vat,net}],net,tax,gross,groups,klein}
-  const u = c => (UNITS.find(x => x[0] === c) || [c, { de: c, en: c }])[1][LANG];
+  const u = c => (UNITS.find(x => x[0] === c) || [c, { de: c, en: c, el: c }])[1][LANG];
   const s = v.seller, b = v.buyer;
   return `<div class="inv">
   <div class="hd"><div><h3>${esc(s.name)}</h3><div class="mut">${esc(s.street)}<br>${esc(s.zip)} ${esc(s.city)} ${esc(s.country || '')}<br>${esc(s.email || '')} ${esc(s.phone || '')}${s.vat ? '<br>USt-IdNr. ' + esc(s.vat) : ''}${s.taxno ? '<br>St.-Nr. ' + esc(s.taxno) : ''}</div></div>

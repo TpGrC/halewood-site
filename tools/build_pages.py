@@ -61,7 +61,7 @@ def page(path,title,desc,body):
 {body}
 </main>
 <footer id="foot"></footer>
-<script src="/assets/site.js?v=9"></script>
+<script src="/assets/site.js?v=10"></script>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "a11dfd5ee7a843d0b247e834f27c971c"}}'></script>
 </body>
 </html>
@@ -195,6 +195,8 @@ page('index.html','Halewood Systems — PC software, games and weather','Halewoo
   <a class="show kf" href="/software/"><div class="st"><h2>Kyrofix PC tools</h2><p>Six Windows programs to fix, clean, free up space and protect your files. Free to download.</p><span class="btn w s">See the tools</span></div>
     <div class="sa kfa"><img src="/img/kyrofix-photo-cleaner/s2.jpg" alt="" width="1100" height="740"><img src="/img/kyrofix-space/s1.jpg" alt="" width="1100" height="740"></div></a>
   </div>
+  <a class="show wr big" href="/e-rechnung/" style="margin-top:18px"><div class="st"><h2>E-Rechnung</h2><p>Create German e-invoices (XRechnung) in one minute, right in the browser. First month free.</p><span class="btn w s">Learn more</span></div>
+    <div class="sa wra"><img src="/img/e-rechnung/app.jpg" alt="" width="1100" height="825"></div></a>
 </div></section>
 <div class="band"><h2>Questions about a product or a purchase?</h2><p class="lead">We answer every email, usually within a day.</p><div class="cta"><a class="btn p" href="/support/">Contact support</a><a class="btn g" href="{DON}" target="_blank" rel="noopener">Support the studio</a></div></div>
 ''')

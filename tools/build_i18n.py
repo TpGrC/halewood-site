@@ -6,7 +6,7 @@ from i18n_common import *
 from bs4 import BeautifulSoup
 R = str(pathlib.Path(__file__).resolve().parent.parent); os.chdir(R)
 SITE = 'https://halewoodsystems.com'
-KEEP = ('/downloads/', '/img/', '/assets/', '/favicon', '/apple-touch')
+KEEP = ('/downloads/', '/img/', '/assets/', '/favicon', '/apple-touch', '/e-rechnung/', '/rechnung/')
 
 def url_of(f):  # 'products/kyrofix/index.html' -> '/products/kyrofix/'
     return '/' + f[:-len('index.html')] if f.endswith('index.html') else '/' + f

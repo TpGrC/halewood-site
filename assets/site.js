@@ -25,7 +25,7 @@
   const here0 = bare.replace(/index\.html$/, ''), here = /^\/products\/kyrofix|^\/activate/.test(here0) ? '/software/' : /^\/products\/(starfuse|potion-sort|triple-bloom|skystack|slipgate)/.test(here0) ? '/games/' : here0;
   const KF = [['/products/kyrofix/', 'Driver Updater'], ['/products/kyrofix-cleaner/', 'Cleaner'], ['/products/kyrofix-space/', 'Space'], ['/products/kyrofix-photo-cleaner/', 'Photo Cleaner'], ['/products/kyrofix-backup/', 'Backup'], ['/products/kyrofix-shredder/', 'Shredder']];
   const GM = [['/products/starfuse/', 'Starfuse'], ['/products/potion-sort/', 'Potion Sort'], ['/products/triple-bloom/', 'Triple Bloom'], ['/products/skystack/', 'Skystack'], ['/products/slipgate/', 'Slipgate']];
-  const links = [['/products/windrova/', 'Windrova'], ['/games/', W[W.length-1], GM], ['/software/', 'Kyrofix', KF], ['/e-rechnung/', 'E-Rechnung'], ['/support/', W[2]]];
+  const links = [['/products/windrova/', 'Windrova'], ['/games/', W[W.length-1], GM], ['/software/', 'Kyrofix', KF], ['/e-rechnung/', 'E-Rechnung'], ...(L === 'el' ? [['/ypiresies/', 'Υπηρεσίες']] : []), ['/support/', W[2]]];
   const nav = document.getElementById('nav');
   if (nav) {
     nav.className = 'nav';

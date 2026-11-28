@@ -25,7 +25,7 @@
   const here0 = bare.replace(/index\.html$/, ''), here = /^\/products\/kyrofix|^\/activate/.test(here0) ? '/software/' : /^\/products\/(starfuse|potion-sort|triple-bloom|skystack|slipgate)/.test(here0) ? '/games/' : here0;
   const KF = [['/products/kyrofix/', 'Driver Updater'], ['/products/kyrofix-cleaner/', 'Cleaner'], ['/products/kyrofix-space/', 'Space'], ['/products/kyrofix-photo-cleaner/', 'Photo Cleaner'], ['/products/kyrofix-backup/', 'Backup'], ['/products/kyrofix-shredder/', 'Shredder']];
   const GM = [['/products/starfuse/', 'Starfuse'], ['/products/potion-sort/', 'Potion Sort'], ['/products/triple-bloom/', 'Triple Bloom'], ['/products/skystack/', 'Skystack'], ['/products/slipgate/', 'Slipgate']];
-  const links = [['/products/windrova/', 'Windrova'], ['/games/', W[W.length-1], GM], ['/software/', 'Kyrofix', KF], ['/e-rechnung/', 'E-Rechnung'], ...(L === 'el' ? [['/ypiresies/', 'Υπηρεσίες']] : []), ['/support/', W[2]]];
+  const links = [['/products/windrova/', 'Windrova'], ['/games/', W[W.length-1], GM], ['/software/', 'Kyrofix', KF], ...(L === 'el' ? [['/ypiresies/', 'Υπηρεσίες']] : []), ['/support/', W[2]]];
   const nav = document.getElementById('nav');
   if (nav) {
     nav.className = 'nav';
@@ -46,7 +46,7 @@
       <div class="cols">
         <div><a class="brand" href="${P}/"><img src="/img/logo-mark-96.png" alt="" width="45" height="28" style="width:auto;height:28px"><span><b style="font-size:16px">HALEWOOD</b><small>SYSTEMS</small></span></a>
           <p style="margin-top:14px;max-width:260px">${W[6]}</p><p style="margin-top:10px"><a href="mailto:halewoodsystems@gmail.com" style="color:#7fb0ff;font-weight:600">✉ halewoodsystems@gmail.com</a></p></div>
-        <div><h4>${W[0]}</h4><ul><li><a href="${P}/products/windrova/">Windrova</a></li><li><a href="${P}/games/">${W[W.length-1]}</a></li><li><a href="${P}/software/">Kyrofix</a></li><li><a href="/e-rechnung/">E-Rechnung</a></li><li><a href="${P}/activate/">Kyrofix Pro key</a></li></ul></div>
+        <div><h4>${W[0]}</h4><ul><li><a href="${P}/products/windrova/">Windrova</a></li><li><a href="${P}/games/">${W[W.length-1]}</a></li><li><a href="${P}/software/">Kyrofix</a></li><li><a href="${P}/activate/">Kyrofix Pro key</a></li></ul></div>
         <div><h4>${W[7]}</h4><ul><li><a href="${P}/about/">${W[3]}</a></li><li><a href="${P}/news/">${W2[0]}</a></li><li><a href="${P}/help/">${W2[1]}</a></li><li><a href="${P}/support/">${W[8]}</a></li><li><a href="https://www.youtube.com/@HalewoodSystems" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://halewood-systems.itch.io" target="_blank" rel="noopener">itch.io</a></li></ul></div>
         <div><h4>${W[9]}</h4><ul><li><a href="${P}/legal/terms/">${W[10]}</a></li><li><a href="${P}/legal/privacy/">${W[11]}</a></li><li><a href="${P}/legal/refunds/">${W[12]}</a></li><li><a href="${P}/legal/cookies/">${W[13]}</a></li><li><a href="${P}/legal/notice/">${W[14]}</a></li></ul></div>
       </div>

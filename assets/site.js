@@ -3,9 +3,10 @@
   const m0 = location.pathname.match(/^\/(el|de|es|fr|it|pl|pt|ru)(\/|$)/);
   const L = m0 ? m0[1] : 'en', P = L === 'en' ? '' : '/' + L;
   const bare = m0 ? location.pathname.slice(3) || '/' : location.pathname;
+  const SVC = /^\/(services|ypiresies)\/?$/, to = c => SVC.test(bare) ? (c === 'el' ? '/el/ypiresies/' : '/services/') : (c === 'en' ? '' : '/' + c) + bare;
   try { // first visit: open the site in the visitor's language
     const saved = localStorage.getItem('hw-lang'), nav0 = (navigator.language || 'en').slice(0, 2);
-    if (!saved && L === 'en' && LANGS[nav0] && nav0 !== 'en') { localStorage.setItem('hw-lang', nav0); location.replace('/' + nav0 + bare + location.search + location.hash); }
+    if (!saved && L === 'en' && LANGS[nav0] && nav0 !== 'en') { localStorage.setItem('hw-lang', nav0); location.replace(to(nav0) + location.search + location.hash); }
     else if (!saved) localStorage.setItem('hw-lang', L);
   } catch (e) {}
   const W = {
@@ -35,7 +36,7 @@
       ${pick}
       <button class="burger" aria-label="${W[5]}" aria-expanded="false" aria-controls="menu">☰</button>
     </div>`;
-    nav.querySelector('.langpick').addEventListener('change', e => { const c = e.target.value; try { localStorage.setItem('hw-lang', c); } catch (x) {} location.href = (c === 'en' ? '' : '/' + c) + bare; });
+    nav.querySelector('.langpick').addEventListener('change', e => { const c = e.target.value; try { localStorage.setItem('hw-lang', c); } catch (x) {} location.href = to(c); });
     const b = nav.querySelector('.burger'), m = nav.querySelector('.menu');
     b.addEventListener('click', () => { const o = m.classList.toggle('open'); b.setAttribute('aria-expanded', o); b.textContent = o ? '✕' : '☰'; });
   }
